@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" >
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" th:href="@{/css/main.css}">
+    <link rel="stylesheet" th:href="@{css/normalize.css}">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Permanent+Marker&display=swap" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/62ea397d3a.js" crossorigin="anonymous"></script>
+    <title>Sistema de Administracion de Socios</title>
+</head>
+<body>
+<div class="main">
+    <div class="presentation-container">
+        <div class="presentation-tittleContainer">
+            <h1 class="presentation-container__tittle">Sistema de Administracion de Socios</h1>
+            <img class="presentation-container__img" th:src="@{/img/logo.png}" alt="">
+        </div>
+        <div class="login-container">
+            <form class="login" method="POST" th:object="${user}" th:action="@{/login}">
+                <h2>Welcome!</h2>
+                <div class="login__input-container">
+                    <div class="login__input-errors" th:if="${Exception}" th:text="${err}"></div>
+                    <input type="text" class="login__input" id="login__user" th:field="*{userName}" autocomplete="off" required="">
+                    <label for="login__user" class="login__lbl"><i class="fas fa-user"></i><span
+                            class="login__lbl-text">Username</span>
+                    </label>
+
+                </div>
+                <div class="login__input-container">
+                    <input type="password" class="login__input" id="login__passwd" th:field="*{password}"
+                           required="">
+                    <label for="login__passwd" class="login__lbl"><i class="fas fa-key"></i><span
+                            class="login__lbl-text">Password</span></label>
+                </div>
+                <input type="submit" class="login__input login__submit" value="Login">
+                <div class="login__input login__options">
+                    <div class="login__remember-container">
+                        <input type="checkbox" id="login__remember">
+                        <label for="login__remember">Remember me</label>
+                    </div>
+                    <a href="">forget your password?</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<script th:src="@{/js/main.js}"></script>
+
+</body>
+</html>
