@@ -1,0 +1,154 @@
+body{
+    font-family: 'Ubuntu', sans-serif;
+}
+
+:root{
+    --color-azul: rgb(255, 205, 0);
+    --color-azul-hover:rgb(0, 0, 0);
+}
+
+.nav__btnBackMenuGitbox{
+    display: none;
+}
+
+.nav__btn-responsive{
+    display: none;
+    margin: 15px;
+}
+
+.nav{
+    display: flex;
+    position: fixed;
+    flex-direction: column;
+    background-color: var(--color-azul);
+    width: 300px;
+    height: 100%;
+    z-index: 100;
+    box-shadow: 0 0 7px #000;
+}
+
+.nav__logo-container{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    height: 80px; 
+    margin: 30px;
+}
+
+.nav__logo{
+    width: 6rem;
+    height: 6rem;
+}
+
+.nav__logo-container a{
+    display: flex;
+    color: #fff;
+    font-size: 20px;
+    text-decoration: none;
+}
+.nav__logo-container a h2{
+    margin: auto;
+}
+
+.nav__ul{
+    display: flex;
+    flex-direction: column;
+}
+
+.nav__li{
+    padding: 15px;
+    list-style: none;
+    font-size: 17px;
+    transition: 0.1s;
+    text-shadow: 0 0 5px #000;
+    border-bottom: 5px solid rgba(0,0,0,0.5);
+border-radius: 0px 0px 10px 0px;
+}
+
+.nav__li i{
+    margin-right: 8px;
+    color: #fff;
+}
+
+.nav__li a {
+    text-decoration: none;
+    color: #fff;
+}
+
+.nav__li:hover{
+    background-color: var(--color-azul-hover);
+}
+
+
+
+
+
+@media screen and (max-width:700px) {
+    .nav{
+        flex-direction: column;
+    }
+    .nav__ul{
+        position:absolute;
+        display: flex;
+        flex-direction: column;
+        background-color: var(--color-azul);
+        top: 50px;
+        width: 80%;
+        height: 100vh;
+        transform: translateX(-100%);
+        transition: 0.1s;
+        z-index: 999;
+    }
+
+    .nav__li{
+        padding-left: 14px;
+        min-width: 250px;
+    }
+
+    .nav__btn-responsive{
+        position: absolute;
+        top: 0;
+        display: block;
+        transition: 0.5s;
+    }
+
+
+    .nav__btn-responsive i{
+        color:#fff;
+        transition: 0.2s;
+    }
+
+
+    .nav__btnBackMenuGitbox.active{
+        position: absolute;
+        display: block;
+        background-color: #000b;
+        top: 50px;
+        left: 80%;
+        height: 100vh;
+        width: 20%;
+    }
+    
+
+    .nav__logo-container{
+        text-align: center;
+    }
+
+    .nav__ul.active{
+        transform: translateX(0%);
+        z-index: 9;
+    }
+    
+    .nav__btn-responsive.active i{
+        transform: rotate(-90deg);
+    }
+    
+
+
+
+
+}
+
+
+
+

@@ -2,11 +2,11 @@ package ar.edu.unnoba.proyecto_river_plate_junin.controller;
 
 import ar.edu.unnoba.proyecto_river_plate_junin.service.*;
 import ar.edu.unnoba.proyecto_river_plate_junin.model.*;
+import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 
@@ -23,28 +23,23 @@ public class UserController {
         return "login";
     }
 
-    @GetMapping("/loginUsernameInvalid")
-    public String loginUserError(Model model){
+    @GetMapping("/register")
+    public String registerUser(Model model){
         model.addAttribute("user", new User());
-        return "loginUserNameInvalid";
+        return "register";
     }
 
-    @PostMapping("/login")
-    public String validateUser(@Validated @ModelAttribute("user")User user, BindingResult result, Model model){
+    @PostMapping("/register")
+    public String createUser(@Valid @ModelAttribute("user")User user, BindingResult result, Model model){
         if (result.hasErrors()){
-            return "redirect:/";
+            return "riderect:/register";
         }
-        else {
-            try {
-                if (userService.authenticateUser(user)){
-                    return "/home";
-                }
-            }catch (Exception e){
-                model.addAttribute("err", e.getMessage());
-                return "redirect:/loginUsernameInvalid";
-            }
+        else{
+            model.addAttribute("user", userService.createUser(user));
+            return "login";
         }
-        return "redirect:/";
     }
+
+
 
 }

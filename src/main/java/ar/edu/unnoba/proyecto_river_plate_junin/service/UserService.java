@@ -5,7 +5,12 @@ import org.springframework.stereotype.Service;
 
 @Service
 public interface UserService {
+
     public User findByNombre(String nombre);
 
-    public boolean authenticateUser(User user) throws Exception;
+    // public boolean authenticateUser(User user) throws Exception;
+
+    public User createUser(User usuario);
+
+
 }
