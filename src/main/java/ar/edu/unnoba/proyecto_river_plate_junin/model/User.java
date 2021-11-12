@@ -38,6 +38,11 @@ public class User implements UserDetails {
     @Size(min = 8, message = "la contraseña debe ser de al menos 8 caracteres")
     private String clave;
 
+    @Transient
+    @NotBlank( message = "la clave no puede estar vacia")
+    @Size(min = 8, message = "la contraseña debe ser de al menos 8 caracteres")
+    private String confirmarPassword;
+
     @NotNull
     @Column(name = "rol")
     private boolean rol;

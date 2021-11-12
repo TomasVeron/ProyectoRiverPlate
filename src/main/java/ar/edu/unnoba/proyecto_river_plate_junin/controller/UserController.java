@@ -46,6 +46,7 @@ public class UserController {
     @PostMapping("/register")
     public String createUser(@Valid @ModelAttribute("user")User user, BindingResult result, ModelMap model){
         if (result.hasErrors()){
+            System.out.println(result.getAllErrors());
             model.addAttribute("user", user);
             return"/register";
         }

@@ -38,7 +38,7 @@
                             class="login__lbl-text">Password</span></label>
                 </div>
                 <div class="login__input-container">
-                    <input type="text" name="password" class="login__input" id="login__confirm-pass" required>
+                    <input type="password" name="password" class="login__input" id="login__confirm-pass" required th:field="*{confirmarPassword}">
                     <label for="login__passwd" class="login__lbl"><i class="fas fa-key"></i><span
                             class="login__lbl-text">confirm password</span></label>
                 </div>

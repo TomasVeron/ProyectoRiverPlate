@@ -45,7 +45,7 @@ public class UserServiceImp implements UserService, UserDetailsService{
 	}
 
 	private boolean checkPasswordValid(User user) throws Exception {
-		if ( !user.getClave().equals(user.getClave())) {
+		if ( !user.getClave().equals(user.getConfirmarPassword())) {
 			throw new Exception("Password y Confirm Password no son iguales");
 		}
 		return true;
@@ -53,9 +53,13 @@ public class UserServiceImp implements UserService, UserDetailsService{
 
     @Override
     public User createUser(User usuario) throws Exception {
-        usuario.setClave(bCryptPasswordEncoder.encode(usuario.getClave()));
-        if(checkUsernameAvailable(usuario) && checkPasswordValid(usuario))
+        System.out.println(usuario.getClave());
+        System.out.println(usuario.getConfirmarPassword());
+        System.out.println(usuario.getNombre());
+        if(checkUsernameAvailable(usuario) && checkPasswordValid(usuario)){
+            usuario.setClave(bCryptPasswordEncoder.encode(usuario.getClave()));
             usuario = repository.save(usuario);
+        }
         return usuario;
     }
 }
