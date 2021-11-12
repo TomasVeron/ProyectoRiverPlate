@@ -10,7 +10,7 @@ public interface UserService {
 
     // public boolean authenticateUser(User user) throws Exception;
 
-    public User createUser(User usuario);
+    public User createUser(User usuario) throws Exception;
 
 
 }

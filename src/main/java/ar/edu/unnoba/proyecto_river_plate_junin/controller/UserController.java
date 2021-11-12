@@ -1,11 +1,13 @@
 package ar.edu.unnoba.proyecto_river_plate_junin.controller;
 
+
 import ar.edu.unnoba.proyecto_river_plate_junin.service.*;
-import ar.edu.unnoba.proyecto_river_plate_junin.model.*;
+import ar.edu.unnoba.proyecto_river_plate_junin.model.User;
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
@@ -18,8 +20,9 @@ public class UserController {
     private UserService userService;
 
     @GetMapping("/login")
-    public String loginUser(Model model){
+    public String loginUser(Model model, String err){
         model.addAttribute("user", new User());
+        model.addAttribute("err", err);
         return "login";
     }
 
@@ -29,15 +32,32 @@ public class UserController {
         return "register";
     }
 
+    // @PostMapping("/register")
+    // public String createUser(@Valid @ModelAttribute("user")User user, BindingResult result, Model model){
+    //     if (result.hasErrors()){
+    //         return "riderect:/register";
+    //     }
+    //     else{
+    //         model.addAttribute("user", userService.createUser(user));
+    //         return "login";
+    //     }
+    // }
+
     @PostMapping("/register")
-    public String createUser(@Valid @ModelAttribute("user")User user, BindingResult result, Model model){
+    public String createUser(@Valid @ModelAttribute("user")User user, BindingResult result, ModelMap model){
         if (result.hasErrors()){
-            return "riderect:/register";
+            model.addAttribute("user", user);
+            return"/register";
         }
-        else{
-            model.addAttribute("user", userService.createUser(user));
-            return "login";
+        try{
+            userService.createUser(user);
+        }catch(Exception e){
+            model.addAttribute("formError", e.getMessage());
+            model.addAttribute("user", user);
+            return "/register";
         }
+
+        return "redirect:/";
     }
 
 

@@ -1,6 +1,7 @@
 package ar.edu.unnoba.proyecto_river_plate_junin.service;
 import ar.edu.unnoba.proyecto_river_plate_junin.model.User;
 import ar.edu.unnoba.proyecto_river_plate_junin.repository.*;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -35,9 +36,26 @@ public class UserServiceImp implements UserService, UserDetailsService{
         return  user;
     }
 
+    private boolean checkUsernameAvailable(User user) throws Exception {
+		User userFound = repository.findByNombre(user.getNombre());
+		if (userFound != null) {
+			throw new Exception("Username no disponible");
+		}
+		return true;
+	}
+
+	private boolean checkPasswordValid(User user) throws Exception {
+		if ( !user.getClave().equals(user.getClave())) {
+			throw new Exception("Password y Confirm Password no son iguales");
+		}
+		return true;
+	}
+
     @Override
-    public User createUser(User usuario) {
+    public User createUser(User usuario) throws Exception {
         usuario.setClave(bCryptPasswordEncoder.encode(usuario.getClave()));
-        return repository.save(usuario);
+        if(checkUsernameAvailable(usuario) && checkPasswordValid(usuario))
+            usuario = repository.save(usuario);
+        return usuario;
     }
 }

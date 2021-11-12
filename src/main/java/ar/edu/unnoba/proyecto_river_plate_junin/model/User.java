@@ -1,8 +1,9 @@
 package ar.edu.unnoba.proyecto_river_plate_junin.model;
 
 
-import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -25,13 +26,16 @@ public class User implements UserDetails {
 
     @Column(name = "id_usuario")
     private Long id;
-
-    @NotEmpty
+    
     @Column(name = "nombre")
+    @NotBlank(message = "El nombre no puede estar vacio")
+    @Size(min = 5, max = 16, message = "minimo 5 caracteres y maximo 16")
     private String nombre;
 
-    @NotEmpty
+    
     @Column(name ="clave")
+    @NotBlank( message = "la clave no puede estar vacia")
+    @Size(min = 8, message = "la contraseña debe ser de al menos 8 caracteres")
     private String clave;
 
     @NotNull
