@@ -25,6 +25,7 @@ body{
     height: 100%;
     z-index: 100;
     box-shadow: 0 0 7px #000;
+    justify-content: space-between;
 }
 
 .nav__logo-container{
@@ -80,8 +81,41 @@ border-radius: 0px 0px 10px 0px;
 }
 
 
+.nav__logout-container{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    background-color: #000;
+    justify-content: space-between;
+    align-items: center;
+}
 
+.nav__logout-userSession{
+    padding: 18px;
+    width: 60%;
+    color: #fff;
+    font-size: 20px;
+}
 
+.nav__logout-userSession i {
+    margin: 3px;
+}
+
+.nav__logout-button{
+    width: 40%;
+    color: #000;
+    margin: 10px;
+    padding: 4px;
+    cursor: pointer;
+    text-decoration: none;
+    font-size: 16px;
+    background-color: #fff;
+    border-radius: 10px;
+}
+
+.nav__logout-button i{
+    transform: rotate(180deg);
+}
 
 @media screen and (max-width:700px) {
     .nav{

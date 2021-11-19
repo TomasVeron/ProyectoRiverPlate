@@ -32,16 +32,6 @@ public class UserController {
         return "register";
     }
 
-    // @PostMapping("/register")
-    // public String createUser(@Valid @ModelAttribute("user")User user, BindingResult result, Model model){
-    //     if (result.hasErrors()){
-    //         return "riderect:/register";
-    //     }
-    //     else{
-    //         model.addAttribute("user", userService.createUser(user));
-    //         return "login";
-    //     }
-    // }
 
     @PostMapping("/register")
     public String createUser(@Valid @ModelAttribute("user")User user, BindingResult result, ModelMap model){
@@ -60,7 +50,6 @@ public class UserController {
 
         return "redirect:/";
     }
-
 
 
 }
