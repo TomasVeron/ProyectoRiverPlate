@@ -22,7 +22,7 @@
         <div class="login-container">
             <form class="login" method="POST" th:object="${user}" th:action="@{/register}">
                 <h2>Welcome!</h2>
-                <div class="login__input-errors" th:if="${formError}" th:text="*{formError}">errors</div>
+                <div class="login__input-formError" th:if=${formError} th:text="${formError}">errors</div>
                 <div class="login__input-container">
                     <div class="login__input-errors"th:if="${#fields.hasErrors('nombre')}" th:errors="*{nombre}">errors</div>
                     <input type="text" name="username" class="login__input" id="login__user" th:field="*{nombre}" autocomplete="off" required>
@@ -43,13 +43,13 @@
                             class="login__lbl-text">confirm password</span></label>
                 </div>
                 <input type="submit" class="login__input login__submit" value="register">
-                <div class="login__input login__options">
+                <!-- <div class="login__input login__options">
                     <div class="login__remember-container">
                         <input type="checkbox" id="login__remember">
                         <label for="login__remember">Remember me</label>
                     </div>
                     <a href="">forget your password?</a>
-                </div>
+                </div> -->
             </form>
         </div>
     </div>

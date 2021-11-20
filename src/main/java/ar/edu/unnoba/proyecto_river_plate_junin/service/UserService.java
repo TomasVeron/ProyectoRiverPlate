@@ -8,8 +8,6 @@ public interface UserService {
 
     public User findByNombre(String nombre);
 
-    // public boolean authenticateUser(User user) throws Exception;
-
     public User createUser(User usuario) throws Exception;
 
 

@@ -53,9 +53,6 @@ public class UserServiceImp implements UserService, UserDetailsService{
 
     @Override
     public User createUser(User usuario) throws Exception {
-        System.out.println(usuario.getClave());
-        System.out.println(usuario.getConfirmarPassword());
-        System.out.println(usuario.getNombre());
         if(checkUsernameAvailable(usuario) && checkPasswordValid(usuario)){
             usuario.setClave(bCryptPasswordEncoder.encode(usuario.getClave()));
             usuario = repository.save(usuario);
