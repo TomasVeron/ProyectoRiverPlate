@@ -1,12 +1,23 @@
 body{
     font-family: 'Ubuntu', sans-serif;
-    background-color: aliceblue;
     margin: 0;
+
 }
 
 :root{
     --color-predominant: rgb(255, 205, 0);
     --color-predominant-hover:rgb(0, 0, 0);
 }
+
+.main{
+    margin-left: 300px;
+    display: flex;
+    width: calc(100% - 300px);
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+
+}
+
 
 

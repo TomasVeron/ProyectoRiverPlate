@@ -9,6 +9,8 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 
 @Service
 public class UserServiceImp implements UserService, UserDetailsService{
@@ -22,14 +24,14 @@ public class UserServiceImp implements UserService, UserDetailsService{
 
 
     @Override
-    public User findByNombre(String username) {
-        return repository.findByNombre(username);
+    public User findByEmail(String username) {
+        return repository.findByEmail(username);
     }
 
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        User user = repository.findByNombre(username);
+        User user = repository.findByEmail(username);
         if(user == null){
             throw new UsernameNotFoundException("El usuario " + username + " no existe");
         }
@@ -37,7 +39,7 @@ public class UserServiceImp implements UserService, UserDetailsService{
     }
 
     private boolean checkUsernameAvailable(User user) throws Exception {
-		User userFound = repository.findByNombre(user.getNombre());
+		User userFound = repository.findByEmail(user.getNombre());
 		if (userFound != null) {
 			throw new Exception("Username no disponible");
 		}
@@ -45,7 +47,7 @@ public class UserServiceImp implements UserService, UserDetailsService{
 	}
 
 	private boolean checkPasswordValid(User user) throws Exception {
-		if ( !user.getClave().equals(user.getConfirmarPassword())) {
+		if ( !user.getPassword().equals(user.getConfirmarPassword())) {
 			throw new Exception("Password y Confirm Password no son iguales");
 		}
 		return true;
@@ -54,9 +56,14 @@ public class UserServiceImp implements UserService, UserDetailsService{
     @Override
     public User createUser(User usuario) throws Exception {
         if(checkUsernameAvailable(usuario) && checkPasswordValid(usuario)){
-            usuario.setClave(bCryptPasswordEncoder.encode(usuario.getClave()));
+            usuario.setPassword(bCryptPasswordEncoder.encode(usuario.getPassword()));
             usuario = repository.save(usuario);
         }
         return usuario;
+    }
+
+    @Override
+    public List<User> getAllUsers() {
+        return repository.findAll();
     }
 }

@@ -1,0 +1,95 @@
+:root{
+    --color-predominant: rgb(255, 205, 0);
+    --color-predominant-hover:rgb(0, 0, 0);
+}
+
+.userTittle{
+    display: block;
+    background-color: #000;
+    color: #fff;
+    width: 100%;
+    padding: 20px;
+    border-radius: 16px 16px 0 0;
+    margin: 0;
+}
+
+.listUser-container{
+    border-radius: 16px;
+    width: 92%;
+    height: 92%;
+    box-shadow: 0 0 10px #000;
+    background-color: #fff;
+}
+.table{
+    width: 100%;
+    margin: 20px 0;
+    border-spacing: 0;
+}
+
+
+.table__colums{
+    background-color: #000;
+    color: #fff;
+    text-align: left;
+}
+.table__colums-th{
+    padding: 18px 10px;
+}
+
+.table__rows{
+    text-align: left;
+}
+
+.table__rows-td{
+    padding: 10px;
+}
+
+.listUser-menuControl{
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    margin: 20px 0;
+}
+
+.listUser__registerButton{
+    padding: 7px 20px;
+    background-color: var(--color-predominant);
+    text-decoration: none;
+    text-shadow: 0 0 3px #000;
+    color: #fff;
+    margin: 0 20px;
+}
+
+.listUser__registerButton i, .table__colums-th i{
+    margin: 0 5px;
+}
+
+.table__rows-td a{
+    padding: 5px 10px;
+    text-decoration: none;
+    background-color: var(--color-predominant);
+    color: #fff;
+    text-shadow: 0 0 3px #000;
+}
+
+.table__rows-td i{
+    margin: 0 5px;
+    color: #fff;
+}
+
+.listUser__search-container{
+    display: flex;
+    margin: 0 20px;
+    outline: none;
+}
+
+.listUser__search{
+}
+
+.listUser__btnSearch{
+    background-color: var(--color-predominant);
+    width: 40px;
+    outline: none;
+}
+
+

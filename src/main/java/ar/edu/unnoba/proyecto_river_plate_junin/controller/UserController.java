@@ -50,5 +50,12 @@ public class UserController {
         return "redirect:/";
     }
 
+    @GetMapping("/users")
+    public String usersView(Model model){
+        model.addAttribute("users", userService.getAllUsers());
+        return "/users/users";
+
+    }
+
 
 }

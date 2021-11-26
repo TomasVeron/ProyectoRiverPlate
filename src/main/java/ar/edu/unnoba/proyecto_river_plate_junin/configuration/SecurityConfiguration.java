@@ -33,12 +33,12 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .authorizeRequests()
-                .antMatchers("/webjars/**", "resources/**", "/css/**","/img/**", "/js/**","/register").permitAll()
+                .antMatchers("/webjars/**", "resources/**", "/css/**","/img/**", "/js/**", "/register").permitAll()
                 .antMatchers("/**").hasRole("USER")
                 .and()
                     .formLogin().loginPage("/login").permitAll().defaultSuccessUrl("/").failureUrl("/login?error=true")
-                    .usernameParameter("nombre")
-                    .passwordParameter("clave").and().csrf().disable()
+                    .usernameParameter("email")
+                    .passwordParameter("password").and().csrf().disable()
                 .logout()
                     .permitAll()
                     .logoutSuccessUrl("/login?logout");

@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" th:href="@{/css/main.css}">
+    <link rel="stylesheet" th:href="@{/css/normalize.css}">
+    <link rel="stylesheet" th:href="@{/css/nav.css}">
+    <link rel="stylesheet" th:href="@{/css/users.css}">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@700&display=swap" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/62ea397d3a.js" crossorigin="anonymous"></script>
+    <title>Usuarios</title>
+</head>
+<body>
+    <header>
+        <nav class="nav">
+            <div>
+                <div class="nav__logo-container">
+                    <a href=""><img class="nav__logo" th:src="@{/img/logo.png}" alt=""></a>
+                </div>
+                <ul class="nav__ul">
+                    <li class="nav__li"><i class="fas fa-home"></i><a th:href="@{/}">Home</a></li>
+                    <li class="nav__li"><i class="fas fa-users"></i><a th:href="@{/socios}">Socios</a></li>
+                    <li class="nav__li"><i class="far fa-file-alt"></i><a th:href="@{cuotas}">Cuotas</a ></li>
+                    <li class="nav__li"><i class="fas fa-user"></i><a th:href="@{/users}">usuarios</a></li>
+                </ul>
+            </div>
+            <div class="nav__logout-container">
+                <div class="nav__logout-userSession"><i class="fas fa-user"></i><span th:text="${#authentication.getPrincipal().getNombre()}"></span></div>
+                <div><a class="nav__logout-button" th:href="@{/logout}">Logout <i class="fas fa-sign-out-alt"></i></a></div>
+            </div>
+        </nav>
+    </header>
+    <div class="main">
+        <div class="listUser-container">
+            <h1 class="userTittle">Usuarios</h1>
+            <div class="listUser-menuControl">
+                <div class="listUser__search-container">
+                    <input class="listUser__search" type="text" placeholder="Buscar Usuario">
+                    <button class="listUser__btnSearch"><i class="fas fa-search"></i></button>
+                </div>
+
+                <a class="listUser__registerButton" th:href="@{register}"><i class="fas fa-user-plus"></i>add User</a>
+
+            </div>
+            <table class="table">
+                <thead>
+                <tr class="table__colums">
+                    <th class="table__colums-th"><i class="far fa-envelope"></i>Email</th>
+                    <th class="table__colums-th"><i class="fas fa-user"></i>Nombre</th>
+                    <th class="table__colums-th"><i class="fas fa-address-card"></i>Apellido</th>
+                    <th class="table__colums-th"></th>
+                    <th class="table__colums-th"></th>
+                    <th class="table__colums-th"></th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr class="table__rows" th:each="user : ${users}">
+                    <td class="table__rows-td" th:text="${user.email}"></td>
+                    <td class="table__rows-td" th:text="${user.nombre}"></td>
+                    <td class="table__rows-td" th:text="${user.apellido}"></td>
+                    <!--            <td><a th:href="@{/users/view/{id}(id=${user.id})}">Ver</a></td>-->
+                    <!--            <td><a th:href="@{/users/edit/{id}(id=${user.id})}">Editar</a></td>-->
+                    <!--            <td><a th:href="@{/users/delete/{id}(id=${user.id})}">Eliminar</a></td>-->
+                    <td class="table__rows-td" ><a href=""><i class="fas fa-eye"></i>Ver</a></td>
+                    <td class="table__rows-td" ><a href=""><i class="fas fa-edit"></i>Editar</a></td>
+                    <td class="table__rows-td" ><a href=""><i class="fas fa-trash"></i>Eliminar</a></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+<script src="js/main.js"></script>
+</body>
+</html>
