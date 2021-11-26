@@ -21,18 +21,23 @@ import lombok.Data;
 @Table(name="usuarios")
 public class User implements UserDetails {
 
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
-
-
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_usuario")
     private Long id;
     
     @Column(name = "nombre")
     @NotBlank(message = "El nombre no puede estar vacio")
-    @Size(min = 5, max = 16, message = "minimo 5 caracteres y maximo 16")
     private String nombre;
 
-    
+    @Column(name = "apellido")
+    @NotBlank(message = "El apellido no puede estar vacio")
+    private String apellido;
+
+    @Column(name= "email")
+    @NotBlank(message= "El email no puede estar vacio")
+    private String email;
+
     @Column(name ="clave")
     @NotBlank( message = "la clave no puede estar vacia")
     @Size(min = 8, message = "la contraseña debe ser de al menos 8 caracteres")
@@ -88,7 +93,5 @@ public class User implements UserDetails {
         // TODO Auto-generated method stub
         return true;
     }
-
-    
 
 }

@@ -15,8 +15,6 @@ import lombok.Data;
 public class Socio implements Serializable {
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
-
-     
     @Column(name = "id_socio")
     private Long id;
     
@@ -54,7 +52,6 @@ public class Socio implements Serializable {
     //@NotBlank(message = "El nombre no puede estar vacio")
     //@Size(min = 5, max = 16, message = "minimo 5 caracteres y maximo 16")
     private String codigo_socio;
-
     
     @Column(name ="fecha_nacimiento")
     //@NotBlank( message = "la clave no puede estar vacia")
@@ -66,12 +63,8 @@ public class Socio implements Serializable {
     //@Size(min = 8, message = "la contraseña debe ser de al menos 8 caracteres")
     private Date fecha_alta;
 
-
     @NotNull
     @Column(name = "estado")
     private boolean estado;
-
-
-    
 
 }
