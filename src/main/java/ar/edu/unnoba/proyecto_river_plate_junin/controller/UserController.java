@@ -4,7 +4,11 @@ package ar.edu.unnoba.proyecto_river_plate_junin.controller;
 import ar.edu.unnoba.proyecto_river_plate_junin.service.*;
 import ar.edu.unnoba.proyecto_river_plate_junin.model.User;
 import javax.validation.Valid;
+
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
@@ -54,6 +58,20 @@ public class UserController {
     public String usersView(Model model){
         model.addAttribute("users", userService.getAllUsers());
         return "/users/users";
+
+    }
+
+    @GetMapping("/users/delete")
+    public String usersDelete(Model model ,@ModelAttribute ("user") User user, Authentication authentication){
+        
+        User sessionUser = (User)authentication.getPrincipal();
+        try {
+            userService.deleteUser(user,sessionUser);
+        } catch (Exception e) {
+            
+            e.printStackTrace();
+        }
+        return "redirect:/users";
 
     }
 

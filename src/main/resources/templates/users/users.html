@@ -28,7 +28,7 @@
                     <button class="listUser__btnSearch"><i class="fas fa-search"></i></button>
                 </div>
 
-                <a class="listUser__registerButton" th:href="@{register}"><i class="fas fa-user-plus"></i>add User</a>
+                <a class="listUser__registerButton" th:href="@{register}"><i class="fas fa-user-plus"></i>Agregar Usuario</a>
 
             </div>
             <table class="table">
@@ -37,7 +37,7 @@
                     <th class="table__colums-th"><i class="far fa-envelope"></i>Email</th>
                     <th class="table__colums-th"><i class="fas fa-user"></i>Nombre</th>
                     <th class="table__colums-th"><i class="fas fa-address-card"></i>Apellido</th>
-                    <th class="table__colums-th"></th>
+                    <th class="table__colums-th"><i class="fas fa-address-card"></i>Rol</th>
                     <th class="table__colums-th"></th>
                 </tr>
                 </thead>
@@ -46,8 +46,8 @@
                     <td class="table__rows-td" th:text="${user.email}"></td>
                     <td class="table__rows-td" th:text="${user.nombre}"></td>
                     <td class="table__rows-td" th:text="${user.apellido}"></td>
-                    <td class="table__rows-td" ><a th:href="@{users/edit/{id} (id=${user.id})}"><i class="fas fa-edit"></i>Editar</a></td>
-                    <td class="table__rows-td" ><a th:href="@{users/delete/{id} (id=${user.id})}"><i class="fas fa-trash"></i>Eliminar</a></td>
+                    <td class="table__rows-td" th:text="${Usuario}"></td>
+                    <td class="table__rows-td" ><a th:href="@{users/delete(id=${user.id})}"><i class="fas fa-trash"></i>Eliminar</a></td>
                 </tr>
                 </tbody>
             </table>

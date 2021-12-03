@@ -66,4 +66,14 @@ public class UserServiceImp implements UserService, UserDetailsService{
     public List<User> getAllUsers() {
         return repository.findAll();
     }
+
+    public void deleteUser(User usuario ,User sessionUser) throws Exception {
+        System.out.println(sessionUser.getId());
+        System.out.println(usuario.getId());
+        if (sessionUser.getId() == usuario.getId() ) {
+			throw new Exception("No puede dar de baja usuario actual");
+        }
+        repository.delete(usuario);
+    
+    }
 }

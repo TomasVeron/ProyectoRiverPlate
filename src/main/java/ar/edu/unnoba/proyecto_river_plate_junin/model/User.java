@@ -26,7 +26,7 @@ public class User implements UserDetails {
     @Column(name = "id_usuario")
     private Long id;
 
-    @Column(name="email", nullable = false)
+    @Column(name="email", nullable = false, unique = true) 
     @NotBlank(message = "el email no puede estar vacio")
     @Email(message = "email no valido")
     private String email;

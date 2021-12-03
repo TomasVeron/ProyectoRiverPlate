@@ -12,6 +12,8 @@ public interface UserService {
 
     public User createUser(User usuario) throws Exception;
 
+    public void deleteUser(User usuario, User sessionUser) throws Exception;
+
     public List<User> getAllUsers();
 
 
