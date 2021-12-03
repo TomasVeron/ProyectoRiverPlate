@@ -11,12 +11,9 @@ body{
 
 .main{
     margin-left: 300px;
-    display: flex;
     width: calc(100% - 300px);
-    justify-content: center;
-    align-items: center;
     height: 100vh;
-
+    display: flex;
 }
 
 

@@ -14,6 +14,7 @@
 }
 
 .listUser-container{
+    margin: auto;
     border-radius: 16px;
     width: 92%;
     height: 92%;
@@ -58,6 +59,8 @@
     text-shadow: 0 0 3px #000;
     color: #fff;
     margin: 0 20px;
+    border-radius: 30px;
+    border: 1px solid #000;
 }
 
 .listUser__registerButton i, .table__colums-th i{
@@ -70,6 +73,8 @@
     background-color: var(--color-predominant);
     color: #fff;
     text-shadow: 0 0 3px #000;
+    border-radius: 30px;
+    border: 1px solid #000;
 }
 
 .table__rows-td i{
@@ -84,12 +89,14 @@
 }
 
 .listUser__search{
+    border-radius: 16px 0 0 16px;
 }
 
 .listUser__btnSearch{
     background-color: var(--color-predominant);
     width: 40px;
     outline: none;
+    border-radius: 0 16px 16px 0;
 }
 
 
