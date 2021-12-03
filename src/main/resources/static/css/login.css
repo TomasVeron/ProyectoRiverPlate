@@ -81,6 +81,7 @@ body{
 
 .login{
     display: flex;
+    position: relative;
     flex-direction: column;
     background-color: #fff0;
     justify-content: center;
@@ -225,6 +226,19 @@ body{
     position: absolute;
     width: 100%;
     color: #f00;
-    top: -30px;
+    top: 100px;
+    left: 35px;
+}
+
+.login__input-logout {
+    position: absolute;
+    color: #1e8f1e;
+    top: 435px;
+    left: 25px;
+    width: 88%;
+    border: 3px solid;
+    padding: 10px;
+    background-color: #cfc;
+    text-align: center;
 }
 

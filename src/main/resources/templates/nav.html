@@ -1,0 +1,21 @@
+<header>
+    <nav class="nav">
+        <div>
+            <div class="nav__logo-container">
+                <a href=""><img class="nav__logo" th:src="@{/img/logo.png}" alt=""></a>
+            </div>
+            <ul class="nav__ul">
+                <li class="nav__li"><a th:href="@{/}"><i class="fas fa-home"></i>Home</a></li>
+                <li class="nav__li"><a th:href="@{/socios}"><i class="fas fa-users"></i>Socios</a></li>
+                <li class="nav__li"><a th:href="@{cuotas}"><i class="far fa-file-alt"></i>Cuotas</a ></li>
+                <li class="nav__li"><a th:href="@{/users}"><i class="fas fa-user"></i>usuarios</a></li>
+            </ul>
+        </div>
+        <!-- <div class="nav__btn-responsive"><i class="fas fa-bars"></i></div>
+        <div class="nav__btnBackMenuGitbox"></div> -->
+        <div class="nav__logout-container">
+            <div class="nav__logout-userSession"><i class="fas fa-user"></i><span th:text="${#authentication.getPrincipal().getNombre()}"></span></div>
+            <div><a class="nav__logout-button" th:href="@{/logout}">Logout <i class="fas fa-sign-out-alt"></i></a></div>
+        </div>
+    </nav>
+</header>
