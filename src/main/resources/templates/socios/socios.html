@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link rel="stylesheet" th:href="@{/css/main.css}" />
+    <link rel="stylesheet" th:href="@{/css/normalize.css}" />
+    <link rel="stylesheet" th:href="@{/css/nav.css}" />
+    <link rel="stylesheet" th:href="@{/css/users.css}" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@700&display=swap"
+      rel="stylesheet"
+    />
+    <script
+      src="https://kit.fontawesome.com/62ea397d3a.js"
+      crossorigin="anonymous"
+    ></script>
+    <title>Usuarios</title>
+  </head>
+  <body>
+    <header th:replace="nav.html"></header>
+    <div class="main">
+      <div class="listUser-container">
+        <h1 class="userTittle">Usuarios</h1>
+        <div class="listUser-menuControl">
+          <div class="listUser__search-container">
+            <input
+              class="listUser__search"
+              type="text"
+              placeholder="Buscar Usuario"
+            />
+            <button class="listUser__btnSearch">
+              <i class="fas fa-search"></i>
+            </button>
+          </div>
+
+          <a class="listUser__registerButton" th:href="@{socios/addSocio}"
+            ><i class="fas fa-user-plus"></i>Agregar socio</a
+          >
+        </div>
+        <table class="table">
+          <thead>
+            <tr class="table__colums">
+              <th class="table__colums-th">
+                <i class="far fa-question-circle"></i>Estado
+              </th>
+              <th class="table__colums-th">
+                <i class="fas fa-user"></i>Apellido
+              </th>
+              <th class="table__colums-th">
+                <i class="fas fa-address-card"></i>Nombre
+              </th>
+              <th class="table__colums-th"></th>
+              <th class="table__colums-th"></th>
+              <th class="table__colums-th"></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="table__rows" th:each="socio : ${socios}">
+              <td class="table__rows-td" th:text="${socio.estado}"></td>
+              <td class="table__rows-td" th:text="${socio.apellido}"></td>
+              <td class="table__rows-td" th:text="${socio.nombre}"></td>
+              <td class="table__rows-td">
+                <a><i class="fas fa-trash"></i>Ver</a>
+              </td>
+              <td class="table__rows-td">
+                <a><i class="fas fa-trash"></i>Editar</a>
+              </td>
+              <td class="table__rows-td">
+                <a><i class="fas fa-trash"></i>Habilitar/Deshabilitar</a>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <script src="js/main.js"></script>
+  </body>
+</html>

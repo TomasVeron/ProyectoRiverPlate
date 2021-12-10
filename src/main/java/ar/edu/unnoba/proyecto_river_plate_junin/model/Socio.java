@@ -1,7 +1,9 @@
 package ar.edu.unnoba.proyecto_river_plate_junin.model;
 
 
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import javax.persistence.*;
 
 import java.io.Serializable;
@@ -31,7 +33,7 @@ public class Socio implements Serializable {
     @Column(name = "mail")
     //@NotBlank(message = "El nombre no puede estar vacio")
     //@Size(min = 5, max = 16, message = "minimo 5 caracteres y maximo 16")
-    private String mail;
+    private String email;
 
     @Column(name = "domicilio")
     //@NotBlank(message = "El nombre no puede estar vacio")
@@ -39,8 +41,8 @@ public class Socio implements Serializable {
     private String domicilio;
 
     @Column(name = "dni")
-    //@NotBlank(message = "El nombre no puede estar vacio")
-    //@Size(min = 5, max = 16, message = "minimo 5 caracteres y maximo 16")
+    @NotBlank(message = "El nombre no puede estar vacio")
+    @Size(min = 5, max = 16, message = "minimo 5 caracteres y maximo 16")
     private String dni;
 
     @Column(name = "telefono")
@@ -51,17 +53,17 @@ public class Socio implements Serializable {
     @Column(name = "codigo_socio")
     //@NotBlank(message = "El nombre no puede estar vacio")
     //@Size(min = 5, max = 16, message = "minimo 5 caracteres y maximo 16")
-    private String codigo_socio;
+    private String codigo;
     
     @Column(name ="fecha_nacimiento")
     //@NotBlank( message = "la clave no puede estar vacia")
     //@Size(min = 8, message = "la contraseña debe ser de al menos 8 caracteres")
-    private Date fecha_nacimiento;
+    private Date fechaNacimiento;
 
     @Column(name ="fecha_alta")
     //@NotBlank( message = "la clave no puede estar vacia")
     //@Size(min = 8, message = "la contraseña debe ser de al menos 8 caracteres")
-    private Date fecha_alta;
+    private Date fechaAlta;
 
     @NotNull
     @Column(name = "estado")

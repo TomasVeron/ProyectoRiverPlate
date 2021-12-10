@@ -15,11 +15,13 @@ public interface SocioRepository extends JpaRepository<Socio, Long> {
 
     public Socio findByNombre(String nombre);
     @Query(value = 
-        "SELECT * FROM socios s  order by s.estado, s.apellido, s.nombre", nativeQuery = true)
-    
+        "SELECT * FROM socios s order by s.estado ASC, s.apellido ASC, s.nombre ASC", nativeQuery = true)
     
     List<Socio> filterSocios();
 
+    public String findByCodigo(String codigoSocio);
+
+    public String findByDni(String dni);
 
 
 

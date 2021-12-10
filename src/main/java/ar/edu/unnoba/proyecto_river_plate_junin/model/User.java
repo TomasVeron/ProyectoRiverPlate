@@ -50,9 +50,9 @@ public class User implements UserDetails {
     @Size(min = 8, message = "la contraseña debe ser de al menos 8 caracteres")
     private String confirmarPassword;
 
-    @NotNull
-    @Column(name = "rol")
-    private boolean rol;
+    // @NotNull
+    // @Column(name = "rol")
+    // private boolean rol;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
