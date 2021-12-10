@@ -6,6 +6,7 @@ import javax.management.loading.PrivateClassLoader;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import ar.edu.unnoba.proyecto_river_plate_junin.model.Socio;
 import ar.edu.unnoba.proyecto_river_plate_junin.repository.SocioRepository;
@@ -34,4 +35,27 @@ public class SocioServiceImp implements SocioService{
         return repository.save(socio);
     }
 
+    @Override
+    @Transactional(readOnly = true)
+    public Socio encontrarSocio(Socio socio){
+        return repository.findById(socio.getId()).orElse(null); 
+    }
+
+    @Override
+    public Socio updateSocio(Socio socio) {
+       
+        Socio uDB = repository.findById(socio.getId()).orElse(null);
+        uDB.setNombre(socio.getNombre());
+        uDB.setApellido(socio.getApellido());
+        uDB.setEmail(socio.getEmail());
+        uDB.setDomicilio(socio.getDomicilio());
+        uDB.setTelefono(socio.getTelefono());
+        uDB.setCodigo(socio.getCodigo());
+        return repository.save(uDB);
+    }
+
+    public Socio getSocio (Socio socio) {
+        return repository.findById(socio.getId()).orElse(null); 
+    
+    }
 }

@@ -69,7 +69,8 @@
                 <a><i class="fas fa-trash"></i>Ver</a>
               </td>
               <td class="table__rows-td">
-                <a><i class="fas fa-trash"></i>Editar</a>
+                
+                <a th:href="@{/socios/edit/{id}(id=${socio.id})}"/> <i class="fas fa-trash"></i>Editar</a>
               </td>
               <td class="table__rows-td">
                 <a><i class="fas fa-trash"></i>Habilitar/Deshabilitar</a>

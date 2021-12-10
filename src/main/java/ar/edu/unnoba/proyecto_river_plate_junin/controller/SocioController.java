@@ -9,6 +9,7 @@ import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import ar.edu.unnoba.proyecto_river_plate_junin.model.Socio;
@@ -26,9 +27,6 @@ public String sociosView(Model model){
     model.addAttribute("socios",socioService.getAllSocios());
     return "/socios/socios";
     }
-
-
-
 
 @GetMapping("/socios/addSocio")
 public String addSocioView(Model model){
@@ -53,7 +51,19 @@ public String addSocioView(Model model){
         return "redirect:/socios";
     }
 
+    @PostMapping("/socios/update")
+    public String update(@ModelAttribute("socio") Socio socio){
+        
+        socioService.updateSocio(socio);
+        return "redirect:/socios";
+    }
+
+    @GetMapping("/socios/edit/{id}")
+    public String socioEdit(@PathVariable("id") Socio socio, Model model){
+        socio = socioService.getSocio(socio);
+        model.addAttribute("socio",socio);
+        
+        return "/socios/editSocio";
+    }
+ 
 }
-
-
-
