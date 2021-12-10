@@ -24,5 +24,4 @@ public interface SocioRepository extends JpaRepository<Socio, Long> {
     public String findByDni(String dni);
 
 
-
 }
