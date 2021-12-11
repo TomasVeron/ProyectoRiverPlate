@@ -66,15 +66,13 @@
               <td class="table__rows-td" th:text="${socio.apellido}"></td>
               <td class="table__rows-td" th:text="${socio.nombre}"></td>
               <td class="table__rows-td">
-                <a><i class="fas fa-trash"></i>Ver</a>
+                <a th:href="@{/socios/ver/{id}(id=${socio.id})}" ><i class="fas fa-trash"></i>Ver</a>
               </td>
               <td class="table__rows-td">
                 
                 <a th:href="@{/socios/edit/{id}(id=${socio.id})}"/> <i class="fas fa-trash"></i>Editar</a>
               </td>
-              <td class="table__rows-td">
-                <a><i class="fas fa-trash"></i>Habilitar/Deshabilitar</a>
-              </td>
+              
             </tr>
           </tbody>
         </table>

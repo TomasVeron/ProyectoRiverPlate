@@ -69,4 +69,7 @@ public class Socio implements Serializable {
     @Column(name = "estado")
     private boolean estado;
 
+    public Boolean getEstado () {
+        return this.estado;
+    }
 }

@@ -66,4 +66,13 @@ public String addSocioView(Model model){
         return "/socios/editSocio";
     }
  
+    @GetMapping("/socios/ver/{id}")
+    public String verSocio(@PathVariable("id") Socio socio, Model model){
+        socio = socioService.getSocio(socio);
+        model.addAttribute("socio",socio);
+        return "/socios/verSocio";
+    }
+
+    
+
 }

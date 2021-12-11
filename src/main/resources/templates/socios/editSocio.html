@@ -34,13 +34,13 @@
                     <input type="hidden" th:value="${socio.id}" th:attr="name='id'"/>
                     <div class="login__input-container">
                         <div class="login__input-errors" th:if="${#fields.hasErrors('nombre')}" th:errors="*{nombre}">errors</div>
-                        <input type="text" class="login__input" id="login__name" th:field="*{nombre}" autocomplete="off" required/>
+                        <input type="text" class="login__input" id="login__name" th:field="*{nombre}" autocomplete="off" required  />
                         <label for="login__name" class="login__lbl"><i class="fas fa-user"></i><span class="login__lbl-text">Nombre</span></label>
                     </div>
 
                     <div class="login__input-container">
                         <div class="login__input-errors" th:if="${#fields.hasErrors('apellido')}" th:errors="*{apellido}">errors</div>
-                        <input type="text" class="login__input" id="login__lastName" th:field="*{apellido}" autocomplete="off" required/>
+                        <input type="text" class="login__input" id="login__lastName" th:field="*{apellido}" autocomplete="off" required />
                         <label for="login__lastName" class="login__lbl"><i class="fas fa-user"></i><span class="login__lbl-text">Apellido</span></label>
                     </div>
 
@@ -50,13 +50,13 @@
 
                     <div class="login__input-container">
                         <div class="login__input-errors" th:if="${#fields.hasErrors('email')}" th:errors="*{email}">errors</div>
-                        <input type="text"  class="login__input" id="login__email" th:field="*{email}" autocomplete="off" required/>
+                        <input type="text"  class="login__input" id="login__email" th:field="*{email}" autocomplete="off" required  />
                         <label for="login__email" class="login__lbl"><i class="fas fa-envelope"></i><span class="login__lbl-text">Email</span></label>
                     </div>
 
                     <div class="login__input-container">
                         <div class="login__input-errors" th:if="${#fields.hasErrors('domicilio')}" th:errors="*{domicilio}">errors</div>
-                        <input type="text"class="login__input" id="login__address" th:field="*{domicilio}" autocomplete="off" required/>
+                        <input type="text"class="login__input" id="login__address" th:field="*{domicilio}" autocomplete="off" required  />
                         <label for="login__address" class="login__lbl"><i class="fas fa-map-marker-alt"></i><span class="login__lbl-text">Domicilio</span></label>
                     </div>
                 </div>
@@ -66,7 +66,7 @@
 
                     <div class="login__input-container">
                         <div class="login__input-errors" th:if="${#fields.hasErrors('codigo')}" th:errors="*{codigo}">errors</div>
-                        <input type="text"  class="login__input" id="login__code" autocomplete="off" th:field="*{codigo}" required/>
+                        <input type="text"  class="login__input" id="login__code" autocomplete="off" th:field="*{codigo}" required  />
                         <label for="login__code" class="login__lbl"><i class="fas fa-user-tag"></i><span class="login__lbl-text">Codigo Socio</span></label>
                     </div>
 
@@ -76,14 +76,27 @@
 
                     <div class="login__input-container">
                         <div class="login__input-errors" th:if="${#fields.hasErrors('telefono')}" th:errors="*{telefono}">errors</div>
-                        <input type="text"  class="login__input" id="login__phone" th:field="*{telefono}" autocomplete="off" required/>
+                        <input type="text"  class="login__input" id="login__phone" th:field="*{telefono}" autocomplete="off" required  />
                         <label for="login__phone" class="login__lbl"><i class="fas fa-phone-alt"></i><span class="login__lbl-text">Telefono</span></label>
                     </div>
 
-                   
+                  
+
+                    <div class="login__input-container">
+                        <label class="login__rol">Estado</span></label>
+                            <select name="rol" type="rol" id="login__rol" value="Estado" th:field="*{estado}" >
+                                <option value="true"  >Habilitado</option> 
+                                <option value="false" >Deshabilitado</option>                            
+                             </select>
+                     
+                    </div>
                 </div>
 
-                <input type="submit" class="login__input login__submit" value="Actualizar Usuario"/>
+           
+    
+                
+
+                <input type="submit"  class="login__input login__submit" value="Editar Socio"/>
             </form>
         </div>
     </div>
