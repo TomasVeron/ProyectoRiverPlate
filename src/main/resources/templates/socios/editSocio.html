@@ -31,6 +31,7 @@
             <form class="login" method="POST" th:object="${socio}" th:action="@{/socios/update}">
                 <div class="login__input-formError" th:if="${formError}" th:text="${formError}">errors</div>
                 <div class="login__input-container-for-two">
+                    <input type="hidden" th:value="${socio.id}" th:attr="name='id'"/>
                     <div class="login__input-container">
                         <div class="login__input-errors" th:if="${#fields.hasErrors('nombre')}" th:errors="*{nombre}">errors</div>
                         <input type="text" class="login__input" id="login__name" th:field="*{nombre}" autocomplete="off" required/>
