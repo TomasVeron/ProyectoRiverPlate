@@ -153,6 +153,13 @@ body{
     border-bottom: 4px solid #000;
 }
 
+#login__birth{
+    color: rgba(0, 0, 0, 0);
+}
+#login__birth:focus, #login__birth:valid{
+    color: rgba(0, 0, 0,255);
+}
+
 .login__submit{
     background-color: var(--color-predominant);
     color: #fff;

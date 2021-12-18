@@ -9,6 +9,7 @@
     <link rel="stylesheet" th:href="@{/css/normalize.css}">
     <link rel="stylesheet" th:href="@{/css/nav.css}">
     <link rel="stylesheet" th:href="@{/css/users.css}">
+    <link rel="stylesheet" th:href="@{/css/modalDelete.css}">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -26,6 +27,7 @@
                 <div class="listUser__search-container">
                     <input class="listUser__search" type="text" placeholder="Buscar Usuario">
                     <button class="listUser__btnSearch"><i class="fas fa-search"></i></button>
+                    <div class="listUser__errorDelete" th:if="${userDeleteError}" th:text="${userDeleteError}"></div>
                 </div>
 
                 <a class="listUser__registerButton" th:href="@{register}"><i class="fas fa-user-plus"></i>Agregar Usuario</a>
@@ -47,12 +49,32 @@
                     <td class="table__rows-td" th:text="${user.nombre}"></td>
                     <td class="table__rows-td" th:text="${user.apellido}"></td>
                     <td class="table__rows-td" th:text="${Usuario}"></td>
-                    <td class="table__rows-td" ><a th:href="@{users/delete(id=${user.id})}"><i class="fas fa-trash"></i>Eliminar</a></td>
+                    <td class="table__rows-td" ><a href="#" th:onclick="'javascript:confirmDelete(\''+${user.id}+'\');'"><i class="fas fa-trash"></i>Eliminar</a></td>
                 </tr>
                 </tbody>
             </table>
         </div>
     </div>
+    <div th:include="users/modal-cancel-or-confirm.html" th:remove="tag"></div>
+    <script type="text/javascript">
+        function confirmDelete(id){
+            const modal = document.querySelector(".modal");
+            const userHidden = document.getElementById("userIdHiddenInput"); //input para guardar el id del usuario
+            modal.classList.toggle("show"); //agrega la clase show para mostrar el modal
+            userHidden.value = id;
+
+        }
+
+        function deleteUser(){
+            const userHidden = document.getElementById("userIdHiddenInput");
+            window.location = "users/delete/"+ userHidden.value; //va a la url /users/delete/{id} para eliminar el usuario
+        }
+
+        function hiddenModal(){
+            const modal = document.querySelector(".modal");
+            modal.classList.toggle("show"); //quita la clase show para dejar de mostrar el modal
+        }
+    </script>
 <script src="js/main.js"></script>
 </body>
 </html>

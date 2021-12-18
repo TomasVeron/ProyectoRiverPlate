@@ -1,100 +1,72 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
 <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <link rel="stylesheet" th:href="@{/css/verSocio.css}" />
-    <link rel="stylesheet" th:href="@{css/normalize.css}" />
+    <link rel="stylesheet" th:href="@{/css/main.css}">
+    <link rel="stylesheet" th:href="@{/css/normalize.css}">
+    <link rel="stylesheet" th:href="@{/css/nav.css}">
+    <link rel="stylesheet" th:href="@{/css/userDetails.css}">
 
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-            href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@700&display=swap"
-            rel="stylesheet"
-    />
-    <link
-            href="https://fonts.googleapis.com/css2?family=Permanent+Marker&display=swap"
-            rel="stylesheet"
-    />
-    <script
-            src="https://kit.fontawesome.com/62ea397d3a.js"
-            crossorigin="anonymous"
-    ></script>
-    <title>Sistema de Administracion de Socios</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@700&display=swap" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/62ea397d3a.js" crossorigin="anonymous"></script>
+    <title>Home</title>
 </head>
 <body>
+<header th:replace="nav.html">
+</header>
 <div class="main">
-    <div class="presentation-container">
-        <div class="login-container">
-            <form class="login" method="POST" th:object="${socio}" th:action="@{/socios/verSocio}">
-                <div class="login__input-formError" th:if="${formError}" th:text="${formError}">errors</div>
-                <div class="login__input-container-for-two">
-                    <div class="login__input-container">
-                        <div class="login__input-errors" th:if="${#fields.hasErrors('nombre')}" th:errors="*{nombre}">errors</div>
-                        <input type="text" class="login__input" id="login__name" th:field="*{nombre}" autocomplete="off" required readonly/>
-                        <label for="login__name" class="login__lbl"><i class="fas fa-user"></i><span class="login__lbl-text">Nombre</span></label>
-                    </div>
-
-                    <div class="login__input-container">
-                        <div class="login__input-errors" th:if="${#fields.hasErrors('apellido')}" th:errors="*{apellido}">errors</div>
-                        <input type="text" class="login__input" id="login__lastName" th:field="*{apellido}" autocomplete="off" required readonly/>
-                        <label for="login__lastName" class="login__lbl"><i class="fas fa-user"></i><span class="login__lbl-text">Apellido</span></label>
-                    </div>
-
-                </div>
-
-                <div class="login__input-container-for-two">
-
-                    <div class="login__input-container">
-                        <div class="login__input-errors" th:if="${#fields.hasErrors('email')}" th:errors="*{email}">errors</div>
-                        <input type="text"  class="login__input" id="login__email" th:field="*{email}" autocomplete="off" required readonly />
-                        <label for="login__email" class="login__lbl"><i class="fas fa-envelope"></i><span class="login__lbl-text">Email</span></label>
-                    </div>
-
-                    <div class="login__input-container">
-                        <div class="login__input-errors" th:if="${#fields.hasErrors('domicilio')}" th:errors="*{domicilio}">errors</div>
-                        <input type="text"class="login__input" id="login__address" th:field="*{domicilio}" autocomplete="off" required readonly />
-                        <label for="login__address" class="login__lbl"><i class="fas fa-map-marker-alt"></i><span class="login__lbl-text">Domicilio</span></label>
-                    </div>
-                </div>
-
-                <div class="login__input-container-for-two">
-                    <div class="login__input-container">
-                        <div class="login__input-errors" th:if="${#fields.hasErrors('dni')}" th:errors="*{dni}">errors</div>
-                        <input type="text" class="login__input" id="login__dni" th:field="*{dni}" autocomplete="off" required readonly />
-                        <label for="login__dni" class="login__lbl"><i class="fas fa-address-card"></i><span class="login__lbl-text">DNI</span></label>
-                    </div>
-
-                    <div class="login__input-container">
-                        <div class="login__input-errors" th:if="${#fields.hasErrors('codigo')}" th:errors="*{codigo}">errors</div>
-                        <input type="text"  class="login__input" id="login__code" autocomplete="off" th:field="*{codigo}" required readonly />
-                        <label for="login__code" class="login__lbl"><i class="fas fa-user-tag"></i><span class="login__lbl-text">Codigo Socio</span></label>
-                    </div>
-
-                </div>
-
-                <div class="login__input-container-for-two">
-
-                    <div class="login__input-container">
-                        <div class="login__input-errors" th:if="${#fields.hasErrors('telefono')}" th:errors="*{telefono}">errors</div>
-                        <input type="text"  class="login__input" id="login__phone" th:field="*{telefono}" autocomplete="off" required readonly />
-                        <label for="login__phone" class="login__lbl"><i class="fas fa-phone-alt"></i><span class="login__lbl-text">Telefono</span></label>
-                    </div>
-
-                    <div class="login__input-container">
-                        <div class="login__input-errors" th:if="${#fields.hasErrors('fechaNacimiento')}" th:errors="*{fechaNacimiento}">errors</div>
-                        <input type="text" class="login__input" id="login__birth" th:field="*{fechaNacimiento}" autocomplete="off" required readonly/>
-                        <label for="login__birth" class="login__lbl"><i class="fas fa-calendar-alt"></i><span class="login__lbl-text">Fecha Nacimiento</span></label>
-                    </div>
-                </div>
-
-                <a class="badge badge-primary" th:href="@{/socios}">Volver</a>
-            </form>
+    <div class="userDetails">
+        <h1 class="userTittle">usuarios-<span th:text="${socio.nombre}"></span></h1>
+        <div class="userDetails__header">
+            <h2 class="userDetails__header-tittle">Detalles de Socio</h2>
+            <a class="userDetails__header-backbutton" th:href="@{/socios}"><i class="fas fa-long-arrow-alt-left"></i> volver</a>
+        </div>
+        <div class="userDetails-container">
+            <h3 class="userDetails__detailName">Codigo Socio</h3>
+            <span class="userDetails__detailInfo" th:text="${socio.codigo}"></span>
+        </div>
+        <div class="userDetails-container">
+            <h3 class="userDetails__detailName">Numero de Documento</h3>
+            <span class="userDetails__detailInfo" th:text="${socio.dni}"></span>
+        </div>
+        <div class="userDetails-container">
+            <h3 class="userDetails__detailName">Nombre</h3>
+            <span class="userDetails__detailInfo" th:text="${socio.nombre}"></span>
+        </div>
+        <div class="userDetails-container">
+            <h3 class="userDetails__detailName">Apellido</h3>
+            <span class="userDetails__detailInfo" th:text="${socio.apellido}"></span>
+        </div>
+        <div class="userDetails-container">
+            <h3 class="userDetails__detailName">Email</h3>
+            <span class="userDetails__detailInfo" th:text="${socio.email}"></span>
+        </div>
+        <div class="userDetails-container">
+            <h3 class="userDetails__detailName">Direccion</h3>
+            <span class="userDetails__detailInfo" th:text="${socio.domicilio}"></span>
+        </div>
+        <div class="userDetails-container">
+            <h3 class="userDetails__detailName">Telefono</h3>
+            <span class="userDetails__detailInfo" th:text="${socio.telefono}"></span>
+        </div>
+        <div class="userDetails-container">
+            <h3 class="userDetails__detailName">Fecha de Nacimiento</h3>
+            <span class="userDetails__detailInfo" th:text="${#dates.format(socio.fechaNacimiento, 'dd MMMM yyyy')}"></span>
+        </div>
+        <div class="userDetails-container">
+            <h3 class="userDetails__detailName">Fecha de Alta</h3>
+            <span class="userDetails__detailInfo" th:text="${#dates.format(socio.fechaAlta, 'dd MMMM yyyy')}"></span>
+        </div>
+        <div class="userDetails-container">
+            <h3 class="userDetails__detailName">Estado</h3>
+            <span class="userDetails__detailInfo" th:text="${socio.estado ? 'Activo/a':'Inactivo/a'}"></span>
         </div>
     </div>
 </div>
-<script th:src="@{/js/main.js}"></script>
 </body>
 </html>

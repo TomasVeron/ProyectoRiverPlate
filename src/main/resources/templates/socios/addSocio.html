@@ -85,7 +85,7 @@
 
                     <div class="login__input-container">
                         <div class="login__input-errors" th:if="${#fields.hasErrors('fechaNacimiento')}" th:errors="*{fechaNacimiento}">errors</div>
-                        <input type="text" class="login__input" id="login__birth" th:field="*{fechaNacimiento}" autocomplete="off" required/>
+                        <input type="date" class="login__input" id="login__birth" th:field="*{fechaNacimiento}" autocomplete="off" required/>
                         <label for="login__birth" class="login__lbl"><i class="fas fa-calendar-alt"></i><span class="login__lbl-text">Fecha Nacimiento</span></label>
                     </div>
                 </div>

@@ -20,6 +20,10 @@ public interface SocioService {
     public Socio updateSocio(Socio socio);
 
     public Socio getSocio (Socio socio);
+
+    public List<Socio> buscarEnSocio(String keyword);
+
+    
        
     
 

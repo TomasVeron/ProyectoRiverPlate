@@ -14,6 +14,7 @@ import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 
 
@@ -61,18 +62,16 @@ public class UserController {
 
     }
 
-    @GetMapping("/users/delete")
-    public String usersDelete(Model model ,@ModelAttribute ("user") User user, Authentication authentication){
-        
+    @GetMapping("/users/delete/{id}")
+    public String usersDelete(@PathVariable("id") Long userId,  Authentication authentication, RedirectAttributes redirectAttributes){
+        User user = userService.getUserById(userId);
         User sessionUser = (User)authentication.getPrincipal();
         try {
             userService.deleteUser(user,sessionUser);
         } catch (Exception e) {
-            
-            e.printStackTrace();
+            redirectAttributes.addFlashAttribute("userDeleteError", e.getMessage());
         }
         return "redirect:/users";
-
     }
 
 

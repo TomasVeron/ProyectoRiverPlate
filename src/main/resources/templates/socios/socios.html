@@ -29,17 +29,21 @@
         <h1 class="userTittle">Usuarios</h1>
         <div class="listUser-menuControl">
           <div class="listUser__search-container">
-            <input
+            <!-- <input
               class="listUser__search"
               type="text"
               placeholder="Buscar Usuario"
             />
             <button class="listUser__btnSearch">
               <i class="fas fa-search"></i>
-            </button>
+            </button> -->
+            <form th:action="@{/socios/buscarEnSocios}" method="get">
+              <input type="text" class="listUser__search" name="keyword" th:value="${keyword}"  placeholder="Buscar por Nombre, Apellido, Codigo" size="50" >
+              <button type="submit" class="listUser__btnSearch" ><i class="fas fa-search"></i></button>
+          </form>
           </div>
 
-          <a class="listUser__registerButton" th:href="@{socios/addSocio}"
+          <a class="listUser__registerButton" th:href="@{/socios/addSocio}"
             ><i class="fas fa-user-plus"></i>Agregar socio</a
           >
         </div>
@@ -62,7 +66,10 @@
           </thead>
           <tbody>
             <tr class="table__rows" th:each="socio : ${socios}">
-              <td class="table__rows-td" th:text="${socio.estado}"></td>
+              <td class="table__rows-td">
+                <i th:if="${socio.estado==true}" class="table__socio-active fas fa-check-circle"></i>
+                <i th:if="${socio.estado==false}" class="table__socio-inactive fas fa-times-circle"></i>
+                <span th:text="${socio.estado ? 'Activo/a':'Inactivo/a'}"></span> </td>
               <td class="table__rows-td" th:text="${socio.apellido}"></td>
               <td class="table__rows-td" th:text="${socio.nombre}"></td>
               <td class="table__rows-td">

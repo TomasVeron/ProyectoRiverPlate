@@ -79,7 +79,6 @@
 
 .table__rows-td i{
     margin: 0 5px;
-    color: #fff;
 }
 
 .listUser__search-container{
@@ -99,4 +98,19 @@
     border-radius: 0 16px 16px 0;
 }
 
+.listUser__errorDelete{
+    background-color: #ff8b94;
+    border: 1px solid #f00;
+    color: #f00;
+    margin: 0 10px;
+    text-align: center;
+    padding: 0 5px;
+}
+
+.table__socio-active{
+    color: #1e8f1e;
+}
+.table__socio-inactive{
+    color: rgba(255, 0, 0, 0.68);
+}
 

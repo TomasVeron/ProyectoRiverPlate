@@ -24,4 +24,11 @@ public interface SocioRepository extends JpaRepository<Socio, Long> {
     public String findByDni(String dni);
 
 
+    @Query(value = 
+        "SELECT * FROM socios s WHERE lower(s.nombre) LIKE lower(CONCAT('%', ?1, '%'))" + 
+        "OR lower(s.codigo_socio) LIKE lower(CONCAT('%', ?1, '%'))" + 
+        "OR lower(s.apellido) LIKE lower(CONCAT('%', ?1, '%'))", nativeQuery = true)
+    public List<Socio> searchSocios(String keyword);
+
+
 }

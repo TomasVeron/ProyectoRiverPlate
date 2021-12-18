@@ -1,5 +1,7 @@
 package ar.edu.unnoba.proyecto_river_plate_junin.controller;
 
+import java.util.List;
+
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -71,6 +73,19 @@ public String addSocioView(Model model){
         socio = socioService.getSocio(socio);
         model.addAttribute("socio",socio);
         return "/socios/verSocio";
+    }
+
+    @GetMapping("/socios/buscarEnSocios")
+    public String buscarEnSocios (Socio socio, Model model, String keyword) {
+        if (keyword != null) {
+            List<Socio> socios = socioService.buscarEnSocio(keyword);
+            model.addAttribute("socios", socios);
+        }
+        /* else {
+            List<Usuario> listaUsuarios = usuarioService.listarUsuarios();
+            model.addAttribute("listaUsuarios", listaUsuarios);
+        } */
+        return "/socios/socios";
     }
 
     

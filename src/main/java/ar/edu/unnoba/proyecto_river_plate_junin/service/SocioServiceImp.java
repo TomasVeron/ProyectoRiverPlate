@@ -27,7 +27,7 @@ public class SocioServiceImp implements SocioService{
 
     @Override
     public Socio createSocio(Socio socio) throws Exception {
-        if(socio.getCodigo()==repository.findByCodigo(socio.getCodigo()) && socio.getDni()==repository.findByDni(socio.getDni())){
+        if(socio.getCodigo()==repository.findByCodigo(socio.getCodigo()) || socio.getDni()==repository.findByDni(socio.getDni())){
             throw new Exception("el codigo o dni de socio no esta disponible");
         }
         socio.setFechaAlta(new Date());
@@ -42,11 +42,8 @@ public class SocioServiceImp implements SocioService{
     }
 
     @Override
-    public Socio updateSocio(Socio socio) {
-       
+    public Socio updateSocio(Socio socio) {       
         Socio uDB = repository.findById(socio.getId()).orElse(null);
-        uDB.setNombre(socio.getNombre());
-        uDB.setApellido(socio.getApellido());
         uDB.setEmail(socio.getEmail());
         uDB.setDomicilio(socio.getDomicilio());
         uDB.setTelefono(socio.getTelefono());
@@ -59,4 +56,11 @@ public class SocioServiceImp implements SocioService{
         return repository.findById(socio.getId()).orElse(null); 
     
     }
+
+
+    @Override
+    @Transactional(readOnly = true)
+    public List<Socio> buscarEnSocio(String keyword){
+        return repository.searchSocios(keyword);
+   }
 }
