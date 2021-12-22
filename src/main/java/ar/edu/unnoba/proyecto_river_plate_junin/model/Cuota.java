@@ -3,6 +3,8 @@ package ar.edu.unnoba.proyecto_river_plate_junin.model;
 import javax.validation.constraints.NotNull;
 
 import java.io.Serializable;
+import java.util.Date;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
 import lombok.Data;
@@ -23,6 +25,16 @@ public class Cuota implements Serializable {
     @Column(name="fecha_caducidad")
     @NotEmpty
     private String fechaCaducidad;
+
+    @Column(name = "fecha_pago")
+    private Date fechaPago;
+
+    @Column(name = "forma_pago")
+    @NotEmpty
+    private String formaPago;
+
+    @Column(name = "detalle_pago")
+    private String detallePago;
     
     @Column(name="monto")
     @NotNull
@@ -32,5 +44,9 @@ public class Cuota implements Serializable {
     @JoinColumn(name = "socio")
     @NotNull
     private Socio socio;
+
+    @JoinColumn(name = "categoria", referencedColumnName = "id_categoria")
+    @OneToOne
+    private Categoria categoria;
 
 }

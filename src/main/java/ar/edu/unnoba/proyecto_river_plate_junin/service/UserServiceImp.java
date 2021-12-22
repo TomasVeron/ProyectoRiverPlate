@@ -81,4 +81,10 @@ public class UserServiceImp implements UserService, UserDetailsService{
     }
 
 
+    @Override
+    public List<User> buscarEnUsuario(String keyword) {
+        return repository.searchUsuarios(keyword);
+    }
+
+
 }

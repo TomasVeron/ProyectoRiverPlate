@@ -3,6 +3,9 @@ package ar.edu.unnoba.proyecto_river_plate_junin.controller;
 
 import ar.edu.unnoba.proyecto_river_plate_junin.service.*;
 import ar.edu.unnoba.proyecto_river_plate_junin.model.User;
+
+import java.util.List;
+
 import javax.validation.Valid;
 
 
@@ -72,6 +75,20 @@ public class UserController {
             redirectAttributes.addFlashAttribute("userDeleteError", e.getMessage());
         }
         return "redirect:/users";
+    }
+
+
+    @GetMapping("/users/buscarEnUsuario")
+    public String buscarEnUsuarios (User user, Model model, String keyword) {
+        if (keyword != null) {
+            List<User> users = userService.buscarEnUsuario(keyword);
+            model.addAttribute("users", users);
+        }
+        /* else {
+            List<Usuario> listaUsuarios = usuarioService.listarUsuarios();
+            model.addAttribute("listaUsuarios", listaUsuarios);
+        } */
+        return "/users/users";
     }
 
 

@@ -18,5 +18,7 @@ public interface UserService {
 
     public User getUserById(Long id);
 
+    public List<User> buscarEnUsuario(String keyword);
+
 
 }

@@ -25,12 +25,14 @@
             <h1 class="userTittle">Usuarios</h1>
             <div class="listUser-menuControl">
                 <div class="listUser__search-container">
-                    <input class="listUser__search" type="text" placeholder="Buscar Usuario">
-                    <button class="listUser__btnSearch"><i class="fas fa-search"></i></button>
+                    <form th:action="@{/users/buscarEnUsuario}" method="get">
+                        <input type="text" class="listUser__search" name="keyword" th:value="${keyword}"  placeholder="Buscar por Nombre, Apellido, Email" size="50" >
+                        <button type="submit" class="listUser__btnSearch" ><i class="fas fa-search"></i></button>
+                    </form>
                     <div class="listUser__errorDelete" th:if="${userDeleteError}" th:text="${userDeleteError}"></div>
                 </div>
 
-                <a class="listUser__registerButton" th:href="@{register}"><i class="fas fa-user-plus"></i>Agregar Usuario</a>
+                <a class="listUser__registerButton" th:href="@{/register}"><i class="fas fa-user-plus"></i>Agregar Usuario</a>
 
             </div>
             <table class="table">
