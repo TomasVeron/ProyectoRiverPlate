@@ -69,7 +69,6 @@ public class Socio implements Serializable {
     @Column(name = "estado")
     private boolean estado;
 
-    @Column
     @ManyToOne(optional = true, fetch = FetchType.LAZY)
     @JoinColumn(name = "socio_titular")
     private Socio socioTitular;

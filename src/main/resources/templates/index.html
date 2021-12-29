@@ -8,6 +8,7 @@
 	<link rel="stylesheet" th:href="@{/css/main.css}">
 	<link rel="stylesheet" th:href="@{/css/normalize.css}">
 	<link rel="stylesheet" th:href="@{/css/nav.css}">
+	<link rel="stylesheet" th:href="@{/css/home.css}">
 
 	<link rel="preconnect" href="https://fonts.googleapis.com">
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -19,7 +20,32 @@
 	<header th:replace="nav.html">
 	</header>
 	<div class="main">
-				
+
+		<h1 class="home-tittle">Informacion General</h1>
+
+		<div class="dates">
+			<div class="dates__card">
+				<img class="dates__icons" th:src="@{/img/socios-icons.png}"></img>
+				<div class="dates__card-footer">
+					<h3 class="dates__date">5,645</h3>
+					<h4 class="dates__date-tittle">Socios Totales</h4>
+				</div>
+			</div>
+			<div class="dates__card">
+				<img class="dates__icons" th:src="@{/img/socios-check.png}"></img>
+				<div class="dates__card-footer">
+					<h3 class="dates__date">4,300</h3>
+					<h4 class="dates__date-tittle">Socios Activos</h4>
+				</div>
+			</div>
+			<div class="dates__card">
+				<img class="dates__icons" th:src="@{/img/users-icons.png}"></img>
+				<div class="dates__card-footer">
+					<h3 class="dates__date">20</h3>
+					<h4 class="dates__date-tittle">Usuarios Totales</h4>
+				</div>
+			</div>
+		
 	</div>
 	<script src="js/main.js"></script>
 </body>
