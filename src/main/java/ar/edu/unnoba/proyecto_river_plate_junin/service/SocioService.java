@@ -23,6 +23,11 @@ public interface SocioService {
 
     public List<Socio> buscarEnSocio(String keyword);
 
+    public int contarSocios();
+
+    public int contarSociosActivos();
+
+
     
        
     

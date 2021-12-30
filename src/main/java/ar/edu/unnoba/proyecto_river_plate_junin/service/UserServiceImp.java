@@ -87,4 +87,10 @@ public class UserServiceImp implements UserService, UserDetailsService{
     }
 
 
+    @Override
+    public int contarUsers() {
+        return repository.contarUsers();
+    }
+
+
 }

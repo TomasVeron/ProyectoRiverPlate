@@ -21,4 +21,8 @@ public interface UserRepository extends JpaRepository<User, Long> {
         "OR lower(u.apellido) LIKE lower(CONCAT('%', ?1, '%'))", nativeQuery = true)
     public List<User> searchUsuarios(String keyword);
 
+    @Query(value = 
+    "SELECT COUNT(id_usuario) FROM usuarios s", nativeQuery = true)
+    public int contarUsers();
+
 }

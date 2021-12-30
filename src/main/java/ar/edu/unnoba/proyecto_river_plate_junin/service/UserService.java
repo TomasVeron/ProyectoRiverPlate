@@ -20,5 +20,7 @@ public interface UserService {
 
     public List<User> buscarEnUsuario(String keyword);
 
+    public int contarUsers();
+
 
 }

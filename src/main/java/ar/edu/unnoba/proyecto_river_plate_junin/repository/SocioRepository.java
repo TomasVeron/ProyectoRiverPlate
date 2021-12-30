@@ -30,5 +30,14 @@ public interface SocioRepository extends JpaRepository<Socio, Long> {
         "OR lower(s.apellido) LIKE lower(CONCAT('%', ?1, '%'))", nativeQuery = true)
     public List<Socio> searchSocios(String keyword);
 
+    @Query(value = 
+    "SELECT COUNT(id_socio) FROM socios s", nativeQuery = true)
+    public int contarSocios();
+
+    @Query(value = 
+    "SELECT COUNT(id_socio) FROM socios s WHERE s.estado = true", nativeQuery = true)
+    public int contarSociosActivos();
+
+
 
 }

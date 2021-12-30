@@ -63,4 +63,16 @@ public class SocioServiceImp implements SocioService{
     public List<Socio> buscarEnSocio(String keyword){
         return repository.searchSocios(keyword);
    }
+
+
+    @Override
+    public int contarSocios() {
+        return repository.contarSocios();
+    }
+
+
+    @Override
+    public int contarSociosActivos() {
+        return repository.contarSociosActivos();
+    }
 }
