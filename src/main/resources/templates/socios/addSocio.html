@@ -88,6 +88,12 @@
                         <input type="date" class="login__input" id="login__birth" th:field="*{fechaNacimiento}" autocomplete="off" required/>
                         <label for="login__birth" class="login__lbl"><i class="fas fa-calendar-alt"></i><span class="login__lbl-text">Fecha Nacimiento</span></label>
                     </div>
+
+                    <div class="login__input-container">
+                        <select th:field="*{categoria}">
+                            <option th:each="categoria: ${categorias}" th:value="${categoria.id}" th:text="${categoria.nombre}"></option>
+                        </select>
+                    </div>
                 </div>
 
                 <input type="submit" class="login__input login__submit" value="Alta Usuario"/>

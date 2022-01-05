@@ -49,6 +49,7 @@ public class SocioServiceImp implements SocioService{
         uDB.setTelefono(socio.getTelefono());
         uDB.setCodigo(socio.getCodigo());
         uDB.setEstado(socio.getEstado());
+        uDB.setCategoria(socio.getCategoria());
         return repository.save(uDB);
     }
 

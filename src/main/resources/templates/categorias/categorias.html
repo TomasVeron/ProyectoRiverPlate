@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link rel="stylesheet" th:href="@{/css/main.css}" />
+    <link rel="stylesheet" th:href="@{/css/normalize.css}" />
+    <link rel="stylesheet" th:href="@{/css/nav.css}" />
+    <link rel="stylesheet" th:href="@{/css/users.css}" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@700&display=swap"
+      rel="stylesheet"
+    />
+    <script
+      src="https://kit.fontawesome.com/62ea397d3a.js"
+      crossorigin="anonymous"
+    ></script>
+    <title>Categorias</title>
+  </head>
+  <body>
+    <header th:replace="nav.html"></header>
+    <div class="main">
+      <div class="listUser-container">
+        <h1 class="userTittle">Categorias</h1>
+        <!-- <div class="listUser-menuControl">
+          <div class="listUser__search-container">
+            <form th:action="@{/socios/buscarEnSocios}" method="get">
+              <input type="text" class="listUser__search" name="keyword" th:value="${keyword}"  placeholder="Buscar por Nombre, Apellido, Codigo" size="50" >
+              <button type="submit" class="listUser__btnSearch" ><i class="fas fa-search"></i></button>
+          </form>
+          </div>
+
+          <a class="listUser__registerButton" th:href="@{/socios/addSocio}"
+            ><i class="fas fa-user-plus"></i>Agregar Categ</a
+          >
+        </div> -->
+        <table class="table">
+          <thead>
+            <tr class="table__colums">
+              <th class="table__colums-th">
+                <i class="far fa-question-circle"></i>Nombre
+              </th>
+              <th class="table__colums-th">
+                <i class="fas fa-user"></i>Edad Desde
+              </th>
+              <th class="table__colums-th">
+                <i class="fas fa-address-card"></i>Edad Hasta
+              </th>
+              <th class="table__colums-th"> Valor Cuota</th>
+              <th class="table__colums-th"></th>
+              <th class="table__colums-th"></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="table__rows" th:each="categoria : ${categorias}">
+
+              <td class="table__rows-td" th:text="${categoria.nombre}"> </td>
+              <td class="table__rows-td" th:text="${categoria.edadDesde}"></td>
+              <td class="table__rows-td" th:text="${categoria.edadHasta}"></td>
+              <td class="table__rows-td" th:text="${categoria.valorCuota}"></td>
+              <td class="table__rows-td">
+                <a th:href="@{/categorias/edit/{id}(id=${categoria.id})}"/> <i class="fas fa-edit"></i>Editar</a>
+              </td>
+              
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <script src="js/main.js"></script>
+  </body>
+</html>

@@ -66,6 +66,11 @@
             <h3 class="userDetails__detailName">Estado</h3>
             <span class="userDetails__detailInfo" th:text="${socio.estado ? 'Activo/a':'Inactivo/a'}"></span>
         </div>
+
+        <div class="userDetails-container">
+            <h3 class="userDetails__detailName">Categoria</h3>
+            <span class="userDetails__detailInfo" th:text="${socio.categoria.nombre}"></span>
+        </div>
     </div>
 </div>
 </body>

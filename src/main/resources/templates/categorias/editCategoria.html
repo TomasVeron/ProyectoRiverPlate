@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" th:href="@{/css/main.css}">
+    <link rel="stylesheet" th:href="@{/css/normalize.css}">
+    <link rel="stylesheet" th:href="@{/css/nav.css}">
+    <link rel="stylesheet" th:href="@{/css/editSocio.css}">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@700&display=swap" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/62ea397d3a.js" crossorigin="anonymous"></script>
+    <title>Home</title>
+</head>
+<body>
+<header th:replace="nav.html">
+</header>
+<div class="main">
+    <div class="userDetails">
+        <h1 class="userTittle">Categorias - <span th:text="${categoria.nombre}"></span></h1>
+        <div class="userDetails__header">
+            <h2 class="userDetails__header-tittle">Detalles de Socio</h2>
+            <a class="userDetails__header-backbutton" th:href="@{/categorias}"><i class="fas fa-long-arrow-alt-left"></i> volver</a>
+        </div>
+        <form method="POST" th:object="${categoria}" th:action="@{/categorias/update}">
+
+            <div class="userDetails-container">
+                <h3 class="userDetails__detailName">Nombre</h3>
+                <input type="hidden" th:value="${categoria.id}" th:attr="name='id'"/>
+                <span class="userDetails__detailInfo" th:text="${categoria.nombre}"></span>
+            </div>
+            <div class="userDetails-container">
+                <h3 class="userDetails__detailName">Edad desde</h3>
+                <span class="userDetails__detailInfo" th:text="${categoria.edadDesde}"></span>
+            </div>
+            <div class="userDetails-container">
+                <h3 class="userDetails__detailName">Edad Hasta</h3>
+                <span class="userDetails__detailInfo" th:text="${categoria.edadHasta}"></span>
+            </div>
+            <div class="userDetails-container">
+                <h3 class="userDetails__detailName">Valor Cuota</h3>
+                <input type="number" class="userDetails__inputs" th:field="*{valorCuota}">
+            </div>
+            <input type="submit" class="userDetails__btn-submit" value="Aplicar Cambios">
+        </form>
+    </div>
+</div>
+</body>
+</html>

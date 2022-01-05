@@ -13,7 +13,6 @@ public interface SocioService {
     public List<Socio> getAllSocios();
 
     public Socio createSocio(Socio socio) throws Exception;
-
     
     public Socio encontrarSocio(Socio socio);
 

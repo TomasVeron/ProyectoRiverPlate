@@ -4,6 +4,9 @@ package ar.edu.unnoba.proyecto_river_plate_junin.model;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+
+import org.springframework.format.annotation.DateTimeFormat;
+
 import javax.persistence.*;
 
 import java.io.Serializable;
@@ -80,5 +83,10 @@ public class Socio implements Serializable {
 
     public Boolean getEstado () {
         return this.estado;
+    }
+
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    public Date getFechaNacimiento() {
+        return fechaNacimiento;
     }
 }
