@@ -71,6 +71,12 @@
             <h3 class="userDetails__detailName">Categoria</h3>
             <span class="userDetails__detailInfo" th:text="${socio.categoria.nombre}"></span>
         </div>
+
+        <div class="userDetails-container">
+            <h3 class="userDetails__detailName">Socio Titular</h3>
+            <span th:if="${socio.socioTitular != null}" class="userDetails__detailInfo" th:text="${socio.socioTitular.nombre}"></span>
+            <span th:if="${socio.socioTitular == null}" class="userDetails__detailInfo" >No tiene socio titular</span>
+        </div>
     </div>
 </div>
 </body>

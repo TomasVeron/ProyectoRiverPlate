@@ -234,3 +234,12 @@ body{
     color: #f00;
     margin-left: 90px;
 }
+
+.addSocio {
+    display: none;
+    position: relative;
+}
+
+.addSocio.show{
+    display: block;
+}

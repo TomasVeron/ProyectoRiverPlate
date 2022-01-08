@@ -1,13 +1,9 @@
 package ar.edu.unnoba.proyecto_river_plate_junin.service;
 import java.util.Date;
 import java.util.List;
-
-import javax.management.loading.PrivateClassLoader;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
 import ar.edu.unnoba.proyecto_river_plate_junin.model.Socio;
 import ar.edu.unnoba.proyecto_river_plate_junin.repository.SocioRepository;
 
