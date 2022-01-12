@@ -22,10 +22,15 @@ public class SocioServiceImp implements SocioService{
 
 
     @Override
-    public Socio createSocio(Socio socio) throws Exception {
+    public Socio createSocio(Socio socio, String socioTitular) throws Exception {
         if(socio.getCodigo()==repository.findByCodigo(socio.getCodigo()) || socio.getDni()==repository.findByDni(socio.getDni())){
             throw new Exception("el codigo o dni de socio no esta disponible");
         }
+        else if(repository.encontrarSocioTitular(socioTitular) == null){
+            throw new Exception("Socio Titular ingresado no existe!!");
+        }
+        Socio socioTi =repository.encontrarSocioTitular(socioTitular);
+        socio.setSocioTitular(socioTi);
         socio.setFechaAlta(new Date());
         socio.setEstado(true);
         return repository.save(socio);
@@ -83,5 +88,11 @@ public class SocioServiceImp implements SocioService{
     @Override
     public int contarSociosInd() {
         return repository.contarSociosInd();
+    }
+
+
+    @Override
+    public Socio consultarSocioTitular(String socioTitular) {
+        return repository.encontrarSocioTitular(socioTitular);
     }
 }

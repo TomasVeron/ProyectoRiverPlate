@@ -1,6 +1,5 @@
 package ar.edu.unnoba.proyecto_river_plate_junin.controller;
 
-import java.util.Collections;
 import java.util.List;
 
 import javax.validation.Valid;
@@ -51,12 +50,10 @@ public String addSocioView(Model model1, Model model2){
             return"/socios/addSocio";
         }
         try{
-            System.out.println(socio.getCategoria().getNombre());
-            socioService.createSocio(socio);
+            socioService.createSocio(socio, socio.getCodigoSocioTitular());
         }catch(Exception e){
             model.addAttribute("socio", socio);
             model2.addAttribute("categorias", categoriaService.getCategorias());
-
             return "/socios/addSocio";
         }
 
@@ -65,7 +62,6 @@ public String addSocioView(Model model1, Model model2){
 
     @PostMapping("/socios/update")
     public String update(@ModelAttribute("socio") Socio socio){
-        
         socioService.updateSocio(socio);
         return "redirect:/socios";
     }
@@ -98,7 +94,5 @@ public String addSocioView(Model model1, Model model2){
         } */
         return "/socios/socios";
     }
-
-    
 
 }

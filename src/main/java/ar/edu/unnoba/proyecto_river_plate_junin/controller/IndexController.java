@@ -22,7 +22,6 @@ public class IndexController {
         int sociosTotales = socioService.contarSocios();
         int usuariosTotales = userService.contarUsers();
         int sociosActivos = socioService.contarSociosActivos();
-        System.out.println(socioService.contarSociosInd());
         model.addAttribute("usuarios",usuariosTotales );
         model.addAttribute("sociosTotales", sociosTotales);
         model.addAttribute("sociosActivos", sociosActivos);

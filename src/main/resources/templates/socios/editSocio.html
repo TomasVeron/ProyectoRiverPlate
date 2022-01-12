@@ -76,6 +76,12 @@
               <option th:each="categoria: ${categorias}" th:value="${categoria.id}" th:text="${categoria.nombre}"></option>
             </select>
           </div>
+
+          <div class="userDetails-container">
+            <h3 class="userDetails__detailName">Socio Titular</h3>
+            <input th:if="${socio.socioTitular != null}" class="userDetails__inputs" th:field="*{socioTitular}"></span>
+            <span th:if="${socio.socioTitular == null}" class="userDetails__detailInfo">No tiene socio titular</span>
+          </div>
           <input type="submit" class="userDetails__btn-submit" value="Editar Socio" />
         </form>
       </div>

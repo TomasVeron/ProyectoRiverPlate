@@ -6,7 +6,7 @@ import java.util.List;
 public interface SocioService {
     public List<Socio> getAllSocios();
 
-    public Socio createSocio(Socio socio) throws Exception;
+    public Socio createSocio(Socio socio, String socioTitular) throws Exception;
     
     public Socio encontrarSocio(Socio socio);
 
@@ -22,6 +22,8 @@ public interface SocioService {
 
     public int contarSociosGf();
     public int contarSociosInd();
+
+    public Socio consultarSocioTitular(String socioTitular);
 
 
 

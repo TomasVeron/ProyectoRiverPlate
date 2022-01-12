@@ -76,6 +76,9 @@ public class Socio implements Serializable {
     @JoinColumn(name = "socio_titular")
     private Socio socioTitular;
 
+    @Transient
+    private String codigoSocioTitular;
+
 
     @JoinColumn(name = "categoria", referencedColumnName = "id_categoria")
     @OneToOne

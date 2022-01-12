@@ -101,8 +101,8 @@
                     </div>
 
                     <div class="login__input-container addSocio" >
-                        <div class="login__input-errors" th:if="${#fields.hasErrors('socioTitular')}" th:errors="*{socioTitular}">errors</div>
-                        <input type="text" class="login__input" id="login__titular" th:field="*{socioTitular}" autocomplete="off"/>
+                        <!-- <div class="login__input-errors" th:if="${#fields.hasErrors('socioTitular')}" th:errors="*{socioTitular}">errors</div> -->
+                        <input type="text" class="login__input" id="login__titular" th:field="*{codigoSocioTitular}"  autocomplete="off"/>
                         <label for="login__titular" class="login__lbl"><i class="fas fa-handshake"></i><span class="login__lbl-text">Socio Titular</span></label>
                     </div>
                 </div>
