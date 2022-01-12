@@ -63,6 +63,10 @@
     border: 1px solid #000;
 }
 
+.scroll{
+    overflow-y: auto;
+}
+
 .listUser__registerButton i, .table__colums-th i{
     margin: 0 5px;
 }

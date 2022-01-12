@@ -1,83 +1,84 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <link rel="stylesheet" th:href="@{/css/main.css}">
-    <link rel="stylesheet" th:href="@{/css/normalize.css}">
-    <link rel="stylesheet" th:href="@{/css/nav.css}">
-    <link rel="stylesheet" th:href="@{/css/userDetails.css}">
+    <link rel="stylesheet" th:href="@{/css/main.css}" />
+    <link rel="stylesheet" th:href="@{/css/normalize.css}" />
+    <link rel="stylesheet" th:href="@{/css/nav.css}" />
+    <link rel="stylesheet" th:href="@{/css/userDetails.css}" />
 
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@700&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@700&display=swap" rel="stylesheet" />
     <script src="https://kit.fontawesome.com/62ea397d3a.js" crossorigin="anonymous"></script>
     <title>Home</title>
-</head>
-<body>
-<header th:replace="nav.html">
-</header>
-<div class="main">
-    <div class="userDetails">
+  </head>
+  <body>
+    <header th:replace="nav.html"></header>
+    <div class="main">
+      <div class="userDetails">
         <h1 class="userTittle">Socios - <span th:text="${socio.nombre}"></span></h1>
         <div class="userDetails__header">
-            <h2 class="userDetails__header-tittle">Detalles de Socio</h2>
-            <a class="userDetails__header-backbutton" th:href="@{/socios}"><i class="fas fa-long-arrow-alt-left"></i> volver</a>
+          <h2 class="userDetails__header-tittle">Detalles de Socio</h2>
+          <a class="userDetails__header-backbutton" th:href="@{/socios}"><i class="fas fa-long-arrow-alt-left"></i> volver</a>
         </div>
-        <div class="userDetails-container">
+        <div class="userDetails_container-scroll">
+          <div class="userDetails-container">
             <h3 class="userDetails__detailName">Codigo Socio</h3>
             <span class="userDetails__detailInfo" th:text="${socio.codigo}"></span>
-        </div>
-        <div class="userDetails-container">
+          </div>
+          <div class="userDetails-container">
             <h3 class="userDetails__detailName">Numero de Documento</h3>
             <span class="userDetails__detailInfo" th:text="${socio.dni}"></span>
-        </div>
-        <div class="userDetails-container">
+          </div>
+          <div class="userDetails-container">
             <h3 class="userDetails__detailName">Nombre</h3>
             <span class="userDetails__detailInfo" th:text="${socio.nombre}"></span>
-        </div>
-        <div class="userDetails-container">
+          </div>
+          <div class="userDetails-container">
             <h3 class="userDetails__detailName">Apellido</h3>
             <span class="userDetails__detailInfo" th:text="${socio.apellido}"></span>
-        </div>
-        <div class="userDetails-container">
+          </div>
+          <div class="userDetails-container">
             <h3 class="userDetails__detailName">Email</h3>
             <span class="userDetails__detailInfo" th:text="${socio.email}"></span>
-        </div>
-        <div class="userDetails-container">
+          </div>
+          <div class="userDetails-container">
             <h3 class="userDetails__detailName">Direccion</h3>
             <span class="userDetails__detailInfo" th:text="${socio.domicilio}"></span>
-        </div>
-        <div class="userDetails-container">
+          </div>
+          <div class="userDetails-container">
             <h3 class="userDetails__detailName">Telefono</h3>
             <span class="userDetails__detailInfo" th:text="${socio.telefono}"></span>
-        </div>
-        <div class="userDetails-container">
+          </div>
+          <div class="userDetails-container">
             <h3 class="userDetails__detailName">Fecha de Nacimiento</h3>
             <span class="userDetails__detailInfo" th:text="${#dates.format(socio.fechaNacimiento, 'dd MMMM yyyy')}"></span>
-        </div>
-        <div class="userDetails-container">
+          </div>
+          <div class="userDetails-container">
             <h3 class="userDetails__detailName">Fecha de Alta</h3>
             <span class="userDetails__detailInfo" th:text="${#dates.format(socio.fechaAlta, 'dd MMMM yyyy')}"></span>
-        </div>
-        <div class="userDetails-container">
+          </div>
+          <div class="userDetails-container">
             <h3 class="userDetails__detailName">Estado</h3>
             <span class="userDetails__detailInfo" th:text="${socio.estado ? 'Activo/a':'Inactivo/a'}"></span>
-        </div>
+          </div>
 
-        <div class="userDetails-container">
+          <div class="userDetails-container">
             <h3 class="userDetails__detailName">Categoria</h3>
             <span class="userDetails__detailInfo" th:text="${socio.categoria.nombre}"></span>
-        </div>
+          </div>
 
-        <div class="userDetails-container">
+          <div class="userDetails-container">
             <h3 class="userDetails__detailName">Socio Titular</h3>
             <span th:if="${socio.socioTitular != null}" class="userDetails__detailInfo" th:text="${socio.socioTitular.nombre}"></span>
-            <span th:if="${socio.socioTitular == null}" class="userDetails__detailInfo" >No tiene socio titular</span>
+            <span th:if="${socio.socioTitular == null}" class="userDetails__detailInfo">No tiene socio titular</span>
+          </div>
         </div>
+      </div>
     </div>
-</div>
-</body>
+  </body>
 </html>

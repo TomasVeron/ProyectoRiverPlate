@@ -1,6 +1,5 @@
 package ar.edu.unnoba.proyecto_river_plate_junin.controller;
 
-import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 
@@ -40,7 +39,8 @@ public String sociosView(Model model){
 @GetMapping("/socios/addSocio")
 public String addSocioView(Model model1, Model model2){
     model1.addAttribute("socio", new Socio());
-    model2.addAttribute("categorias",categoriaService.getCategorias());
+    List<Categoria> categorias = categoriaService.getCategorias();
+    model2.addAttribute("categorias",categorias);
     return "/socios/addSocio";
 }
 

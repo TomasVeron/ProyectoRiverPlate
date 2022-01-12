@@ -89,16 +89,21 @@
                         <label for="login__birth" class="login__lbl"><i class="fas fa-calendar-alt"></i><span class="login__lbl-text">Fecha Nacimiento</span></label>
                     </div>
 
+                </div>
+
+                <div class="login__input-container-for-two">
+
                     <div class="login__input-container">
-                        <select th:field="*{categoria}" class="categoriaSocioSelect" >
-                            <option th:each="categoria: ${categorias}" class="categoriaSocio" th:value="${categoria.id}" th:selected="${categoria==2}" th:text="${categoria.nombre}"></option>
+                        <label for="login__categoria" class="lbl-categoria">Categoria</label>
+                        <select th:field="*{categoria}" class="login__input categoriaSocioSelect" />
+                            <option th:each="categoria: ${categorias}" id="login__categoria" class="categoriaSocio" th:value="${categoria.id}" th:selected="${categoria.id==2}" th:text="${categoria.nombre}"></option>
                         </select>
                     </div>
 
-                    <div class="addSocio" >
+                    <div class="login__input-container addSocio" >
                         <div class="login__input-errors" th:if="${#fields.hasErrors('socioTitular')}" th:errors="*{socioTitular}">errors</div>
-                        <input type="text" class="login__input" id="login__birth" th:field="*{socioTitular}" autocomplete="off" required/>
-                        <label for="login__birth" class="login__lbl"><i class="fas fa-calendar-alt"></i><span class="login__lbl-text">Socio Titualar</span></label>
+                        <input type="text" class="login__input" id="login__titular" th:field="*{socioTitular}" autocomplete="off"/>
+                        <label for="login__titular" class="login__lbl"><i class="fas fa-handshake"></i><span class="login__lbl-text">Socio Titular</span></label>
                     </div>
                 </div>
 

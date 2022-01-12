@@ -72,4 +72,16 @@ public class SocioServiceImp implements SocioService{
     public int contarSociosActivos() {
         return repository.contarSociosActivos();
     }
+
+
+    @Override
+    public int contarSociosGf() {
+        return repository.contarSociosGf();
+    }
+
+
+    @Override
+    public int contarSociosInd() {
+        return repository.contarSociosInd();
+    }
 }

@@ -20,6 +20,11 @@ public interface SocioService {
 
     public int contarSociosActivos();
 
+    public int contarSociosGf();
+    public int contarSociosInd();
+
+
+
 
     
        

@@ -56,7 +56,7 @@
               <th class="table__colums-th"></th>
             </tr>
           </thead>
-          <tbody>
+          <tbody class="scroll">
             <tr class="table__rows" th:each="socio : ${socios}">
               <td class="table__rows-td">
                 <i th:if="${socio.estado==true}" class="table__socio-active fas fa-check-circle"></i>

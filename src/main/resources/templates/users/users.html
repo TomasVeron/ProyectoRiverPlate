@@ -1,82 +1,88 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <link rel="stylesheet" th:href="@{/css/main.css}">
-    <link rel="stylesheet" th:href="@{/css/normalize.css}">
-    <link rel="stylesheet" th:href="@{/css/nav.css}">
-    <link rel="stylesheet" th:href="@{/css/users.css}">
-    <link rel="stylesheet" th:href="@{/css/modalDelete.css}">
+    <link rel="stylesheet" th:href="@{/css/main.css}" />
+    <link rel="stylesheet" th:href="@{/css/normalize.css}" />
+    <link rel="stylesheet" th:href="@{/css/nav.css}" />
+    <link rel="stylesheet" th:href="@{/css/users.css}" />
+    <link rel="stylesheet" th:href="@{/css/modalDelete.css}" />
 
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@700&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@700&display=swap" rel="stylesheet" />
     <script src="https://kit.fontawesome.com/62ea397d3a.js" crossorigin="anonymous"></script>
     <title>Usuarios</title>
-</head>
-<body>
-    <header th:replace="nav.html">
-    </header>
+  </head>
+  <body>
+    <header th:replace="nav.html"></header>
     <div class="main">
-        <div class="listUser-container">
-            <h1 class="userTittle">Usuarios</h1>
-            <div class="listUser-menuControl">
-                <div class="listUser__search-container">
-                    <form th:action="@{/users/buscarEnUsuario}" method="get">
-                        <input type="text" class="listUser__search" name="keyword" th:value="${keyword}"  placeholder="Buscar por Nombre, Apellido, Email" size="50" >
-                        <button type="submit" class="listUser__btnSearch" ><i class="fas fa-search"></i></button>
-                    </form>
-                    <div class="listUser__errorDelete" th:if="${userDeleteError}" th:text="${userDeleteError}"></div>
-                </div>
+      <div class="listUser-container">
+        <h1 class="userTittle">Usuarios</h1>
+        <div class="listUser-menuControl">
+          <div class="listUser__search-container">
+            <form th:action="@{/users/buscarEnUsuario}" method="get">
+              <input
+                type="text"
+                class="listUser__search"
+                name="keyword"
+                th:value="${keyword}"
+                placeholder="Buscar por Nombre, Apellido, Email"
+                size="50"
+              />
+              <button type="submit" class="listUser__btnSearch"><i class="fas fa-search"></i></button>
+            </form>
+            <div class="listUser__errorDelete" th:if="${userDeleteError}" th:text="${userDeleteError}"></div>
+          </div>
 
-                <a class="listUser__registerButton" th:href="@{/register}"><i class="fas fa-user-plus"></i>Agregar Usuario</a>
-
-            </div>
-            <table class="table">
-                <thead>
-                <tr class="table__colums">
-                    <th class="table__colums-th"><i class="far fa-envelope"></i>Email</th>
-                    <th class="table__colums-th"><i class="fas fa-user"></i>Nombre</th>
-                    <th class="table__colums-th"><i class="fas fa-address-card"></i>Apellido</th>
-                    <th class="table__colums-th"><i class="fas fa-address-card"></i>Rol</th>
-                    <th class="table__colums-th"></th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr class="table__rows" th:each="user : ${users}">
-                    <td class="table__rows-td" th:text="${user.email}"></td>
-                    <td class="table__rows-td" th:text="${user.nombre}"></td>
-                    <td class="table__rows-td" th:text="${user.apellido}"></td>
-                    <td class="table__rows-td" th:text="${Usuario}"></td>
-                    <td class="table__rows-td" ><a href="#" th:onclick="'javascript:confirmDelete(\''+${user.id}+'\');'"><i class="fas fa-trash"></i>Eliminar</a></td>
-                </tr>
-                </tbody>
-            </table>
+          <a class="listUser__registerButton" th:href="@{/register}"><i class="fas fa-user-plus"></i>Agregar Usuario</a>
         </div>
+        <table class="table">
+          <thead>
+            <tr class="table__colums">
+              <th class="table__colums-th"><i class="far fa-envelope"></i>Email</th>
+              <th class="table__colums-th"><i class="fas fa-user"></i>Nombre</th>
+              <th class="table__colums-th"><i class="fas fa-address-card"></i>Apellido</th>
+              <th class="table__colums-th"><i class="fas fa-address-card"></i>Rol</th>
+              <th class="table__colums-th"></th>
+            </tr>
+          </thead>
+          <tbody class="scroll">
+            <tr class="table__rows" th:each="user : ${users}">
+              <td class="table__rows-td" th:text="${user.email}"></td>
+              <td class="table__rows-td" th:text="${user.nombre}"></td>
+              <td class="table__rows-td" th:text="${user.apellido}"></td>
+              <td class="table__rows-td" th:text="${Usuario}"></td>
+              <td class="table__rows-td">
+                <a href="#" th:onclick="'javascript:confirmDelete(\''+${user.id}+'\');'"><i class="fas fa-trash"></i>Eliminar</a>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
     </div>
     <div th:include="users/modal-cancel-or-confirm.html" th:remove="tag"></div>
     <script type="text/javascript">
-        function confirmDelete(id){
-            const modal = document.querySelector(".modal");
-            const userHidden = document.getElementById("userIdHiddenInput"); //input para guardar el id del usuario
-            modal.classList.toggle("show"); //agrega la clase show para mostrar el modal
-            userHidden.value = id;
+      function confirmDelete(id) {
+        const modal = document.querySelector(".modal");
+        const userHidden = document.getElementById("userIdHiddenInput"); //input para guardar el id del usuario
+        modal.classList.toggle("show"); //agrega la clase show para mostrar el modal
+        userHidden.value = id;
+      }
 
-        }
+      function deleteUser() {
+        const userHidden = document.getElementById("userIdHiddenInput");
+        window.location = "users/delete/" + userHidden.value; //va a la url /users/delete/{id} para eliminar el usuario
+      }
 
-        function deleteUser(){
-            const userHidden = document.getElementById("userIdHiddenInput");
-            window.location = "users/delete/"+ userHidden.value; //va a la url /users/delete/{id} para eliminar el usuario
-        }
-
-        function hiddenModal(){
-            const modal = document.querySelector(".modal");
-            modal.classList.toggle("show"); //quita la clase show para dejar de mostrar el modal
-        }
+      function hiddenModal() {
+        const modal = document.querySelector(".modal");
+        modal.classList.toggle("show"); //quita la clase show para dejar de mostrar el modal
+      }
     </script>
-<script src="js/main.js"></script>
-</body>
+    <script src="js/main.js"></script>
+  </body>
 </html>
