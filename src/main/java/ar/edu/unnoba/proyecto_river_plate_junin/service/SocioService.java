@@ -23,7 +23,11 @@ public interface SocioService {
     public int contarSociosGf();
     public int contarSociosInd();
 
+    public void actualizarGrupoFamiliar(boolean habilitado, String codigo);
+
     public Socio consultarSocioTitular(String socioTitular);
+
+    public boolean titularHabilitado(Long id);
 
 
 

@@ -5,6 +5,7 @@ import ar.edu.unnoba.proyecto_river_plate_junin.model.*;
 import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
@@ -23,6 +24,7 @@ public interface SocioRepository extends JpaRepository<Socio, Long> {
 
     public String findByDni(String dni);
 
+    public Socio findByIdSocio(Long id);
 
     @Query(value = 
         "SELECT * FROM socios s WHERE lower(s.nombre) LIKE lower(CONCAT('%', ?1, '%'))" + 
@@ -55,5 +57,13 @@ public interface SocioRepository extends JpaRepository<Socio, Long> {
     "FROM socios s " +
     "WHERE lower(s.codigo_socio) = lower(CONCAT('', ?1, '')) and s.socio_titular is null ", nativeQuery = true)
     public Socio encontrarSocioTitular(String codigoSocio);
+   
+    @Query(value = "SELECT id_socio FROM socios s WHERE lower(s.codigo_socio) = lower(?1)", nativeQuery=true)
+    public Long obtenerIdSocio(String codigoSocio);
+    
+    @Modifying
+    @Query(value = 
+        "UPDATE socio SET estado = ?1 WHERE lower(id_socio) = lower(?2)", nativeQuery = true)
+    public void actualizarCuentas(boolean habilitado, Long codigo);
 
 }

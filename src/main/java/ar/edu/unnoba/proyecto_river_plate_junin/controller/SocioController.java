@@ -62,6 +62,10 @@ public String addSocioView(Model model1, Model model2){
 
     @PostMapping("/socios/update")
     public String update(@ModelAttribute("socio") Socio socio){
+        if (socio.getEstado() == true && socioService.titularHabilitado(socio.getSocioTitular().getId()) == false) {
+            return "/socios/editSocio";
+        }
+        socioService.actualizarGrupoFamiliar(socio.getEstado(), socio.getCodigo());
         socioService.updateSocio(socio);
         return "redirect:/socios";
     }

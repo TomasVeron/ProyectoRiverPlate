@@ -13,13 +13,10 @@ public class SocioServiceImp implements SocioService{
     @Autowired
     private SocioRepository repository;
 
-    
     @Override
     public List<Socio> getAllSocios() {
         return repository.filterSocios();
-    
     }
-
 
     @Override
     public Socio createSocio(Socio socio, String socioTitular) throws Exception {
@@ -94,5 +91,24 @@ public class SocioServiceImp implements SocioService{
     @Override
     public Socio consultarSocioTitular(String socioTitular) {
         return repository.encontrarSocioTitular(socioTitular);
+    }
+
+
+    @Override
+    @Transactional
+    public void actualizarGrupoFamiliar(boolean habilitado, String codigo) {
+        Long idSocio = repository.obtenerIdSocio(codigo);
+        repository.actualizarCuentas(habilitado, idSocio);
+    }
+
+
+    @Override
+    @Transactional(readOnly = true)
+    public boolean titularHabilitado(Long id) {
+        Socio socioTitular = repository.findByIdSocio(id);
+        if (socioTitular.getEstado() == true) {
+            return true;
+        }
+        return false;
     }
 }
