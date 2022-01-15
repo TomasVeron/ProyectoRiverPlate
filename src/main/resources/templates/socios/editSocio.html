@@ -79,7 +79,8 @@
 
           <div class="userDetails-container">
             <h3 class="userDetails__detailName">Socio Titular</h3>
-            <input th:if="${socio.socioTitular != null}" class="userDetails__inputs" th:field="*{socioTitular}"></span>
+            <input th:if="${socio.socioTitular != null}" class="userDetails__inputs" th:field="*{codigoSocioTitular}">
+            <input type="hidden" th:field="*{socioTitular}">
             <span th:if="${socio.socioTitular == null}" class="userDetails__detailInfo">No tiene socio titular</span>
           </div>
           <input type="submit" class="userDetails__btn-submit" value="Editar Socio" />

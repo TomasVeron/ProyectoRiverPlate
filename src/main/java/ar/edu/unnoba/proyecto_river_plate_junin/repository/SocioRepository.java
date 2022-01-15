@@ -24,7 +24,6 @@ public interface SocioRepository extends JpaRepository<Socio, Long> {
 
     public String findByDni(String dni);
 
-    public Socio findByIdSocio(Long id);
 
     @Query(value = 
         "SELECT * FROM socios s WHERE lower(s.nombre) LIKE lower(CONCAT('%', ?1, '%'))" + 
@@ -63,7 +62,7 @@ public interface SocioRepository extends JpaRepository<Socio, Long> {
     
     @Modifying
     @Query(value = 
-        "UPDATE socio SET estado = ?1 WHERE lower(id_socio) = lower(?2)", nativeQuery = true)
-    public void actualizarCuentas(boolean habilitado, Long codigo);
+        "UPDATE socios SET estado = ?1 WHERE socio_titular = ?2", nativeQuery = true)
+    public void actualizarGrupoFamiliar(boolean habilitado, Long codigo);
 
 }

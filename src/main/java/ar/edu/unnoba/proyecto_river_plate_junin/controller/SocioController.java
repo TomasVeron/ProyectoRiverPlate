@@ -4,6 +4,8 @@ import java.util.List;
 
 import javax.validation.Valid;
 
+import com.fasterxml.jackson.annotation.JsonCreator.Mode;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -61,18 +63,29 @@ public String addSocioView(Model model1, Model model2){
     }
 
     @PostMapping("/socios/update")
-    public String update(@ModelAttribute("socio") Socio socio){
-        if (socio.getEstado() == true && socioService.titularHabilitado(socio.getSocioTitular().getId()) == false) {
-            return "/socios/editSocio";
+    public String update(@ModelAttribute("socio") Socio socio, Model model){
+        System.out.println(socio.getSocioTitular());
+        if(socio.getSocioTitular()!=null ){
+            if (socio.getEstado() == true && socioService.titularHabilitado(socio.getSocioTitular().getId()) == false) {
+                model.addAttribute("socio", socio);
+                return "redirect:/socios/edit/"+ socio.getId();
+            }
+        } 
+        else if(socio.getCategoria().getId()==1 && socio.getSocioTitular() == null){
+            socioService.actualizarGrupoFamiliar(socio.getEstado(), socio.getCodigo());
         }
-        socioService.actualizarGrupoFamiliar(socio.getEstado(), socio.getCodigo());
-        socioService.updateSocio(socio);
+        try{
+            socioService.updateSocio(socio);   
+        }catch(Exception e){
+            System.out.println(e.getMessage());
+        }
         return "redirect:/socios";
     }
 
     @GetMapping("/socios/edit/{id}")
     public String socioEdit(@PathVariable("id") Socio socio, Model model){
         socio = socioService.getSocio(socio);
+        if(socio.getSocioTitular()!=null) socio.setCodigoSocioTitular(socio.getSocioTitular().getCodigo());
         model.addAttribute("socio",socio);
         model.addAttribute("categorias",categoriaService.getCategorias());
         

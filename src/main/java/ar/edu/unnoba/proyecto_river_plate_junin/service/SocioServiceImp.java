@@ -18,15 +18,19 @@ public class SocioServiceImp implements SocioService{
         return repository.filterSocios();
     }
 
+    public Socio encontrarSocioTitular(String socioTitular){
+        return repository.encontrarSocioTitular(socioTitular);
+    }
+
     @Override
     public Socio createSocio(Socio socio, String socioTitular) throws Exception {
         if(socio.getCodigo()==repository.findByCodigo(socio.getCodigo()) || socio.getDni()==repository.findByDni(socio.getDni())){
             throw new Exception("el codigo o dni de socio no esta disponible");
         }
-        else if(repository.encontrarSocioTitular(socioTitular) == null){
+        else if(encontrarSocioTitular(socioTitular) == null){
             throw new Exception("Socio Titular ingresado no existe!!");
         }
-        Socio socioTi =repository.encontrarSocioTitular(socioTitular);
+        Socio socioTi =encontrarSocioTitular(socioTitular);
         socio.setSocioTitular(socioTi);
         socio.setFechaAlta(new Date());
         socio.setEstado(true);
@@ -40,8 +44,18 @@ public class SocioServiceImp implements SocioService{
     }
 
     @Override
-    public Socio updateSocio(Socio socio) {       
+    @Transactional
+    public Socio updateSocio(Socio socio) throws Exception { 
         Socio uDB = repository.findById(socio.getId()).orElse(null);
+        if(socio.getSocioTitular() != null){
+            if(socio.getCodigoSocioTitular().equals(uDB.getSocioTitular().getCodigo())==false){
+                if(encontrarSocioTitular(socio.getCodigoSocioTitular())==null){
+                    throw new Exception("Socio Titular ingresado no existe!!");
+                }
+                Socio titular = encontrarSocioTitular(socio.getCodigoSocioTitular());
+                uDB.setSocioTitular(titular); 
+            }
+        }
         uDB.setEmail(socio.getEmail());
         uDB.setDomicilio(socio.getDomicilio());
         uDB.setTelefono(socio.getTelefono());
@@ -98,14 +112,14 @@ public class SocioServiceImp implements SocioService{
     @Transactional
     public void actualizarGrupoFamiliar(boolean habilitado, String codigo) {
         Long idSocio = repository.obtenerIdSocio(codigo);
-        repository.actualizarCuentas(habilitado, idSocio);
+        repository.actualizarGrupoFamiliar(habilitado, idSocio);
     }
 
 
     @Override
     @Transactional(readOnly = true)
     public boolean titularHabilitado(Long id) {
-        Socio socioTitular = repository.findByIdSocio(id);
+        Socio socioTitular = repository.findById(id).orElse(null);
         if (socioTitular.getEstado() == true) {
             return true;
         }

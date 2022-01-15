@@ -10,7 +10,7 @@ public interface SocioService {
     
     public Socio encontrarSocio(Socio socio);
 
-    public Socio updateSocio(Socio socio);
+    public Socio updateSocio(Socio socio) throws Exception; 
 
     public Socio getSocio (Socio socio);
 

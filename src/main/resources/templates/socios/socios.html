@@ -51,7 +51,7 @@
               <th class="table__colums-th">
                 <i class="fas fa-address-card"></i>Nombre
               </th>
-              <th class="table__colums-th"></th>
+              <th class="table__colums-th">Categoria</th>
               <th class="table__colums-th"></th>
               <th class="table__colums-th"></th>
             </tr>
@@ -64,6 +64,7 @@
                 <span th:text="${socio.estado ? 'Activo/a':'Inactivo/a'}"></span> </td>
               <td class="table__rows-td" th:text="${socio.apellido}"></td>
               <td class="table__rows-td" th:text="${socio.nombre}"></td>
+              <td class="table__rows-td" th:text="${socio.categoria.nombre}"></td>
               <td class="table__rows-td">
                 <a th:href="@{/socios/ver/{id}(id=${socio.id})}" ><i class="fas fa-eye"></i>Ver</a>
               </td>
