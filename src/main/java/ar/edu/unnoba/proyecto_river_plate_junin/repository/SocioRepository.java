@@ -24,6 +24,10 @@ public interface SocioRepository extends JpaRepository<Socio, Long> {
 
     public String findByDni(String dni);
 
+    @Query(value = 
+    "SELECT * FROM socios s WHERE s.codigo_socio = ?1", nativeQuery = true)
+    public Socio getSocio(String codigo);
+
 
     @Query(value = 
         "SELECT * FROM socios s WHERE lower(s.nombre) LIKE lower(CONCAT('%', ?1, '%'))" + 
@@ -64,5 +68,13 @@ public interface SocioRepository extends JpaRepository<Socio, Long> {
     @Query(value = 
         "UPDATE socios SET estado = ?1 WHERE socio_titular = ?2", nativeQuery = true)
     public void actualizarGrupoFamiliar(boolean habilitado, Long codigo);
+
+    @Query(value = 
+        "SELECT * FROM socios s  WHERE socio_titular = ?1", nativeQuery = true)
+    public List<Socio> getFamiliares(Long socioTitularId);
+
+    @Query(value = 
+    "SELECT * FROM socios s  WHERE s.socio_titular is NULL", nativeQuery = true)
+    public List<Socio> getSociosNoDependientes(); 
 
 }

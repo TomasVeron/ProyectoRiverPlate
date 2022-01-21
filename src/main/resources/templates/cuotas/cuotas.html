@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link rel="stylesheet" th:href="@{/css/main.css}" />
+    <link rel="stylesheet" th:href="@{/css/normalize.css}" />
+    <link rel="stylesheet" th:href="@{/css/nav.css}" />
+    <link rel="stylesheet" th:href="@{/css/users.css}" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@700&display=swap" rel="stylesheet" />
+    <script src="https://kit.fontawesome.com/62ea397d3a.js" crossorigin="anonymous"></script>
+    <title>Cuotas</title>
+  </head>
+  <body>
+    <header th:replace="nav.html"></header>
+    <div class="main">
+      <div class="listUser-container">
+        <h1 class="userTittle">Cuotas</h1>
+        <div class="listUser-menuControl">
+          <div class="listUser__search-container">
+            <form th:action="@{/users/buscarEnUsuario}" method="get">
+              <input
+                type="text"
+                class="listUser__search"
+                name="keyword"
+                th:value="${keyword}"
+                placeholder="Buscar por Nombre, Apellido, Email"
+                size="50"
+              />
+              <button type="submit" class="listUser__btnSearch"><i class="fas fa-search"></i></button>
+            </form>
+            <form th:action="@{/cuotas/generarCuotas}" method="post">
+              <button style="cursor: pointer;" class="listUser__registerButton" type="submit"><i class="fas fa-user-plus"></i>Agregar socio</a> 
+            </form>
+                
+          </div>
+        </div>
+        <table class="table">
+          <thead>
+            <tr class="table__colums">
+              <th class="table__colums-th"><i class="fas fa-user-tag"></i>Codigo</th>
+              <th class="table__colums-th"><i class="fas fa-user"></i>Nombre</th>
+              <th class="table__colums-th"><i class="fas fa-address-card"></i>Apellido</th>
+              <th class="table__colums-th"><i class="fas fa-sitemap"></i>Categoria</th>
+              <th class="table__colums-th"></th>
+            </tr>
+          </thead>
+          <tbody class="scroll">
+            <tr class="table__rows" th:each="socio : ${socioNoDependientes}">
+              <td class="table__rows-td" th:text="${socio.codigo}"></td>
+              <td class="table__rows-td" th:text="${socio.nombre}"></td>
+              <td class="table__rows-td" th:text="${socio.apellido}"></td>
+              <td class="table__rows-td" th:text="${socio.categoria.nombre}" th:if="${socio.categoria.id==2}"></td>
+              <td class="table__rows-td" th:if="${socio.categoria.id==1 and socio.socioTitular==null}">Socio Titular</td>
+              <td class="table__rows-td">
+                <a><i class="fas fa-file-invoice-dollar"></i>Cuotas</a>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>

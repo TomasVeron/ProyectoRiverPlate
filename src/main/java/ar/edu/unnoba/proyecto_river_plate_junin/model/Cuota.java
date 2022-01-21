@@ -2,6 +2,8 @@ package ar.edu.unnoba.proyecto_river_plate_junin.model;
 
 import javax.validation.constraints.NotNull;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import java.io.Serializable;
 import java.util.Date;
 
@@ -22,15 +24,19 @@ public class Cuota implements Serializable {
     @NotEmpty
     private String numero;
 
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     @Column(name="fecha_caducidad")
-    @NotEmpty
-    private String fechaCaducidad;
+    private Date fechaCaducidad;
 
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @Column(name="fecha_creacion")
+    private Date fechaCreacion;
+
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     @Column(name = "fecha_pago")
     private Date fechaPago;
 
     @Column(name = "forma_pago")
-    @NotEmpty
     private String formaPago;
 
     @Column(name = "detalle_pago")
@@ -38,7 +44,7 @@ public class Cuota implements Serializable {
     
     @Column(name="monto")
     @NotNull
-    private float importe;
+    private double importe;
 
     @ManyToOne(optional = false, cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinColumn(name = "socio")

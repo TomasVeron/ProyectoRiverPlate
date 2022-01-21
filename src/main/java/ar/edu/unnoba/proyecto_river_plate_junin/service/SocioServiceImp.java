@@ -27,14 +27,17 @@ public class SocioServiceImp implements SocioService{
         if(socio.getCodigo()==repository.findByCodigo(socio.getCodigo()) || socio.getDni()==repository.findByDni(socio.getDni())){
             throw new Exception("el codigo o dni de socio no esta disponible");
         }
-        else if(encontrarSocioTitular(socioTitular) == null){
-            throw new Exception("Socio Titular ingresado no existe!!");
+        if(!socioTitular.equals("")){
+            if(encontrarSocioTitular(socioTitular) == null){
+                throw new Exception("Socio Titular ingresado no existe!!");
+            }
         }
         Socio socioTi =encontrarSocioTitular(socioTitular);
         socio.setSocioTitular(socioTi);
         socio.setFechaAlta(new Date());
         socio.setEstado(true);
-        return repository.save(socio);
+        
+        return  repository.save(socio);
     }
 
     @Override
@@ -47,13 +50,27 @@ public class SocioServiceImp implements SocioService{
     @Transactional
     public Socio updateSocio(Socio socio) throws Exception { 
         Socio uDB = repository.findById(socio.getId()).orElse(null);
-        if(socio.getSocioTitular() != null){
-            if(socio.getCodigoSocioTitular().equals(uDB.getSocioTitular().getCodigo())==false){
+        if(socio.getSocioTitular() != null){//socio dependiente
+            if(socio.getCategoria().getNombre().equals("Individual")){
+                uDB.setSocioTitular(null);
+            }
+            else if (socio.getEstado() == true && titularHabilitado(socio.getSocioTitular().getId()) == false) {
+                    throw new Exception("No se puede habilitar un familiar cuando el titular esta inactivo");
+            }
+            if(socio.getCodigoSocioTitular().equals(uDB.getSocioTitular().getCodigo())==false){//verifica si hubo un cambio de titular
                 if(encontrarSocioTitular(socio.getCodigoSocioTitular())==null){
                     throw new Exception("Socio Titular ingresado no existe!!");
                 }
                 Socio titular = encontrarSocioTitular(socio.getCodigoSocioTitular());
                 uDB.setSocioTitular(titular); 
+            }
+        }
+        if(socio.getSocioTitular() == null){// socio titular o Individual
+            if(socio.getCategoria().getId()==1 && socio.getEstado()!=uDB.getEstado()){//actualiza a la familia si es socio titular y si hubo un cambio de estado   
+                actualizarGrupoFamiliar(socio.getEstado(), socio.getCodigo());
+            }
+            if(socio.getCategoria().getNombre().equals("Individual") && uDB.getCategoria().getId()==1){
+                actualizarGrupoFamiliar(false, socio.getCodigo());
             }
         }
         uDB.setEmail(socio.getEmail());
@@ -120,9 +137,19 @@ public class SocioServiceImp implements SocioService{
     @Transactional(readOnly = true)
     public boolean titularHabilitado(Long id) {
         Socio socioTitular = repository.findById(id).orElse(null);
-        if (socioTitular.getEstado() == true) {
+        if (socioTitular.getEstado() == true && socioTitular.getCategoria().getId()==1) {
             return true;
         }
         return false;
+    }
+
+    @Override
+    public List<Socio> getFamiliares(Long id) {
+        return repository.getFamiliares(id);
+    }
+
+    @Override
+    public List<Socio> getSocioNoDependientes() {
+        return repository.getSociosNoDependientes();
     }
 }

@@ -1,11 +1,6 @@
 package ar.edu.unnoba.proyecto_river_plate_junin.controller;
-
 import java.util.List;
-
 import javax.validation.Valid;
-
-import com.fasterxml.jackson.annotation.JsonCreator.Mode;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,10 +10,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-
 import ar.edu.unnoba.proyecto_river_plate_junin.model.Categoria;
 import ar.edu.unnoba.proyecto_river_plate_junin.model.Socio;
 import ar.edu.unnoba.proyecto_river_plate_junin.service.CategoriaService;
+import ar.edu.unnoba.proyecto_river_plate_junin.service.CuotaService;
 import ar.edu.unnoba.proyecto_river_plate_junin.service.SocioService;
 
 @Controller
@@ -29,6 +24,9 @@ private SocioService socioService;
 
 @Autowired
 private CategoriaService categoriaService;
+
+@Autowired
+private CuotaService cuotaService;
 
 
 @GetMapping("/socios")
@@ -47,13 +45,16 @@ public String addSocioView(Model model1, Model model2){
 
 @PostMapping("/socios/addSocio")
     public String createUser(@Valid @ModelAttribute("socio")Socio socio, BindingResult result, ModelMap model,ModelMap model2){
+        System.out.println(socio);
         if (result.hasErrors()){
             model.addAttribute("socio", socio);
             return"/socios/addSocio";
         }
         try{
-            socioService.createSocio(socio, socio.getCodigoSocioTitular());
+            Socio aux = socioService.createSocio(socio, socio.getCodigoSocioTitular());
+            cuotaService.generarCuotaSocio(aux);
         }catch(Exception e){
+            System.out.println(e.getMessage());
             model.addAttribute("socio", socio);
             model2.addAttribute("categorias", categoriaService.getCategorias());
             return "/socios/addSocio";
@@ -64,20 +65,12 @@ public String addSocioView(Model model1, Model model2){
 
     @PostMapping("/socios/update")
     public String update(@ModelAttribute("socio") Socio socio, Model model){
-        System.out.println(socio.getSocioTitular());
-        if(socio.getSocioTitular()!=null ){
-            if (socio.getEstado() == true && socioService.titularHabilitado(socio.getSocioTitular().getId()) == false) {
-                model.addAttribute("socio", socio);
-                return "redirect:/socios/edit/"+ socio.getId();
-            }
-        } 
-        else if(socio.getCategoria().getId()==1 && socio.getSocioTitular() == null){
-            socioService.actualizarGrupoFamiliar(socio.getEstado(), socio.getCodigo());
-        }
         try{
             socioService.updateSocio(socio);   
         }catch(Exception e){
             System.out.println(e.getMessage());
+            model.addAttribute("socio", socio);
+            return "redirect:/socios/edit/"+ socio.getId();
         }
         return "redirect:/socios";
     }
@@ -96,6 +89,7 @@ public String addSocioView(Model model1, Model model2){
     public String verSocio(@PathVariable("id") Socio socio, Model model){
         socio = socioService.getSocio(socio);
         model.addAttribute("socio",socio);
+        model.addAttribute("familiares",socioService.getFamiliares(socio.getId()));
         return "/socios/verSocio";
     }
 

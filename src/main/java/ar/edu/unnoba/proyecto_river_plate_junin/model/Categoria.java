@@ -20,7 +20,7 @@ public class Categoria implements Serializable {
     @Column(name = "id_categoria")
     private Long id;
 
-    @Column(name = "nombre", unique = true)
+    @Column(name = "nombre")
     private String nombre;
 
     @Column(name = "edad_desde")

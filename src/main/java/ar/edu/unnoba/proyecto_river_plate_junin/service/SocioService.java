@@ -29,6 +29,11 @@ public interface SocioService {
 
     public boolean titularHabilitado(Long id);
 
+    public List<Socio> getFamiliares(Long id);
+
+    public List<Socio> getSocioNoDependientes();
+
+
 
 
 
