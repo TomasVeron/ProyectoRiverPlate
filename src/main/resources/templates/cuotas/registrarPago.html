@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link rel="stylesheet" th:href="@{/css/main.css}" />
+    <link rel="stylesheet" th:href="@{/css/normalize.css}" />
+    <link rel="stylesheet" th:href="@{/css/nav.css}" />
+    <link rel="stylesheet" th:href="@{/css/editSocio.css}" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@700&display=swap" rel="stylesheet" />
+    <script src="https://kit.fontawesome.com/62ea397d3a.js" crossorigin="anonymous"></script>
+    <title>Home</title>
+  </head>
+  <body>
+    <header th:replace="nav.html"></header>
+    <div class="main">
+      <div class="userDetails">
+        <h1 class="userTittle">Registrar Pago - <span th:text="${cuota.numero}"></span></h1>
+        <div class="userDetails__header">
+          <a class="userDetails__header-backbutton" th:href="@{/cuotas/ver/socio/}+${cuota.idCuota}" ><i class="fas fa-long-arrow-alt-left"></i> volver</a>
+        </div>
+        <form method="POST" th:object="${cuota}" th:action="@{/cuotas/registrarPago}" class="userDetails_container-scroll">
+          <div class="details-container-flex">
+            <div class="userDetails_container-scroll">
+              <div class="userDetails-container">
+                <h3 class="userDetails__detailName">Numero</h3>
+                <input type="hidden" th:value="${cuota.idCuota}" th:attr="name='idCuota'" />
+                <input type="hidden" th:value="${cuota.socio.id}" th:attr="name='socio'" />
+                <input type="hidden" th:value="${cuota.categoria.id}" th:attr="name='categoria'" />
+                <input type="hidden" th:value="${cuota.fechaCreacion}" th:attr="name='fechaCreacion'" />
+                <input type="hidden" th:value="${cuota.fechaCaducidad}" th:attr="name='fechaCaducidad'" />
+                <input type="hidden" th:value="${cuota.numero}" th:attr="name='numero'" />
+                <input type="hidden" th:value="${cuota.importe}" th:attr="name='importe'" />
+                <span class="userDetails__detailInfo" th:text="${cuota.numero}"></span>
+              </div>
+              <div class="userDetails-container">
+                <h3 class="userDetails__detailName">fecha Caducidad</h3>
+                <span class="userDetails__detailInfo" th:text="${#dates.format(cuota.fechaCaducidad, 'dd MMMM yyyy')}"></span>
+              </div>
+              <div class="userDetails-container">
+                <h3 class="userDetails__detailName">fecha Creacion</h3>
+                <span class="userDetails__detailInfo" th:text="${#dates.format(cuota.fechaCreacion, 'dd MMMM yyyy')}"></span>
+              </div>
+              <div class="userDetails-container">
+                  <h3 class="userDetails__detailName">Forma de Pago</h3>
+                  <input type="text" class="userDetails__inputs" th:field="*{formaPago}" />
+              </div>
+
+              <!-- <div class="userDetails-container">
+                <h3 class="userDetails__detailName">Forma de Pago</h3>
+                <input type="date" name="updateDate" id="updateDate" th:value="${#dates.format(#dates.createNow(),'YYYY/MM/dd HH:mm')}" class="userDetails__inputs" th:field="*{fechaPago}" />
+            </div> -->
+              <div class="userDetails-container">
+                  <h3 class="userDetails__detailName">Detalle de Pago</h3>
+                  <input type="text" class="userDetails__inputs" th:field="*{detallePago}" />
+              </div>
+              <div class="userDetails-container">
+                <h3 class="userDetails__detailName">Importe</h3>
+                <span class="userDetails__detailInfo" th:text="${cuota.importe}"></span>
+              </div>
+              <!-- <div class="userDetails-container">
+                <h3 class="userDetails__detailName">Socio</h3>
+                <span class="userDetails__detailInfo" th:text="${cuota.socio.codigo} +'-'+ ${cuota.socio.nombre} + '   ' + ${cuota.socio.apellido}"></span>
+              </div>
+              <div class="userDetails-container">
+                <h3 class="userDetails__detailName">Categoria</h3>
+                <span class="userDetails__detailInfo" th:text="${cuota.categoria.nombre}"></span>
+              </div> -->
+              <!-- <div class="userDetails-container">
+                <h3 class="userDetails__detailName">Estado</h3>
+                <span class="userDetails__detailInfo" th:if="${(cuota.fechaPago==null) and (cuota.fechaCaducidad.after(#dates.createNow()))}">PENDIENTE</span>
+                <span class="userDetails__detailInfo" th:if="${(cuota.fechaPago==null) and (cuota.fechaCaducidad.before(#dates.createNow()))}">CADUCADA</span>
+                <span class="userDetails__detailInfo" th:if="${(cuota.fechaPago != null)}">PAGADA</span>
+              </div> -->
+            </div>
+          <input type="submit" class="userDetails__btn-submit" value="Editar Socio" />
+        </form>
+      </div>
+    </div>
+  </body>
+</html>

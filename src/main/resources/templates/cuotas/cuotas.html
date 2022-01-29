@@ -58,7 +58,7 @@
               <td class="table__rows-td" th:text="${socio.categoria.nombre}" th:if="${socio.categoria.id==2}"></td>
               <td class="table__rows-td" th:if="${socio.categoria.id==1 and socio.socioTitular==null}">Socio Titular</td>
               <td class="table__rows-td">
-                <a><i class="fas fa-file-invoice-dollar"></i>Cuotas</a>
+                <a th:href="@{/cuotas/ver/socio/{id}(id=${socio.id})}"><i class="fas fa-file-invoice-dollar"></i>Cuotas</a>
               </td>
             </tr>
           </tbody>

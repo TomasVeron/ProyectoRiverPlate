@@ -28,6 +28,10 @@ public interface SocioRepository extends JpaRepository<Socio, Long> {
     "SELECT * FROM socios s WHERE s.codigo_socio = ?1", nativeQuery = true)
     public Socio getSocio(String codigo);
 
+    @Query(value = 
+    "SELECT * FROM socios s WHERE s.id_socio = ?1", nativeQuery = true)
+    public Socio getSocio(Long socioId);
+
 
     @Query(value = 
         "SELECT * FROM socios s WHERE lower(s.nombre) LIKE lower(CONCAT('%', ?1, '%'))" + 

@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import ar.edu.unnoba.proyecto_river_plate_junin.model.Categoria;
 import ar.edu.unnoba.proyecto_river_plate_junin.model.Socio;
 import ar.edu.unnoba.proyecto_river_plate_junin.service.CategoriaService;
-import ar.edu.unnoba.proyecto_river_plate_junin.service.CuotaService;
 import ar.edu.unnoba.proyecto_river_plate_junin.service.SocioService;
 
 @Controller
@@ -25,8 +24,6 @@ private SocioService socioService;
 @Autowired
 private CategoriaService categoriaService;
 
-@Autowired
-private CuotaService cuotaService;
 
 
 @GetMapping("/socios")
@@ -51,10 +48,8 @@ public String addSocioView(Model model1, Model model2){
             return"/socios/addSocio";
         }
         try{
-            Socio aux = socioService.createSocio(socio, socio.getCodigoSocioTitular());
-            cuotaService.generarCuotaSocio(aux);
+            socioService.createSocio(socio, socio.getCodigoSocioTitular());
         }catch(Exception e){
-            System.out.println(e.getMessage());
             model.addAttribute("socio", socio);
             model2.addAttribute("categorias", categoriaService.getCategorias());
             return "/socios/addSocio";
