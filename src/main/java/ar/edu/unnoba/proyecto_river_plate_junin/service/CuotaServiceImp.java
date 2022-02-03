@@ -14,8 +14,7 @@ import java.util.List;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.mail.SimpleMailMessage;
-import org.springframework.mail.javamail.JavaMailSender;
+
 @Service
 public class CuotaServiceImp implements CuotaService{
     
@@ -26,9 +25,8 @@ public class CuotaServiceImp implements CuotaService{
     private SocioService socioService;
 
     @Autowired
-    private JavaMailSender javaMailSender;
+    private SendEmail email;
 	
-
 
     public Date generarFechaCaducidad(){
         Date fecha = new Date();
@@ -82,9 +80,9 @@ public class CuotaServiceImp implements CuotaService{
             throw new Exception("No se puede generar cuotas para un socio dependiente");
         }
         Date fecha_creacion= new Date();
-        // if(!controlarFechaCuota(socio.getId(), fecha_creacion)){
-        //     throw new Exception("No se pueden generar mas de una cuota por mes");
-        // }
+        if(!controlarFechaCuota(socio.getId(), fecha_creacion)){
+            throw new Exception("No se pueden generar mas de una cuota por mes");
+        }
         Cuota cuota = new Cuota();
         Long numeroCuota = repository.numeroCuota() + 1L ;
         Categoria categoria = socio.getCategoria();
@@ -95,19 +93,10 @@ public class CuotaServiceImp implements CuotaService{
         cuota.setFechaCaducidad(generarFechaCaducidad());
         cuota.setFechaCreacion(fecha_creacion);
         repository.save(cuota);
+        email.enviarEmailCuotas(socio);
         return cuota;
     }
 
-    void sendEmail(String to) {
-
-        SimpleMailMessage msg = new SimpleMailMessage();
-        msg.setTo(to);
-
-        msg.setSubject("Testing from Spring Boot");
-        msg.setText("Hello World \n Spring Boot Email");
-
-        javaMailSender.send(msg);
-    }
 
 
     @Override
@@ -115,7 +104,6 @@ public class CuotaServiceImp implements CuotaService{
         for(Socio socio: socioNoDependientes){
            try {
             generarCuotaSocio(socio);
-            sendEmail(socio.getEmail());
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }

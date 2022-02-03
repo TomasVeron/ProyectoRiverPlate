@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import ar.edu.unnoba.proyecto_river_plate_junin.model.Cuota;
 import ar.edu.unnoba.proyecto_river_plate_junin.model.Socio;
@@ -40,6 +41,17 @@ public class CuotaController {
     public String generarCuotas() {
         List<Socio> socioNoDependientes= socioService.getSocioNoDependientes();
         cuotaService.generarCuotas(socioNoDependientes);
+        return"redirect:/cuotas";
+
+    }
+
+    @PostMapping("/cuotas/generarCuotaSocio/{id}")
+    public String generarCuotaSocio(@PathVariable("id") Socio socio, RedirectAttributes redirectAttributes) {
+        try {
+            cuotaService.generarCuotaSocio(socio);
+        } catch (Exception e) {
+            redirectAttributes.addFlashAttribute("error", e.getMessage());
+        }
         return"redirect:/cuotas";
 
     }

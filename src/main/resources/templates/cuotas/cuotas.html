@@ -9,6 +9,8 @@
     <link rel="stylesheet" th:href="@{/css/normalize.css}" />
     <link rel="stylesheet" th:href="@{/css/nav.css}" />
     <link rel="stylesheet" th:href="@{/css/users.css}" />
+    <link rel="stylesheet" th:href="@{/css/modalDelete.css}" />
+
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -35,7 +37,7 @@
               <button type="submit" class="listUser__btnSearch"><i class="fas fa-search"></i></button>
             </form>
             <form th:action="@{/cuotas/generarCuotas}" method="post">
-              <button style="cursor: pointer;" class="listUser__registerButton" type="submit"><i class="fas fa-user-plus"></i>Agregar socio</a> 
+              <button style="cursor: pointer;" class="listUser__registerButton" type="submit"><i class="fas fa-user-plus"></i>Generar Cuotas</a> 
             </form>
                 
           </div>
@@ -47,6 +49,7 @@
               <th class="table__colums-th"><i class="fas fa-user"></i>Nombre</th>
               <th class="table__colums-th"><i class="fas fa-address-card"></i>Apellido</th>
               <th class="table__colums-th"><i class="fas fa-sitemap"></i>Categoria</th>
+              <th class="table__colums-th"></th>
               <th class="table__colums-th"></th>
             </tr>
           </thead>
@@ -60,8 +63,17 @@
               <td class="table__rows-td">
                 <a th:href="@{/cuotas/ver/socio/{id}(id=${socio.id})}"><i class="fas fa-file-invoice-dollar"></i>Cuotas</a>
               </td>
+              <td class="table__rows-td">
+                <form th:action="@{/cuotas/generarCuotaSocio/{id}(id=${socio.id})}" method="post">
+                  <button type="submit"><i class="fas fa-file-invoice-dollar"></i>Generar Cuota</button>
+                </form>
+              </td>
             </tr>
           </tbody>
         </table>
       </div>
     </div>
+  <div th:include="/modal-error.html" th:remove="tag"></div>
+  <script th:src="@{/js/errorModal.js}"></script>
+  </body>
+</html>

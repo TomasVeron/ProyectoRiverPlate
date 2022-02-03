@@ -9,6 +9,8 @@
     <link rel="stylesheet" th:href="@{/css/normalize.css}" />
     <link rel="stylesheet" th:href="@{/css/nav.css}" />
     <link rel="stylesheet" th:href="@{/css/editSocio.css}" />
+    <link rel="stylesheet" th:href="@{/css/modalDelete.css}" />
+
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -87,5 +89,7 @@
         </form>
       </div>
     </div>
+    <div th:include="/modal-error.html" th:remove="tag"></div>
+  <script th:src="@{/js/errorModal.js}"></script>
   </body>
 </html>

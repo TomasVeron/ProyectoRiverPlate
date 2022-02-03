@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
 import ar.edu.unnoba.proyecto_river_plate_junin.model.Categoria;
 import ar.edu.unnoba.proyecto_river_plate_junin.model.Socio;
 import ar.edu.unnoba.proyecto_river_plate_junin.service.CategoriaService;
@@ -59,12 +61,13 @@ public String addSocioView(Model model1, Model model2){
     }
 
     @PostMapping("/socios/update")
-    public String update(@ModelAttribute("socio") Socio socio, Model model){
+    public String update(@ModelAttribute("socio") Socio socio, Model model,RedirectAttributes redirectAttributes){
         try{
             socioService.updateSocio(socio);   
         }catch(Exception e){
             System.out.println(e.getMessage());
             model.addAttribute("socio", socio);
+            redirectAttributes.addFlashAttribute("error", e.getMessage());
             return "redirect:/socios/edit/"+ socio.getId();
         }
         return "redirect:/socios";

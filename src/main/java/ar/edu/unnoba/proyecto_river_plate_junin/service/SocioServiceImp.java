@@ -70,10 +70,10 @@ public class SocioServiceImp implements SocioService{
         }
         if(socio.getSocioTitular() == null){// socio titular o Individual
             if(socio.getCategoria().getId()==1 && socio.getEstado()!=uDB.getEstado()){//actualiza a la familia si es socio titular y si hubo un cambio de estado   
-                actualizarGrupoFamiliar(socio.getEstado(), socio.getCodigo());
+                actualizarGrupoFamiliar(socio.getEstado(), uDB.getCodigo());
             }
             if(socio.getCategoria().getNombre().equals("Individual") && uDB.getCategoria().getId()==1){
-                actualizarGrupoFamiliar(false, socio.getCodigo());
+                actualizarGrupoFamiliar(false, uDB.getCodigo());
             }
         }
         uDB.setEmail(socio.getEmail());
