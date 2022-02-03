@@ -6,6 +6,7 @@ import ar.edu.unnoba.proyecto_river_plate_junin.model.Categoria;
 import ar.edu.unnoba.proyecto_river_plate_junin.model.Cuota;
 import ar.edu.unnoba.proyecto_river_plate_junin.model.Socio;
 import ar.edu.unnoba.proyecto_river_plate_junin.repository.CuotaRepository;
+import ar.edu.unnoba.proyecto_river_plate_junin.utils.SendEmail;
 
 import java.util.Calendar;
 import java.util.Date;
@@ -13,6 +14,8 @@ import java.util.List;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.SimpleMailMessage;
+import org.springframework.mail.javamail.JavaMailSender;
 @Service
 public class CuotaServiceImp implements CuotaService{
     
@@ -21,6 +24,10 @@ public class CuotaServiceImp implements CuotaService{
 
     @Autowired
     private SocioService socioService;
+
+    @Autowired
+    private JavaMailSender javaMailSender;
+	
 
 
     public Date generarFechaCaducidad(){
@@ -75,9 +82,9 @@ public class CuotaServiceImp implements CuotaService{
             throw new Exception("No se puede generar cuotas para un socio dependiente");
         }
         Date fecha_creacion= new Date();
-        if(!controlarFechaCuota(socio.getId(), fecha_creacion)){
-            throw new Exception("No se pueden generar mas de una cuota por mes");
-        }
+        // if(!controlarFechaCuota(socio.getId(), fecha_creacion)){
+        //     throw new Exception("No se pueden generar mas de una cuota por mes");
+        // }
         Cuota cuota = new Cuota();
         Long numeroCuota = repository.numeroCuota() + 1L ;
         Categoria categoria = socio.getCategoria();
@@ -91,11 +98,24 @@ public class CuotaServiceImp implements CuotaService{
         return cuota;
     }
 
+    void sendEmail(String to) {
+
+        SimpleMailMessage msg = new SimpleMailMessage();
+        msg.setTo(to);
+
+        msg.setSubject("Testing from Spring Boot");
+        msg.setText("Hello World \n Spring Boot Email");
+
+        javaMailSender.send(msg);
+    }
+
+
     @Override
     public void generarCuotas(List<Socio> socioNoDependientes) {
         for(Socio socio: socioNoDependientes){
            try {
             generarCuotaSocio(socio);
+            sendEmail(socio.getEmail());
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }

@@ -24,8 +24,11 @@ public class SocioServiceImp implements SocioService{
 
     @Override
     public Socio createSocio(Socio socio, String socioTitular) throws Exception {
-        if(socio.getCodigo()==repository.findByCodigo(socio.getCodigo()) || socio.getDni()==repository.findByDni(socio.getDni())){
-            throw new Exception("el codigo o dni de socio no esta disponible");
+        
+        String codigo = String.valueOf(repository.contarSocios() + 1) ;
+        socio.setCodigo(codigo);
+        if(socio.getDni()==repository.findByDni(socio.getDni())){
+            throw new Exception("el dni de socio no esta disponible");
         }
         if(!socioTitular.equals("")){
             if(encontrarSocioTitular(socioTitular) == null){
@@ -76,7 +79,6 @@ public class SocioServiceImp implements SocioService{
         uDB.setEmail(socio.getEmail());
         uDB.setDomicilio(socio.getDomicilio());
         uDB.setTelefono(socio.getTelefono());
-        uDB.setCodigo(socio.getCodigo());
         uDB.setEstado(socio.getEstado());
         uDB.setCategoria(socio.getCategoria());
         return repository.save(uDB);

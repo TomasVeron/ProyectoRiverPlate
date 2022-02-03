@@ -29,7 +29,7 @@
           <div class="userDetails-container">
             <h3 class="userDetails__detailName">codigo Socio</h3>
             <input type="hidden" th:value="${socio.id}" th:attr="name='id'" />
-            <input type="text" class="userDetails__inputs" th:field="*{codigo}" />
+            <span class="userDetails__detailInfo" th:text="${socio.codigo}"></span>
           </div>
           <div class="userDetails-container">
             <h3 class="userDetails__detailName">Numero de Documento</h3>
