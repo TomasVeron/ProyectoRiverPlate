@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+
+    <link rel="stylesheet" th:href="@{/css/normalize.css}" />
+    <link rel="stylesheet" th:href="@{/css/cuotaPdf.css}" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@700&display=swap" rel="stylesheet" />
+    <script src="https://kit.fontawesome.com/62ea397d3a.js" crossorigin="anonymous"></script>
+</head>
+<body>
+        <div class="cuota-generar">
+            <div class="main">
+                <div class="userDetails">
+                  <h1 class="userTittle">
+                    <span th:text="'Cuota '+${#dates.format(cuota.fechaCreacion, 'MMMM yyyy')}"></span>
+                    <div class="logo-container">
+                        <img class="logo" th:src="@{/img/logo.png}" alt="">
+                    </div>
+                </h1>
+                  <div class="userDetails__header">
+                    <h2 class="userDetails__header-tittle">Detalles de Cuota</h2>
+                  </div>
+                  <div class="details-container-flex">
+                    <div class="userDetails_container-scroll">
+                        <div class="userDetails-container">
+                            <h3 class="userDetails__detailName">DNI</h3>
+                            <span class="userDetails__detailInfo" th:text="${cuota.socio.dni}"></span>
+                          </div>
+                          <div class="userDetails-container">
+                            <h3 class="userDetails__detailName">Nombre</h3>
+                            <span class="userDetails__detailInfo" th:text="${cuota.socio.nombre}"></span>
+                          </div>
+                          <div class="userDetails-container">
+                            <h3 class="userDetails__detailName">Apellido</h3>
+                            <span class="userDetails__detailInfo" th:text="${cuota.socio.apellido}"></span>
+                          </div>
+                          <div class="userDetails-container">
+                            <h3 class="userDetails__detailName">Domicilio</h3>
+                            <span class="userDetails__detailInfo" th:text="${cuota.socio.domicilio}"></span>
+                          </div>
+                          <div class="userDetails-container">
+                            <h3 class="userDetails__detailName">Codigo Socio</h3>
+                            <span class="userDetails__detailInfo" th:text="${cuota.socio.codigo}"></span>
+                          </div>
+                      <div class="userDetails-container">
+                        <h3 class="userDetails__detailName">Numero</h3>
+                        <span class="userDetails__detailInfo" th:text="${#dates.format(cuota.fechaCreacion, 'MM')}"></span>
+                      </div>
+                      <div class="userDetails-container">
+                        <h3 class="userDetails__detailName">fecha Caducidad</h3>
+                        <span class="userDetails__detailInfo" th:text="${#dates.format(cuota.fechaCaducidad, 'dd MMMM yyyy')}"></span>
+                      </div>
+                      <div class="userDetails-container">
+                        <h3 class="userDetails__detailName">fecha Creacion</h3>
+                        <span class="userDetails__detailInfo" th:text="${#dates.format(cuota.fechaCreacion, 'dd MMMM yyyy')}"></span>
+                      </div>
+                      <div class="userDetails-container">
+                        <h3 class="userDetails__detailName">Importe</h3>
+                        <span class="userDetails__detailInfo" th:text="'$'+${cuota.importe}"></span>
+                      </div>
+                      <div class="userDetails-container">
+                        <h3 class="userDetails__detailName">Categoria</h3>
+                        <span class="userDetails__detailInfo" th:text="${cuota.categoria.nombre}"></span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+        </div>
+
+        <button class="pdf-generator"> generar pdf</button>
+
+        <script th:src="@{/js/htmlToPdf.js}"></script>
+    </body>
+</html>

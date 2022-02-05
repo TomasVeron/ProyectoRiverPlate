@@ -36,6 +36,12 @@ public class CuotaController {
         return "/cuotas/cuotas";
     }
 
+    @GetMapping("/cuotas/cuotaPdf/{id}")
+    public String cuotaPdf(@PathVariable("id") Cuota cuota,Model model){
+        model.addAttribute("cuota", cuota);
+        return "/cuotas/cuotaPdf";
+    }
+
 
     @PostMapping("/cuotas/generarCuotas")
     public String generarCuotas() {

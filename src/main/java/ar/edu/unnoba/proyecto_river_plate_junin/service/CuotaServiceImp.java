@@ -37,38 +37,32 @@ public class CuotaServiceImp implements CuotaService{
         return fechaCaducidad;
     }
 
-    public boolean controlarFechaCuota(Long socioId, Date fechaCreacion){
+    public boolean controlarFechaCuota(Long socioId, Date fechaCreacion) throws Exception{
         Cuota ultimaCuota= repository.consulatarUltimaCuota(socioId);
         Socio socio = socioService.getSocio(socioId);
 
         Calendar fechaAlta = Calendar.getInstance();
         Calendar fechaDisponible = Calendar.getInstance();
-        Calendar fechaCreacionAux = Calendar.getInstance();
         fechaAlta.setTime(socio.getFechaAlta());
         fechaDisponible.setTime(socio.getFechaAlta());
-        fechaCreacionAux.setTime(fechaCreacion);
         fechaDisponible.add(Calendar.MONTH, 1);
         Date fechaLimite = fechaDisponible.getTime();
-        int mesFechaAlta = fechaAlta.get(Calendar.MONTH);
-        int anioFechaAlta = fechaAlta.get(Calendar.YEAR);
-        int mesCreacion = fechaCreacionAux.get(Calendar.MONTH);
-        int anioCreacion = fechaCreacionAux.get(Calendar.YEAR);
 
-        if (ultimaCuota == null && fechaCreacion.after(fechaLimite) &&  (mesCreacion != mesFechaAlta ||anioFechaAlta != anioCreacion )){
+        if (ultimaCuota==null){
+            if (fechaCreacion.after(fechaLimite)==false){// aunque coincidan los meses o el anio la funcion comprueba que la fecha de creacion sea desp de la fecha limite
+                throw new Exception("No ha pasado un mes desde que se dio de alta el socio");
+            }
             return true;
         }
 
         Calendar fechaUltimaCuota = Calendar.getInstance();
         Calendar fechaUltimaDisponible = Calendar.getInstance();
         fechaUltimaDisponible.setTime(ultimaCuota.getFechaCreacion());
-        fechaUltimaDisponible.add(Calendar.MONTH, 1);
-        
+        fechaUltimaDisponible.add(Calendar.MONTH, 1);    
         Date limiteFechaUltimaCuota = fechaUltimaDisponible.getTime();
         fechaUltimaCuota.setTime(ultimaCuota.getFechaCreacion());
-        int mesUltimaCuota = fechaUltimaCuota.get(Calendar.MONTH);
-        int anioUltimaCuota = fechaUltimaCuota.get(Calendar.YEAR);
 
-        if(fechaCreacion.after(limiteFechaUltimaCuota) && (mesCreacion != mesUltimaCuota || anioCreacion != anioUltimaCuota)){
+        if(fechaCreacion.after(limiteFechaUltimaCuota)){
             return true;
         }
         return false;
@@ -93,7 +87,7 @@ public class CuotaServiceImp implements CuotaService{
         cuota.setFechaCaducidad(generarFechaCaducidad());
         cuota.setFechaCreacion(fecha_creacion);
         repository.save(cuota);
-        email.enviarEmailCuotas(socio);
+        email.enviarEmailCuotas(socio, cuota);
         return cuota;
     }
 
