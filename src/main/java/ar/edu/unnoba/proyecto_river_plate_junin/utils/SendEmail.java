@@ -1,11 +1,12 @@
 package ar.edu.unnoba.proyecto_river_plate_junin.utils;
 
+import java.io.File;
+
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.io.ClassPathResource;
-import org.springframework.mail.SimpleMailMessage;
+import org.springframework.core.io.FileSystemResource;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Component;
@@ -40,12 +41,19 @@ public class SendEmail {
         
         , true);
 
+        File cuotaPdf = new File("cuotasPdf/cuota.pdf");
 		// hard coded a file path
-        //FileSystemResource file = new FileSystemResource(new File("path/android.png"));
+        FileSystemResource file = new FileSystemResource(cuotaPdf);
 
-        // helper.addAttachment("my_photo.png", new ClassPathResource("android.png"));
+        
+
+        helper.addAttachment("cuota.pdf", file);
+        
+        
 
         javaMailSender.send(msg);
+        
+        cuotaPdf.delete();
     }
     
 
