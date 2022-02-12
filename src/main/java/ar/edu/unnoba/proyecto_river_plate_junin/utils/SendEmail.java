@@ -51,48 +51,77 @@ public class SendEmail {
 
         String html = "<html xmlns:th='http://www.thymeleaf.org'>"+
                         "<head>"+
-        
+                                "<style type='text/css'>"+
+                                ".userDetails-container{"+
+                                    "display: flex;align-items:center;padding: 10px;border: 1px solid}"+
+                            "</style>"+
+                            "<style type='text/css'>"+
+                                ".userDetails__detailInfo{"+
+                                    "width:100%; text-align: right;"+
+                            "</style>"+
+                            "<style type='text/css'>"+
+                                ".userTittle{"+
+                                    "display: flex;align-items:center;"+
+                            "</style>"+
+                            "<style type='text/css'>"+
+                                ".userTittle span{"+
+                                    "width:100%"+
+                            "</style>"+
+                            "<style type='text/css'>"+
+                                ".logo-container{"+
+                                    "width: 130px;height: 130px;"+
+                            "</style>"+
+                            "<style type='text/css'>"+
+                                ".logo{"+
+                                    "object-fit: cover;"+
+                            "</style>"+
                         "</head>"+
                         "<body>"+
-                            "<div class='userDetails-container' style='display:flex;justify-content:space-between;padding:10px;'>"+
-                                "<h3 class='userDetails__detailName' style='display:block; padding: 10px;'>DNI</h3>"+
-                                "<span class='userDetails__detailInfo' style='display:block; padding: 10px;'>"+cuota.getSocio().getDni()+"</span>"+
+                            "<h1 class='userTittle' style='display: flex;align-items:center;'>"+
+                                "<span style='width:100%'>Cuota</span>"+
+                                "<div class='logo-container' style='width: 130px;height: 130px;'>"+
+                                "<img class='logo' style='object-fit: cover;width: inherit;' src='https://scontent.fjni3-1.fna.fbcdn.net/v/t1.18169-9/10629586_780258542038653_1108998330630031778_n.jpg?_nc_cat=105&ccb=1-5&_nc_sid=09cbfe&_nc_ohc=aOgwzj-hCfMAX_hGbDZ&_nc_ht=scontent.fjni3-1.fna&oh=00_AT96uzKbQe5mV_Q40q-_lzzSllgLnAhmBt-9UJ0wme06YQ&oe=622D6C40' alt='' />"+
+                                "</div>"+
+                            "</h1>"+
+                            "<div class='userDetails-container'>"+
+                                "<h3 class='userDetails__detailName'>DNI</h3>"+
+                                "<p class='userDetails__detailInfo'style='width:100%; text-align: right;'>"+cuota.getSocio().getDni()+"</p>"+
                             "</div>"+
-                            "<div class='userDetails-container' style='display:flex;justify-content:space-between;padding:10px;'>"+
-                                "<h3 class='userDetails__detailName' style='display:block; padding: 10px;'>Nombre</h3>"+
-                                "<span class='userDetails__detailInfo' style='display:block; padding: 10px;'>"+cuota.getSocio().getNombre()+"</span>"+
+                            "<div class='userDetails-container'>"+
+                                "<h3 class='userDetails__detailName'>Nombre</h3>"+
+                                "<p class='userDetails__detailInfo'style='width:100%; text-align: right;'>"+cuota.getSocio().getNombre()+"</p>"+
                             "</div>"+
-                            "<div class='userDetails-container' style='display:flex;justify-content:space-between;padding:10px;'>"+
-                                "<h3 class='userDetails__detailName' style='display:block; padding: 10px;'>Apellido</h3>"+
-                                "<span class='userDetails__detailInfo' style='display:block; padding: 10px;'>"+cuota.getSocio().getApellido()+"</span>"+
+                            "<div class='userDetails-container' >"+
+                                "<h3 class='userDetails__detailName' >Apellido</h3>"+
+                                "<p class='userDetails__detailInfo' style='width:100%; text-align: right;'>"+cuota.getSocio().getApellido()+"</p>"+
                             "</div>"+
-                            "<div class='userDetails-container' style='display:flex;justify-content:space-between;padding:10px;'>"+
-                                "<h3 class='userDetails__detailName' style='display:block; padding: 10px;'>Domicilio</h3>"+
-                                "<span class='userDetails__detailInfo' style='display:block; padding: 10px;'>"+cuota.getSocio().getDomicilio()+"</span>"+
+                            "<div class='userDetails-container' >"+
+                                "<h3 class='userDetails__detailName' >Domicilio</h3>"+
+                                "<p class='userDetails__detailInfo' style='width:100%; text-align: right;'>"+cuota.getSocio().getDomicilio()+"</p>"+
                             "</div>"+
-                            "<div class='userDetails-container' style='display:flex;justify-content:space-between;padding:10px;'>"+
-                                "<h3 class='userDetails__detailName' style='display:block; padding: 10px;'>Codigo</h3>"+
-                                "<span class='userDetails__detailInfo' style='display:block; padding: 10px;'>"+cuota.getSocio().getCodigo()+"</span>"+
+                            "<div class='userDetails-container' >"+
+                                "<h3 class='userDetails__detailName' >Codigo</h3>"+
+                                "<p class='userDetails__detailInfo' style='width:100%; text-align: right;'>"+cuota.getSocio().getCodigo()+"</p>"+
                             "</div>"+
-                            "<div class='userDetails-container' style='display:flex;justify-content:space-between;padding:10px;'>"+
-                                "<h3 class='userDetails__detailName' style='display:block; padding: 10px;'>Cuota Mes</h3>"+
-                                "<span class='userDetails__detailInfo' style='display:block; padding: 10px;'>"+mesFechaEmision+"</span>"+
+                            "<div class='userDetails-container'>"+
+                                "<h3 class='userDetails__detailName' >Cuota Mes</h3>"+
+                                "<p class='userDetails__detailInfo' style='width:100%; text-align: right;'>"+mesFechaEmision+"</p>"+
                             "</div>"+
-                            "<div class='userDetails-container' style='display:flex;justify-content:space-between;padding:10px;'>"+
-                                "<h3 class='userDetails__detailName' style='display:block; padding: 10px;'>Fecha Caducidad</h3>"+
-                                "<span class='userDetails__detailInfo' style='display:block; padding: 10px;'>"+fechaCaducidadString+"</span>"+
+                            "<div class='userDetails-container' >"+
+                                "<h3 class='userDetails__detailName' >Fecha Caducidad</h3>"+
+                                "<p class='userDetails__detailInfo'style='width:100%; text-align: right;' >"+fechaCaducidadString+"</p>"+
                             "</div>"+
-                            "<div class='userDetails-container' style='display:flex;justify-content:space-between;padding:10px;'>"+
-                                "<h3 class='userDetails__detailName' style='display:block; padding: 10px;'>Fecha Emision</h3>"+
-                                "<span class='userDetails__detailInfo' style='display:block; padding: 10px;'>"+fechaEmisionString+"</span>"+
+                            "<div class='userDetails-container' >"+
+                                "<h3 class='userDetails__detailName' >Fecha Emision</h3>"+
+                                "<p class='userDetails__detailInfo'style='width:100%; text-align: right;' >"+fechaEmisionString+"</p>"+
                             "</div>"+
-                            "<div class='userDetails-container' style='display:flex;justify-content:space-between;padding:10px;'>"+
-                                "<h3 class='userDetails__detailName' style='display:block; padding: 10px;'>Importe</h3>"+
-                                "<span class='userDetails__detailInfo' style='display:block; padding: 10px;'>"+"$"+cuota.getImporte()+"</span>"+
+                            "<div class='userDetails-container' >"+
+                                "<h3 class='userDetails__detailName' >Importe</h3>"+
+                                "<p class='userDetails__detailInfo' style='width:100%; text-align: right;' >"+"$"+cuota.getImporte()+"</p>"+
                             "</div>"+
-                            "<div class='userDetails-container' style='display:flex;justify-content:space-between;padding:10px;'>"+
-                                "<h3 class='userDetails__detailName' style='display:block; padding: 10px;'>Categoria</h3>"+
-                                "<span class='userDetails__detailInfo' style='display:block; padding: 10px;'>"+cuota.getCategoria().getNombre()+"</span>"+
+                            "<div class='userDetails-container'>"+
+                                "<h3 class='userDetails__detailName' >Categoria</h3>"+
+                                "<p class='userDetails__detailInfo'style='width:100%; text-align: right;' >"+cuota.getCategoria().getNombre()+"</p>"+
                             "</div>"+
                         "</body>"+
                     "</html>";
