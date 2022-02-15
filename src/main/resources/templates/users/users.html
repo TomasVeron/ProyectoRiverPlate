@@ -8,7 +8,7 @@
     <link rel="stylesheet" th:href="@{/css/main.css}" />
     <link rel="stylesheet" th:href="@{/css/normalize.css}" />
     <link rel="stylesheet" th:href="@{/css/nav.css}" />
-    <link rel="stylesheet" th:href="@{/css/users.css}" />
+    <link rel="stylesheet" th:href="@{/css/list.css}" />
     <link rel="stylesheet" th:href="@{/css/modalDelete.css}" />
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -20,25 +20,25 @@
   <body>
     <header th:replace="nav.html"></header>
     <div class="main">
-      <div class="listUser-container">
-        <h1 class="userTittle">Usuarios</h1>
-        <div class="listUser-menuControl">
-          <div class="listUser__search-container">
+      <div class="list-container">
+        <h1 class="listTitle">Usuarios</h1>
+        <div class="list-menuControl">
+          <div class="list__search-container">
             <form th:action="@{/users/buscarEnUsuario}" method="get">
               <input
                 type="text"
-                class="listUser__search"
+                class="list__inputSearch"
                 name="keyword"
                 th:value="${keyword}"
                 placeholder="Buscar por Nombre, Apellido, Email"
                 size="50"
               />
-              <button type="submit" class="listUser__btnSearch"><i class="fas fa-search"></i></button>
+              <button type="submit" class="list__btnSearch"><i class="fas fa-search"></i></button>
             </form>
             <div class="listUser__errorDelete" th:if="${userDeleteError}" th:text="${userDeleteError}"></div>
           </div>
 
-          <a class="listUser__registerButton" th:href="@{/register}"><i class="fas fa-user-plus"></i>Agregar Usuario</a>
+          <a class="list__actionButton" th:href="@{/register}"><i class="fas fa-user-plus"></i>Agregar Usuario</a>
         </div>
         <table class="table">
           <thead>

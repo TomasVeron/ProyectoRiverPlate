@@ -8,7 +8,7 @@
     <link rel="stylesheet" th:href="@{/css/main.css}" />
     <link rel="stylesheet" th:href="@{/css/normalize.css}" />
     <link rel="stylesheet" th:href="@{/css/nav.css}" />
-    <link rel="stylesheet" th:href="@{/css/userDetails.css}" />
+    <link rel="stylesheet" th:href="@{/css/details.css}" />
     <link rel="stylesheet" th:href="@{/css/grupoFamiliarInfo.css}" />
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -20,55 +20,55 @@
   <body>
     <header th:replace="nav.html"></header>
     <div class="main">
-      <div class="userDetails">
-        <h1 class="userTittle">Cuota  <span th:text="${cuota.numero} + '-' + ${cuota.socio.nombre} +' '+ ${cuota.socio.apellido}"></span></h1>
-        <div class="userDetails__header">
-          <h2 class="userDetails__header-tittle">Detalles de Cuota</h2>
-          <a class="userDetails__header-backbutton" th:href="@{/cuotas}"><i class="fas fa-long-arrow-alt-left"></i> volver</a>
+      <div class="details">
+        <h1 class="details__title">Cuota  <span th:text="${cuota.numero} + '-' + ${cuota.socio.nombre} +' '+ ${cuota.socio.apellido}"></span></h1>
+        <div class="details__header">
+          <h2 class="details__header-tittle">Detalles de Cuota</h2>
+          <a class="details__header-backbutton" th:href="@{/cuotas}"><i class="fas fa-long-arrow-alt-left"></i> volver</a>
         </div>
         <div class="details-container-flex">
-          <div class="userDetails_container-scroll">
-            <div class="userDetails-container">
-              <h3 class="userDetails__detailName">Numero</h3>
-              <span class="userDetails__detailInfo" th:text="${cuota.numero}"></span>
+          <div class="details_container-scroll">
+            <div class="details-container">
+              <h3 class="details__detailName">Numero</h3>
+              <span class="details__detailInfo" th:text="${cuota.numero}"></span>
             </div>
-            <div class="userDetails-container">
-              <h3 class="userDetails__detailName">fecha Caducidad</h3>
-              <span class="userDetails__detailInfo" th:text="${#dates.format(cuota.fechaCaducidad, 'dd MMMM yyyy')}"></span>
+            <div class="details-container">
+              <h3 class="details__detailName">fecha Caducidad</h3>
+              <span class="details__detailInfo" th:text="${#dates.format(cuota.fechaCaducidad, 'dd MMMM yyyy')}"></span>
             </div>
-            <div class="userDetails-container">
-              <h3 class="userDetails__detailName">fecha Creacion</h3>
-              <span class="userDetails__detailInfo" th:text="${#dates.format(cuota.fechaCreacion, 'dd MMMM yyyy')}"></span>
+            <div class="details-container">
+              <h3 class="details__detailName">fecha Creacion</h3>
+              <span class="details__detailInfo" th:text="${#dates.format(cuota.fechaCreacion, 'dd MMMM yyyy')}"></span>
             </div>
-            <div class="userDetails-container">
-              <h3 class="userDetails__detailName">fecha Pago</h3>
-              <span class="userDetails__detailInfo" th:text="${#dates.format(cuota.fechaPago, 'dd MMMM yyyy')}"></span>
+            <div class="details-container">
+              <h3 class="details__detailName">fecha Pago</h3>
+              <span class="details__detailInfo" th:text="${#dates.format(cuota.fechaPago, 'dd MMMM yyyy')}"></span>
             </div>
-            <div class="userDetails-container">
-                <h3 class="userDetails__detailName">Forma de Pago</h3>
-                <span class="userDetails__detailInfo" th:text="${cuota.formaPago}"></span>
+            <div class="details-container">
+                <h3 class="details__detailName">Forma de Pago</h3>
+                <span class="details__detailInfo" th:text="${cuota.formaPago}"></span>
             </div>
-            <div class="userDetails-container">
-                <h3 class="userDetails__detailName">Detalle de Pago</h3>
-                <span class="userDetails__detailInfo" th:text="${cuota.detallePago}"></span>
+            <div class="details-container">
+                <h3 class="details__detailName">Detalle de Pago</h3>
+                <span class="details__detailInfo" th:text="${cuota.detallePago}"></span>
             </div>
-            <div class="userDetails-container">
-              <h3 class="userDetails__detailName">Importe</h3>
-              <span class="userDetails__detailInfo" th:text="${cuota.importe}"></span>
+            <div class="details-container">
+              <h3 class="details__detailName">Importe</h3>
+              <span class="details__detailInfo" th:text="${cuota.importe}"></span>
             </div>
-            <div class="userDetails-container">
-              <h3 class="userDetails__detailName">Socio</h3>
-              <span class="userDetails__detailInfo" th:text="${cuota.socio.codigo} +'-'+ ${cuota.socio.nombre} + '   ' + ${cuota.socio.apellido}"></span>
+            <div class="details-container">
+              <h3 class="details__detailName">Socio</h3>
+              <span class="details__detailInfo" th:text="${cuota.socio.codigo} +'-'+ ${cuota.socio.nombre} + '   ' + ${cuota.socio.apellido}"></span>
             </div>
-            <div class="userDetails-container">
-              <h3 class="userDetails__detailName">Categoria</h3>
-              <span class="userDetails__detailInfo" th:text="${cuota.categoria.nombre}"></span>
+            <div class="details-container">
+              <h3 class="details__detailName">Categoria</h3>
+              <span class="details__detailInfo" th:text="${cuota.categoria.nombre}"></span>
             </div>
-            <div class="userDetails-container">
-              <h3 class="userDetails__detailName">Estado</h3>
-              <span class="userDetails__detailInfo" th:if="${(cuota.fechaPago==null) and (cuota.fechaCaducidad.after(#dates.createNow()))}">PENDIENTE</span>
-              <span class="userDetails__detailInfo" th:if="${(cuota.fechaPago==null) and (cuota.fechaCaducidad.before(#dates.createNow()))}">CADUCADA</span>
-              <span class="userDetails__detailInfo" th:if="${(cuota.fechaPago != null)}">PAGADA</span>
+            <div class="details-container">
+              <h3 class="details__detailName">Estado</h3>
+              <span class="details__detailInfo" th:if="${(cuota.fechaPago==null) and (cuota.fechaCaducidad.after(#dates.createNow()))}">PENDIENTE</span>
+              <span class="details__detailInfo" th:if="${(cuota.fechaPago==null) and (cuota.fechaCaducidad.before(#dates.createNow()))}">CADUCADA</span>
+              <span class="details__detailInfo" th:if="${(cuota.fechaPago != null)}">PAGADA</span>
             </div>
           </div>
 

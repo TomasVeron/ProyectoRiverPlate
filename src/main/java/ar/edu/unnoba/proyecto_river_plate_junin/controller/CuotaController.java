@@ -88,7 +88,7 @@ public class CuotaController {
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
-        return"redirect:/cuotas";
+        return"redirect:/cuotas/ver/socio/"+cuota.getSocio().getId();
 
     }
 

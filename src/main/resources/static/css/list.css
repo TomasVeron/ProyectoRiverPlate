@@ -3,7 +3,7 @@
     --color-predominant-hover:rgb(0, 0, 0);
 }
 
-.userTittle{
+.listTitle{
     display: block;
     background-color: #000;
     color: #fff;
@@ -13,11 +13,10 @@
     margin: 0;
 }
 
-.listUser-container{
-    margin: auto;
+.list-container{
+    margin: 30px;
     border-radius: 16px;
-    width: 92%;
-    height: 92%;
+    width: 100%;
     box-shadow: 0 0 10px #000;
     background-color: #fff;
 }
@@ -45,14 +44,14 @@
     padding: 10px;
 }
 
-.listUser-menuControl{
+.list-menuControl{
     display: flex;
     justify-content: space-between;
     width: 100%;
     margin: 20px 0;
 }
 
-.listUser__registerButton{
+.list__actionButton{
     padding: 7px 20px;
     background-color: var(--color-predominant);
     text-decoration: none;
@@ -68,7 +67,7 @@
     overflow-y: auto;
 }
 
-.listUser__registerButton i, .table__colums-th i{
+.list__actionButton i, .table__colums-th i{
     margin: 0 5px;
 }
 
@@ -97,7 +96,7 @@
     margin: 0 5px;
 }
 
-.listUser__search-container{
+.list__search-container{
     display: flex;
     margin: 0 20px;
     outline: none;
@@ -105,14 +104,14 @@
     justify-content: space-between;
 }
 
-.listUser__search{
+.list__inputSearch{
     border-radius: 16px 0 0 16px;
     padding: 5px;
     width: 57%;
     margin: -5px;
 }
 
-.listUser__btnSearch{
+.list__btnSearch{
     background-color: var(--color-predominant);
     width: 40px;
     outline: none;

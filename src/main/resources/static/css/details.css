@@ -1,31 +1,21 @@
-.userDetails{
-    margin: auto;
+.details{
+    margin: 30px;
     border-radius: 16px;
-    width: 92%;
-    height: 92%;
+    width: 100%;
     box-shadow: 0 0 10px #000;
     background-color: #fff;
     display: flex;
     flex-direction: column;
 }
 
-.userDetails_container-scroll{
-    overflow-y: auto;
+.details_container-scroll{
+    min-width: 50%;
+    flex-grow: 1;
 }
 
-.userDetails_container-scroll::-webkit-scrollbar {
-    width: 12px;
-}
-.userDetails_container-scroll::-webkit-scrollbar-track {
-    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3); 
-    border-radius: 10px;
-}
-.userDetails_container-scroll::-webkit-scrollbar-thumb {
-    border-radius: 10px;
-    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.5);
-}
 
-.userDetails__header{
+
+.details__header{
     display: flex;
     justify-content: space-between;
     padding: 10px;
@@ -33,7 +23,7 @@
     margin: 20px 0;
 }
 
-.userDetails__header-backbutton{
+.details__header-backbutton{
     padding: 10px;
     background-color: var(--color-predominant);
     text-decoration: none;
@@ -43,7 +33,7 @@
     border: 1px solid #000;
 }
 
-.userTittle{
+.details__title{
     display: block;
     background-color: #000;
     color: #fff;
@@ -53,13 +43,13 @@
     margin: 0;
 }
 
-.userDetails-container{
+.details-container{
     display: flex;
     justify-content: space-between;
     padding: 10px;
 }
 
-.userDetails__btn-submit{
+.details__btn-submit{
     padding: 10px;
     margin: 20px;
     width: 150px;
@@ -72,7 +62,7 @@
 
 }
 
-.userDetails__inputs{
+.details__inputs{
     padding: 10px;
     outline: none;
     text-align: end;

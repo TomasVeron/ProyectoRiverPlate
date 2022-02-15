@@ -8,9 +8,9 @@
     <link rel="stylesheet" th:href="@{/css/main.css}" />
     <link rel="stylesheet" th:href="@{/css/normalize.css}" />
     <link rel="stylesheet" th:href="@{/css/nav.css}" />
-    <link rel="stylesheet" th:href="@{/css/userDetails.css}" />
+    <link rel="stylesheet" th:href="@{/css/details.css}" />
     <link rel="stylesheet" th:href="@{/css/grupoFamiliarInfo.css}" />
-    <link rel="stylesheet" th:href="@{/css/users.css}" />
+    <link rel="stylesheet" th:href="@{/css/list.css}" />
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -21,49 +21,45 @@
   <body>
     <header th:replace="nav.html"></header>
     <div class="main">
-      <div class="userDetails">
-        <h1 class="userTittle">Cuotas</h1>
-        <div class="userDetails__header">
-          <h2 class="userDetails__header-tittle">Cuotas del Socio</h2>
-          <a class="userDetails__header-backbutton" th:href="@{/cuotas}"><i class="fas fa-long-arrow-alt-left"></i> volver</a>
+      <div class="details">
+        <h1 class="details__title">Cuotas</h1>
+        <div class="details__header">
+          <h2 class="details__header-tittle">Cuotas del Socio</h2>
+          <a class="details__header-backbutton" th:href="@{/cuotas}"><i class="fas fa-long-arrow-alt-left"></i> volver</a>
         </div>
         <div class="details-container-flex">
-          <div class="family-group-container">
-            <div class="family-group__title">Cuotasr</div>
-            <table class="table">
-                <thead>
-                  <tr class="table__colums">
-                    <th class="table__colums-th"><i class="fas fa-user-tag"></i>Numero</th>
-                    <th class="table__colums-th"><i class="fas fa-user"></i>Fecha Caducidad</th>
-                    <th class="table__colums-th"><i class="fas fa-address-card"></i>Fecha Creacion</th>
-                    <th class="table__colums-th"><i class="fas fa-sitemap"></i>Fecha Pago</th>
-                    <th class="table__colums-th"><i class="fas fa-sitemap"></i>Importe</th>
-                    <th class="table__colums-th"><i class="fas fa-sitemap"></i>Estado</th>
-                    <th class="table__colums-th"></th>
-                    <th class="table__colums-th"></th>
-                  </tr>
-                </thead>
-                <tbody class="scroll">
-                  <tr class="table__rows" th:each="cuota : ${cuotas}">
-                    <td class="table__rows-td" th:text="${cuota.numero}"></td>
-                    <td class="table__rows-td" th:text="${#dates.format(cuota.fechaCaducidad, 'dd MMMM yyyy')}"></td>
-                    <td class="table__rows-td" th:text="${#dates.format(cuota.fechaCreacion, 'dd MMMM yyyy')}"></td>
-                    <td class="table__rows-td" th:text="${#dates.format(cuota.fechaPago, 'dd MMMM yyyy')}"></td>
-                    <td class="table__rows-td" th:text="${cuota.importe}"></td>
-                    <td class="table__rows-td" th:if="${(cuota.fechaPago==null) and (cuota.fechaCaducidad.after(#dates.createNow()))}" > PENDIENTE</td>
-                    <td class="table__rows-td" th:if="${(cuota.fechaPago==null) and (cuota.fechaCaducidad.before(#dates.createNow()))}" > CADUCADA</td>
-                    <td class="table__rows-td" th:if="${(cuota.fechaPago != null)}"> PAGADA</td>
-                    <td class="table__rows-td">
-                      <a th:href="@{/cuotas/ver/{id}(id=${cuota.idCuota})}"><i class="fas fa-file-invoice-dollar"></i>Info Completa</a>
-                    </td>
-                    <td class="table__rows-td" th:if="${cuota.fechaPago==null}">
-                      <a th:href="@{/cuotas/socio/registrarPago/{id}(id=${cuota.idCuota})}"><i class="fas fa-file-invoice-dollar"></i>Registrar Pago</a>
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
-          </div>
-        </div>
+          <table class="table">
+            <thead>
+              <tr class="table__colums">
+                <th class="table__colums-th"><i class="fas fa-user-tag"></i>Numero</th>
+                <th class="table__colums-th"><i class="fas fa-user"></i>Fecha Caducidad</th>
+                <th class="table__colums-th"><i class="fas fa-address-card"></i>Fecha Creacion</th>
+                <th class="table__colums-th"><i class="fas fa-sitemap"></i>Fecha Pago</th>
+                <th class="table__colums-th"><i class="fas fa-sitemap"></i>Importe</th>
+                <th class="table__colums-th"><i class="fas fa-sitemap"></i>Estado</th>
+                <th class="table__colums-th"></th>
+                <th class="table__colums-th"></th>
+              </tr>
+            </thead>
+            <tbody class="scroll">
+              <tr class="table__rows" th:each="cuota : ${cuotas}">
+                <td class="table__rows-td" th:text="${cuota.numero}"></td>
+                <td class="table__rows-td" th:text="${#dates.format(cuota.fechaCaducidad, 'dd MMMM yyyy')}"></td>
+                <td class="table__rows-td" th:text="${#dates.format(cuota.fechaCreacion, 'dd MMMM yyyy')}"></td>
+                <td class="table__rows-td" th:text="${#dates.format(cuota.fechaPago, 'dd MMMM yyyy')}"></td>
+                <td class="table__rows-td" th:text="${cuota.importe}"></td>
+                <td class="table__rows-td" th:if="${(cuota.fechaPago==null) and (cuota.fechaCaducidad.after(#dates.createNow()))}" > PENDIENTE</td>
+                <td class="table__rows-td" th:if="${(cuota.fechaPago==null) and (cuota.fechaCaducidad.before(#dates.createNow()))}" > CADUCADA</td>
+                <td class="table__rows-td" th:if="${(cuota.fechaPago != null)}"> PAGADA</td>
+                <td class="table__rows-td">
+                  <a th:href="@{/cuotas/ver/{id}(id=${cuota.idCuota})}"><i class="fas fa-file-invoice-dollar"></i>Info Completa</a>
+                </td>
+                <td class="table__rows-td" th:if="${cuota.fechaPago==null}">
+                  <a th:href="@{/cuotas/socio/registrarPago/{id}(id=${cuota.idCuota})}"><i class="fas fa-file-invoice-dollar"></i>Registrar Pago</a>
+                </td>
+              </tr>
+            </tbody>
+          </table>
       </div>
     </div>
   </body>

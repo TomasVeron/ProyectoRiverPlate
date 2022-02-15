@@ -38,10 +38,6 @@
     overflow-x: hidden;
 }
 
-.userDetails_container-scroll{
-    width: 50%;
-    flex-grow: 1;
-}
 
 .family__info{
     padding: 10px;

@@ -8,9 +8,8 @@
     <link rel="stylesheet" th:href="@{/css/main.css}" />
     <link rel="stylesheet" th:href="@{/css/normalize.css}" />
     <link rel="stylesheet" th:href="@{/css/nav.css}" />
-    <link rel="stylesheet" th:href="@{/css/editSocio.css}" />
+    <link rel="stylesheet" th:href="@{/css/details.css}" />
     <link rel="stylesheet" th:href="@{/css/modalDelete.css}" />
-
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -21,75 +20,75 @@
   <body>
     <header th:replace="nav.html"></header>
     <div class="main">
-      <div class="userDetails">
-        <h1 class="userTittle">Socios - <span th:text="${socio.nombre}"></span></h1>
-        <div class="userDetails__header">
-          <h2 class="userDetails__header-tittle">Detalles de Socio</h2>
-          <a class="userDetails__header-backbutton" th:href="@{/socios}"><i class="fas fa-long-arrow-alt-left"></i> volver</a>
+      <div class="details">
+        <h1 class="details__title">socios - <span th:text="${socio.nombre}"></span></h1>
+        <div class="details__header">
+          <h2 class="details__header-tittle">Detalles de Socio</h2>
+          <a class="details__header-backbutton" th:href="@{/socios}"><i class="fas fa-long-arrow-alt-left"></i> volver</a>
         </div>
-        <form method="POST" th:object="${socio}" th:action="@{/socios/update}" class="userDetails_container-scroll">
-          <div class="userDetails-container">
-            <h3 class="userDetails__detailName">codigo Socio</h3>
+        <form method="POST" th:object="${socio}" th:action="@{/socios/update}" class="details_container-scroll">
+          <div class="details-container">
+            <h3 class="details__detailName">codigo Socio</h3>
             <input type="hidden" th:value="${socio.id}" th:attr="name='id'" />
-            <span class="userDetails__detailInfo" th:text="${socio.codigo}"></span>
+            <span class="details__detailInfo" th:text="${socio.codigo}"></span>
           </div>
-          <div class="userDetails-container">
-            <h3 class="userDetails__detailName">Numero de Documento</h3>
-            <span class="userDetails__detailInfo" th:text="${socio.dni}"></span>
+          <div class="details-container">
+            <h3 class="details__detailName">Numero de Documento</h3>
+            <span class="details__detailInfo" th:text="${socio.dni}"></span>
           </div>
-          <div class="userDetails-container">
-            <h3 class="userDetails__detailName">Nombre</h3>
-            <span class="userDetails__detailInfo" th:text="${socio.nombre}"></span>
+          <div class="details-container">
+            <h3 class="details__detailName">Nombre</h3>
+            <span class="details__detailInfo" th:text="${socio.nombre}"></span>
           </div>
-          <div class="userDetails-container">
-            <h3 class="userDetails__detailName">Apellido</h3>
-            <span class="userDetails__detailInfo" th:text="${socio.apellido}"></span>
+          <div class="details-container">
+            <h3 class="details__detailName">Apellido</h3>
+            <span class="details__detailInfo" th:text="${socio.apellido}"></span>
           </div>
-          <div class="userDetails-container">
-            <h3 class="userDetails__detailName">Email</h3>
-            <input type="text" class="userDetails__inputs" th:field="*{email}" />
+          <div class="details-container">
+            <h3 class="details__detailName">Email</h3>
+            <input type="text" class="details__inputs" th:field="*{email}" />
           </div>
-          <div class="userDetails-container">
-            <h3 class="userDetails__detailName">Direccion</h3>
-            <input type="text" class="userDetails__inputs" th:field="*{domicilio}" />
+          <div class="details-container">
+            <h3 class="details__detailName">Direccion</h3>
+            <input type="text" class="details__inputs" th:field="*{domicilio}" />
           </div>
-          <div class="userDetails-container">
-            <h3 class="userDetails__detailName">Telefono</h3>
-            <input type="text" class="userDetails__inputs" th:field="*{telefono}" />
+          <div class="details-container">
+            <h3 class="details__detailName">Telefono</h3>
+            <input type="text" class="details__inputs" th:field="*{telefono}" />
           </div>
-          <div class="userDetails-container">
-            <h3 class="userDetails__detailName">Fecha de Nacimiento</h3>
-            <span class="userDetails__detailInfo" th:text="${#dates.format(socio.fechaNacimiento, 'dd MMMM yyyy')}"></span>
+          <div class="details-container">
+            <h3 class="details__detailName">Fecha de Nacimiento</h3>
+            <span class="details__detailInfo" th:text="${#dates.format(socio.fechaNacimiento, 'dd MMMM yyyy')}"></span>
           </div>
-          <div class="userDetails-container">
-            <h3 class="userDetails__detailName">Fecha de Alta</h3>
-            <span class="userDetails__detailInfo" th:text="${#dates.format(socio.fechaAlta, 'dd MMMM yyyy')}"></span>
+          <div class="details-container">
+            <h3 class="details__detailName">Fecha de Alta</h3>
+            <span class="details__detailInfo" th:text="${#dates.format(socio.fechaAlta, 'dd MMMM yyyy')}"></span>
           </div>
-          <div class="userDetails-container">
-            <h3 class="userDetails__detailName">Estado</h3>
+          <div class="details-container">
+            <h3 class="details__detailName">Estado</h3>
             <select name="rol" type="rol" id="login__rol" th:field="*{estado}">
               <option value="true">Activo</option>
               <option value="false">Inactivo</option>
             </select>
           </div>
-          <div class="userDetails-container">
-            <h3 class="userDetails__detailName">Categoria</h3>
+          <div class="details-container">
+            <h3 class="details__detailName">Categoria</h3>
             <select th:field="*{categoria}">
               <option th:each="categoria: ${categorias}" th:value="${categoria.id}" th:text="${categoria.nombre}"></option>
             </select>
           </div>
 
-          <div class="userDetails-container">
-            <h3 class="userDetails__detailName">Socio Titular</h3>
-            <input th:if="${socio.socioTitular != null}" class="userDetails__inputs" th:field="*{codigoSocioTitular}">
-            <input type="hidden" th:field="*{socioTitular}">
-            <span th:if="${socio.socioTitular == null}" class="userDetails__detailInfo">No tiene socio titular</span>
+          <div class="details-container">
+            <h3 class="details__detailName">Socio Titular</h3>
+            <input th:if="${socio.socioTitular != null}" class="details__inputs" th:field="*{codigoSocioTitular}" />
+            <input type="hidden" th:field="*{socioTitular}" />
+            <span th:if="${socio.socioTitular == null}" class="details__detailInfo">No tiene socio titular</span>
           </div>
-          <input type="submit" class="userDetails__btn-submit" value="Editar Socio" />
+          <input type="submit" class="details__btn-submit" value="Editar Socio" />
         </form>
       </div>
     </div>
     <div th:include="/modal-error.html" th:remove="tag"></div>
-  <script th:src="@{/js/errorModal.js}"></script>
+    <script th:src="@{/js/errorModal.js}"></script>
   </body>
 </html>
