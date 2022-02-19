@@ -1,0 +1,90 @@
+main{
+    display: flex;
+    justify-content: center;
+	align-items: center	;
+}
+
+.recibo{
+width: 490px;
+}
+.header {
+    display: flex;
+    padding: 5px;
+    justify-content: center;
+    position: relative;
+    margin-right: -35px;
+}
+.logo-container {
+    
+}
+
+.logo-container img{
+    width: 177px;
+    position: absolute;
+    top: -41px;
+    left: -25px;
+
+}
+
+.title-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.title{
+    border-bottom: 2px solid;
+    border-top: 2px solid;
+    padding: 20px;
+font-size:20px;
+    text-align:center;
+}
+
+.subtitle-container {
+    text-align: center;
+    font-size: larger;
+	margin:15px;
+}
+
+.title-container strong {
+
+}
+
+.partner-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+p {
+    margin: 0;
+    border-bottom: 1px dashed;
+    width: 100%;
+    text-align: center;
+    font-family: sans-serif;
+}
+
+.direction-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.date-price {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.date-price p {
+    width: 34%;
+}
+
+.datePayment {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.datePayment p {
+    width: 77%;
+}

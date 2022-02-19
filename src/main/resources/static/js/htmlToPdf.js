@@ -9,8 +9,8 @@ function addScript(url) {
 addScript('https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js');
 addScript('https://unpkg.com/axios/dist/axios.min.js');
 
-const pdfInput = document.querySelector("#pdfcuota");
-const formPdf = document.querySelector("#formpdf");
+// const pdfInput = document.querySelector("#pdfcuota");
+// const formPdf = document.querySelector("#formpdf");
 const btnPdf = document.querySelector(".pdf-generator");
 
 function text2Binary(string) {
@@ -41,18 +41,20 @@ btnPdf.addEventListener("click" ,()=> {
         })
         .from($elementoParaConvertir)
         .toPdf()
-        .output("blob")
-        .then( (pdfResult) => {
-            const formData= new FormData(formPdf);
-            formData.append("pdf", pdfResult);
-            console.log(formData);
-             axios.post("http://localhost:8080/cuotas/guardarpdf",formData , {
-                headers: {'Content-Type': 'multipart/form-data',
-                            'responseType': 'arraybuffer'},
-            });
+        .save()
+        
+        // .output("blob")
+        // .then( (pdfResult) => {
+        //     const formData= new FormData(formPdf);
+        //     formData.append("pdf", pdfResult);
+        //     console.log(formData);
+        //      axios.post("http://localhost:8080/cuotas/guardarpdf",formData , {
+        //         headers: {'Content-Type': 'multipart/form-data',
+        //                     'responseType': 'arraybuffer'},
+        //     });
 
-        })
-        .catch(err => console.log(err));
+        // })
+        // .catch(err => console.log(err));
 
-        const form = new FormData();
+        // const form = new FormData();
 });

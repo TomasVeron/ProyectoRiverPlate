@@ -10,6 +10,8 @@
     <link rel="stylesheet" th:href="@{/css/nav.css}" />
     <link rel="stylesheet" th:href="@{details.css}" />
     <link rel="stylesheet" th:href="@{/css/details.css}" />
+    <link rel="stylesheet" th:href="@{/css/modalRecibo.css}" />
+
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -79,9 +81,13 @@
                 <span class="details__detailInfo" th:if="${(cuota.fechaPago != null)}">PAGADA</span>
               </div> -->
             </div>
-          <input type="submit" class="details__btn-submit" value="Registrar Pago" />
+          <!-- <input type="submit" class="details__btn-submit" value="Registrar Pago" /> -->
         </form>
+        <button style="cursor:pointer" class="details__btn-submit" type="button" th:onclick="validateInputs()">Registrar Pago</button>
       </div>
     </div>
   </body>
+  <div th:replace="/cuotas/modalRecibo.html" th:remove="tag"></div>
+  <script th:src="@{/js/registrarPago.js}"></script>
+  <script th:src="@{/js/htmlToPdf.js}"></script>
 </html>
