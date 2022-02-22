@@ -29,6 +29,7 @@
     text-shadow: 0 0 3px #000;
     border-radius: 30px;
     border: 1px solid #000;
+    white-space: nowrap;
 }
 .details-container-flex{
     display: flex;

@@ -8,7 +8,6 @@
     <link rel="stylesheet" th:href="@{/css/main.css}" />
     <link rel="stylesheet" th:href="@{/css/normalize.css}" />
     <link rel="stylesheet" th:href="@{/css/nav.css}" />
-    <link rel="stylesheet" th:href="@{details.css}" />
     <link rel="stylesheet" th:href="@{/css/details.css}" />
     <link rel="stylesheet" th:href="@{/css/modalRecibo.css}" />
 
@@ -17,7 +16,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@700&display=swap" rel="stylesheet" />
     <script src="https://kit.fontawesome.com/62ea397d3a.js" crossorigin="anonymous"></script>
-    <title>Home</title>
+    <title>Cuotas | Registrar Pago</title>
   </head>
   <body>
     <header th:replace="nav.html"></header>
@@ -34,6 +33,7 @@
                 <h3 class="details__detailName">Numero</h3>
                 <input type="hidden" th:value="${cuota.idCuota}" th:attr="name='idCuota'" />
                 <input type="hidden" th:value="${cuota.socio.id}" th:attr="name='socio'" />
+                <input type="hidden" class="socio-dni" th:value="${cuota.socio.dni}" th:attr="name='dni'" />
                 <input type="hidden" th:value="${cuota.categoria.id}" th:attr="name='categoria'" />
                 <input type="hidden" th:value="${cuota.fechaCreacion}" th:attr="name='fechaCreacion'" />
                 <input type="hidden" th:value="${cuota.fechaCaducidad}" th:attr="name='fechaCaducidad'" />

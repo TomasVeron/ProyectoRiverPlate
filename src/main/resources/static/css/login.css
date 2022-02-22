@@ -226,7 +226,7 @@ body{
     position: absolute;
     width: 100%;
     color: #f00;
-    top: 100px;
+    top: 148px;
     left: 35px;
 }
 
@@ -240,5 +240,32 @@ body{
     padding: 10px;
     background-color: #cfc;
     text-align: center;
+}
+
+@media screen and (max-width:850px) {
+    .presentation-tittleContainer{
+        display: none;
+    }
+}
+
+@media screen and (max-width:520px) {
+    .login{
+        width: 345px;
+    }
+
+    .login__input-logout{
+        top: 420px;
+        left: 20px;
+    }
+
+    .login__input-errors{
+        top: 128px;
+    }
+}
+
+@media screen and (max-width:400px) {
+    .login{
+        width: 300px;
+    }
 }
 

@@ -8,7 +8,7 @@
     <title>Document</title>
 </head>
 <body>
-   <main>
+   <main class="recibo-pdf">
 	<div class="recibo">
         <div class="header"> 
             <div class="logo-container"><img th:src="@{/img/logo.png}"/></div>
@@ -35,7 +35,7 @@
                 <span>Fecha Cuota</span>
                 <p th:text="${#dates.format(cuota.fechaCreacion, 'dd/MM/yyyy')}"></p>
                 <span>Importe</span>
-                <p th:text="${cuota.importe}"></p>
+                <p th:text="'$'+${cuota.importe}"></p>
             </div>
 		<br>
             <div class="datePayment">

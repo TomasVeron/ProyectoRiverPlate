@@ -79,6 +79,7 @@
     text-shadow: 0 0 3px #000;
     border-radius: 30px;
     border: 1px solid #000;
+    white-space: nowrap;
 }
 
 .table__rows-td button{
@@ -90,6 +91,7 @@
     border-radius: 30px;
     border: 1px solid #000;
     cursor: pointer;
+    white-space: nowrap;
 }
 
 .table__rows-td i{
@@ -133,5 +135,30 @@
 }
 .table__socio-inactive{
     color: rgba(255, 0, 0, 0.68);
+}
+
+@media screen and (max-width:768px) {
+    .table thead{
+        display: none;
+    }
+
+    .scroll{
+        display: flex;
+        flex-direction: column;
+    }
+
+    .table__rows{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        border:1px solid #000;
+    }
+    .list__actionButton p{
+        font-size: 0;
+    }
+
+    .list__actionButton i{
+        font-size: 1em;
+    }
 }
 

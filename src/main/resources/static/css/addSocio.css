@@ -256,3 +256,32 @@ body{
 .addSocio.show{
     display: block;
 }
+
+@media screen and (max-width:700px){
+    .login{
+        width: 500px;
+    }
+}
+
+@media screen and (max-width:550px){
+    .login{
+        width: 400px;
+        height: 710px;
+    }
+
+    
+    .login__input{
+        width: 60%;
+    }
+
+    .login__input-container{
+        width: 40%;
+    }
+}
+
+@media screen and (max-width:400px){
+    .login{
+        width: 326px;
+        height: 590px;
+    }
+}

@@ -76,7 +76,7 @@ p {
 }
 
 .date-price p {
-    width: 34%;
+    width: 33%;
 }
 
 .datePayment {
@@ -87,4 +87,20 @@ p {
 
 .datePayment p {
     width: 77%;
+}
+
+
+@media screen and (max-width:1100px){
+    .modal.show{
+        right:-200px;
+    }
+
+}
+
+@media screen and (max-width:900px){
+    .modal.show{
+        right: 0;
+        width: 100vw;
+    }
+
 }

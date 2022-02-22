@@ -12,19 +12,15 @@ addScript('https://unpkg.com/axios/dist/axios.min.js');
 // const pdfInput = document.querySelector("#pdfcuota");
 // const formPdf = document.querySelector("#formpdf");
 const btnPdf = document.querySelector(".pdf-generator");
+const socioDni = document.querySelector(".socio-dni");
 
-function text2Binary(string) {
-    return string.split('').map(function (char) {
-        return char.charCodeAt(0).toString(2);
-    }).join(' ');
-}
 
 btnPdf.addEventListener("click" ,()=> {
-    const $elementoParaConvertir = document.querySelector(".cuota-generar"); // <-- Aquí puedes elegir cualquier elemento del DOM
+    const $elementoParaConvertir = document.querySelector(".recibo-pdf"); // <-- Aquí puedes elegir cualquier elemento del DOM
     html2pdf()
         .set({
             margin: 1,
-            filename: 'cuota.pdf',
+            filename: `recibo-dni_${socioDni.value}.pdf`,
             image: {
                 type: 'jpeg',
                 quality: 0.98
@@ -35,8 +31,8 @@ btnPdf.addEventListener("click" ,()=> {
             },
             jsPDF: {
                 unit: "in",
-                format: "a4",
-                orientation: 'portrait' // landscape o portrait
+                format: "a5",
+                orientation: 'landscape' // landscape o portrait
             }
         })
         .from($elementoParaConvertir)
