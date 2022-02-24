@@ -36,6 +36,7 @@
                 <input type="hidden" class="socio-dni" th:value="${cuota.socio.dni}" th:attr="name='dni'" />
                 <input type="hidden" th:value="${cuota.categoria.id}" th:attr="name='categoria'" />
                 <input type="hidden" th:value="${cuota.fechaCreacion}" th:attr="name='fechaCreacion'" />
+                <input type="hidden" class="fecha-creacion" th:value="${#dates.format(cuota.fechaCreacion, 'MM-yyyy')}" th:attr="name='fechaCreacion'" />
                 <input type="hidden" th:value="${cuota.fechaCaducidad}" th:attr="name='fechaCaducidad'" />
                 <input type="hidden" th:value="${cuota.numero}" th:attr="name='numero'" />
                 <input type="hidden" th:value="${cuota.importe}" th:attr="name='importe'" />
@@ -84,10 +85,11 @@
           <!-- <input type="submit" class="details__btn-submit" value="Registrar Pago" /> -->
         </form>
         <button style="cursor:pointer" class="details__btn-submit" type="button" th:onclick="validateInputs()">Registrar Pago</button>
+        <div th:replace="/cuotas/modalRecibo.html" th:remove="tag"></div>
+        <div th:replace="/cuotas/modalConfirmarPago.html" th:remove="tag"></div>
       </div>
     </div>
   </body>
-  <div th:replace="/cuotas/modalRecibo.html" th:remove="tag"></div>
   <script th:src="@{/js/registrarPago.js}"></script>
   <script th:src="@{/js/htmlToPdf.js}"></script>
 </html>

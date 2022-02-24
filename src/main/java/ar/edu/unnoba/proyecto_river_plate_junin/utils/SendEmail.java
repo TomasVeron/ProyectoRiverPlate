@@ -1,6 +1,8 @@
 package ar.edu.unnoba.proyecto_river_plate_junin.utils;
 
 
+import java.io.File;
+import java.io.FileInputStream;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -9,9 +11,13 @@ import java.util.Calendar;
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
 
+import org.apache.tomcat.util.http.fileupload.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.ByteArrayResource;
+import org.springframework.core.io.FileSystemResource;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
+import org.springframework.mail.javamail.MimeMessagePreparator;
 import org.springframework.stereotype.Component;
 
 import ar.edu.unnoba.proyecto_river_plate_junin.model.Cuota;
@@ -147,6 +153,39 @@ public class SendEmail {
         javaMailSender.send(msg);
         
         // cuotaPdf.delete();
+    }
+
+    public void enviarRecibo(Socio socio, Cuota cuota) throws MessagingException{
+        MimeMessage msg = javaMailSender.createMimeMessage();
+        try{
+            
+
+            // true = multipart message
+            MimeMessageHelper helper = new MimeMessageHelper(msg, true);
+            
+            helper.setTo(socio.getEmail());
+
+            DateFormat formatter = new SimpleDateFormat("dd MMMM yyyy");
+            Calendar fechaEmision = Calendar.getInstance();
+            fechaEmision.setTime(cuota.getFechaCreacion());
+            String fechaEmisionString = formatter.format(fechaEmision.getTime());
+
+            helper.setSubject("Club River Plate Junin - Recibo de Pago - fecha: " + fechaEmisionString);
+            helper.setText("Se envia adjunto a este mail el recibo en pdf");
+            // hard coded a file path
+            FileSystemResource file = new FileSystemResource("src/main/resources/recibos/recibo.pdf");
+            helper.addAttachment("recibo.pdf",file);
+            
+        }catch(Exception e){
+            System.out.println("ha ocurrido un error......");
+        }
+        javaMailSender.send(msg);
+        File recibo = new File("src/main/resources/recibos/recibo.pdf");
+        recibo.delete();
+
+
+
+
     }
     
 

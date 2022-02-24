@@ -121,6 +121,7 @@ public class CuotaServiceImp implements CuotaService{
         cDB.setFechaPago(fechaHoy);
         cDB.setDetallePago(cuota.getDetallePago());
         cDB.setFormaPago(cuota.getFormaPago());
+        email.enviarRecibo(cuota.getSocio(), cuota);
         return repository.save(cDB);
     }
     

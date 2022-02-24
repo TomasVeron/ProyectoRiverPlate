@@ -17,14 +17,13 @@ import org.springframework.web.multipart.MultipartFile;
 
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
-public class CuotaRestController {
+public class ReciboRestController {
     
 
-    @RequestMapping(path = "/cuotas/guardarpdf", method = RequestMethod.POST, consumes = { MediaType.MULTIPART_FORM_DATA_VALUE })
+    @RequestMapping(path = "/cuotas/generarRecibo", method = RequestMethod.POST, consumes = { MediaType.MULTIPART_FORM_DATA_VALUE })
     public void guardarPdf(@RequestPart MultipartFile pdf)throws IOException {
         byte [] bytes = pdf.getBytes();
-        DataOutputStream out = new DataOutputStream(new  BufferedOutputStream(new FileOutputStream(new File("cuotasPdf/cuota.pdf"))));
+        DataOutputStream out = new DataOutputStream(new  BufferedOutputStream(new FileOutputStream(new File("src/main/resources/recibos/recibo.pdf"))));
         out.write(bytes);
-      
     }
 }

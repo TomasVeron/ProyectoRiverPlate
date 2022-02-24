@@ -11,3 +11,9 @@ function validateInputs(){
         hiddenModal();
     }
 }
+
+
+function hiddenModalConfirm(){
+    const modal = document.querySelector(".confirm");
+    modal.classList.toggle("active");
+}

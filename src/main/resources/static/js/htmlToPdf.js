@@ -10,9 +10,15 @@ addScript('https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bu
 addScript('https://unpkg.com/axios/dist/axios.min.js');
 
 // const pdfInput = document.querySelector("#pdfcuota");
-// const formPdf = document.querySelector("#formpdf");
+const formPdf = document.querySelector("#formpdf");
 const btnPdf = document.querySelector(".pdf-generator");
 const socioDni = document.querySelector(".socio-dni");
+const reciboFecha = document.querySelector(".fecha-creacion");
+
+function registerPayment(){
+    const modal = document.querySelector(".confirm");
+    modal.classList.toggle("active");
+}
 
 
 btnPdf.addEventListener("click" ,()=> {
@@ -20,7 +26,7 @@ btnPdf.addEventListener("click" ,()=> {
     html2pdf()
         .set({
             margin: 1,
-            filename: `recibo-dni_${socioDni.value}.pdf`,
+            filename: `Recibo-DNI_${socioDni.value}-CuotaMes_${reciboFecha.value}.pdf`,
             image: {
                 type: 'jpeg',
                 quality: 0.98
@@ -38,19 +44,18 @@ btnPdf.addEventListener("click" ,()=> {
         .from($elementoParaConvertir)
         .toPdf()
         .save()
-        
-        // .output("blob")
-        // .then( (pdfResult) => {
-        //     const formData= new FormData(formPdf);
-        //     formData.append("pdf", pdfResult);
-        //     console.log(formData);
-        //      axios.post("http://localhost:8080/cuotas/guardarpdf",formData , {
-        //         headers: {'Content-Type': 'multipart/form-data',
-        //                     'responseType': 'arraybuffer'},
-        //     });
+        .output("blob")
+        .then( (pdfResult) => {
+            const formData= new FormData(formPdf);
+            formData.append("pdf", pdfResult);
+            console.log(formData);
+             axios.post("http://localhost:8080/cuotas/generarRecibo",formData , {
+                headers: {'Content-Type': 'multipart/form-data',
+                            'responseType': 'arraybuffer'},
+            });
 
-        // })
-        // .catch(err => console.log(err));
+        })
+        .catch(err => console.log(err));
 
-        // const form = new FormData();
+        registerPayment();
 });

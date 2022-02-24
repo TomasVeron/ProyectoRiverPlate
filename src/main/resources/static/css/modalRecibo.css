@@ -1,7 +1,8 @@
-.modal{
+.modal, .confirm{
     display: none;
 }
-.modal.show{
+
+.modal.show, .confirm.active{
     display: flex;
     background-color: #0008;
     position: fixed;
