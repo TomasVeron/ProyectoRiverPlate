@@ -11,13 +11,14 @@
     right: 0;
     justify-content: center;
     align-items: center;
+    z-index: 100;
 }
 
 
 .modal-content{
     background-color: #fff;
     width: 400px;
-    height: 185px;
+    height: 200px;
     position: relative;
     margin: auto;
     display: flex;

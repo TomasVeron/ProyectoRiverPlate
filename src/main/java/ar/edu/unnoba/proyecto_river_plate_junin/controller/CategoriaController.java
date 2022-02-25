@@ -1,6 +1,7 @@
 package ar.edu.unnoba.proyecto_river_plate_junin.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -9,6 +10,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import ar.edu.unnoba.proyecto_river_plate_junin.model.Categoria;
+import ar.edu.unnoba.proyecto_river_plate_junin.model.User;
 import ar.edu.unnoba.proyecto_river_plate_junin.service.CategoriaService;
 
 @Controller
@@ -24,7 +26,11 @@ public class CategoriaController {
     }
 
     @GetMapping("/categorias/edit/{id}")
-    public String socioEdit(@PathVariable("id") Categoria categoria, Model model){
+    public String socioEdit(@PathVariable("id") Categoria categoria, Model model, Authentication authentication){
+        User sessionUser =(User) authentication.getPrincipal();
+        if(sessionUser.getRol()==false){
+            return "redirect:/categorias";
+        }
         categoria = categoriaService.getCategoria(categoria);
         model.addAttribute("categoria",categoria);
         return "/categorias/editCategoria";

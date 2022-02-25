@@ -2,6 +2,7 @@ package ar.edu.unnoba.proyecto_river_plate_junin.controller;
 import java.util.List;
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
@@ -14,6 +15,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import ar.edu.unnoba.proyecto_river_plate_junin.model.Categoria;
 import ar.edu.unnoba.proyecto_river_plate_junin.model.Socio;
+import ar.edu.unnoba.proyecto_river_plate_junin.model.User;
 import ar.edu.unnoba.proyecto_river_plate_junin.service.CategoriaService;
 import ar.edu.unnoba.proyecto_river_plate_junin.service.SocioService;
 
@@ -54,6 +56,7 @@ public String addSocioView(Model model1, Model model2){
         }catch(Exception e){
             model.addAttribute("socio", socio);
             model2.addAttribute("categorias", categoriaService.getCategorias());
+            model2.addAttribute("error", e.getMessage());
             return "/socios/addSocio";
         }
 
@@ -74,7 +77,11 @@ public String addSocioView(Model model1, Model model2){
     }
 
     @GetMapping("/socios/edit/{id}")
-    public String socioEdit(@PathVariable("id") Socio socio, Model model){
+    public String socioEdit(@PathVariable("id") Socio socio, Model model, Authentication authentication){
+        User sessionUser = (User)authentication.getPrincipal();
+        if(sessionUser.getRol()==false){
+            return "redirect:/socios";
+        }
         socio = socioService.getSocio(socio);
         if(socio.getSocioTitular()!=null) socio.setCodigoSocioTitular(socio.getSocioTitular().getCodigo());
         model.addAttribute("socio",socio);

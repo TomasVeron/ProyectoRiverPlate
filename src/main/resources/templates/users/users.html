@@ -38,7 +38,7 @@
             <div class="listUser__errorDelete" th:if="${userDeleteError}" th:text="${userDeleteError}"></div>
           </div>
 
-          <a class="list__actionButton" th:href="@{/register}"><i class="fas fa-user-plus"></i><p>Agregar Usuario</p></a>
+          <a class="list__actionButton" th:if="${#authentication.getPrincipal().getRol()}" th:href="@{/register}"><i class="fas fa-user-plus"></i><p>Agregar Usuario</p></a>
         </div>
         <table class="table">
           <thead>
@@ -55,9 +55,10 @@
               <td class="table__rows-td" th:text="${user.email}"></td>
               <td class="table__rows-td" th:text="${user.nombre}"></td>
               <td class="table__rows-td" th:text="${user.apellido}"></td>
-              <td class="table__rows-td" th:text="${Usuario}"></td>
+              <td class="table__rows-td" th:if="${user.rol==false}">USER</td>
+              <td class="table__rows-td" th:if="${user.rol==true}">ADMIN</td>
               <td class="table__rows-td">
-                <a href="#" th:onclick="'javascript:confirmDelete(\''+${user.id}+'\');'"><i class="fas fa-trash"></i>Eliminar</a>
+                <a href="#" th:if="${#authentication.getPrincipal().getRol()}" th:onclick="'javascript:confirmDelete(\''+${user.id}+'\');'"><i class="fas fa-trash"></i>Eliminar</a>
               </td>
             </tr>
           </tbody>

@@ -19,7 +19,7 @@ public class IndexController {
 
     @GetMapping("/")
     public String index(Model model){
-        int sociosTotales = socioService.contarSocios();
+        Long sociosTotales = socioService.contarSocios();
         int usuariosTotales = userService.contarUsers();
         int sociosActivos = socioService.contarSociosActivos();
         model.addAttribute("usuarios",usuariosTotales );

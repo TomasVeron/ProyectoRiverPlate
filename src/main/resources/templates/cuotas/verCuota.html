@@ -24,7 +24,7 @@
         <h1 class="details__title">Cuota  <span th:text="${cuota.numero} + '-' + ${cuota.socio.nombre} +' '+ ${cuota.socio.apellido}"></span></h1>
         <div class="details__header">
           <h2 class="details__header-tittle">Detalles de Cuota</h2>
-          <a class="details__header-backbutton" th:href="@{/cuotas}"><i class="fas fa-long-arrow-alt-left"></i> volver</a>
+          <a class="details__header-backbutton" th:href="@{/cuotas/ver/socio/}+${cuota.socio.id}"><i class="fas fa-long-arrow-alt-left"></i> volver</a>
         </div>
         <div class="details-container-flex">
           <div class="details_container-scroll">

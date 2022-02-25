@@ -22,6 +22,8 @@ public interface SocioRepository extends JpaRepository<Socio, Long> {
 
     public String findByCodigo(String codigoSocio);
 
+    @Query(value = 
+    "SELECT dni FROM socios s WHERE dni = ?1", nativeQuery = true)
     public String findByDni(String dni);
 
     @Query(value = 
@@ -41,7 +43,7 @@ public interface SocioRepository extends JpaRepository<Socio, Long> {
 
     @Query(value = 
     "SELECT COUNT(id_socio) FROM socios s", nativeQuery = true)
-    public int contarSocios();
+    public Long contarSocios();
 
     @Query(value = 
     "SELECT COUNT(id_socio) FROM socios s WHERE s.estado = true", nativeQuery = true)
@@ -79,6 +81,14 @@ public interface SocioRepository extends JpaRepository<Socio, Long> {
 
     @Query(value = 
     "SELECT * FROM socios s  WHERE s.socio_titular is NULL", nativeQuery = true)
-    public List<Socio> getSociosNoDependientes(); 
+    public List<Socio> getSociosNoDependientes();
+
+
+    @Query(value = 
+    "SELECT COUNT(id_socio)"+
+    "FROM socios s INNER JOIN categorias c ON s.categoria = c.id_categoria " +
+    "WHERE UPPER(c.nombre) LIKE '%GRUPO FAMILIAR%' and s.socio_titular=?1 ", nativeQuery = true)
+    public int contarSociosGrupoFamiliar(Long idSocioTitular);
+
 
 }

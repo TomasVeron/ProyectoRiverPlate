@@ -2,7 +2,6 @@ package ar.edu.unnoba.proyecto_river_plate_junin.utils;
 
 
 import java.io.File;
-import java.io.FileInputStream;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -11,13 +10,10 @@ import java.util.Calendar;
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
 
-import org.apache.tomcat.util.http.fileupload.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.io.ByteArrayResource;
 import org.springframework.core.io.FileSystemResource;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
-import org.springframework.mail.javamail.MimeMessagePreparator;
 import org.springframework.stereotype.Component;
 
 import ar.edu.unnoba.proyecto_river_plate_junin.model.Cuota;
@@ -131,28 +127,10 @@ public class SendEmail {
                             "</div>"+
                         "</body>"+
                     "</html>";
-
-        // File style = new File("src/main/resources/static/css/cuotaPdf.css");
-		// hard coded a file path
-        // FileSystemResource file = new FileSystemResource(style);
-        // true = text/html
-        // helper.addAttachment("style.css", file);
         helper.setText(html, true);
-
-
-        // File cuotaPdf = new File("cuotasPdf/cuota.pdf");
-		// // hard coded a file path
-        // FileSystemResource file = new FileSystemResource(cuotaPdf);
-
-        
-
-        // helper.addAttachment("cuota.pdf", file);
-        
-        
 
         javaMailSender.send(msg);
         
-        // cuotaPdf.delete();
     }
 
     public void enviarRecibo(Socio socio, Cuota cuota) throws MessagingException{
@@ -165,12 +143,12 @@ public class SendEmail {
             
             helper.setTo(socio.getEmail());
 
-            DateFormat formatter = new SimpleDateFormat("dd MMMM yyyy");
+            DateFormat formatter = new SimpleDateFormat("MM-yyyy");
             Calendar fechaEmision = Calendar.getInstance();
             fechaEmision.setTime(cuota.getFechaCreacion());
             String fechaEmisionString = formatter.format(fechaEmision.getTime());
 
-            helper.setSubject("Club River Plate Junin - Recibo de Pago - fecha: " + fechaEmisionString);
+            helper.setSubject("Club River Plate Junin - Recibo de Pago - Cuota Mes: " + fechaEmisionString);
             helper.setText("Se envia adjunto a este mail el recibo en pdf");
             // hard coded a file path
             FileSystemResource file = new FileSystemResource("src/main/resources/recibos/recibo.pdf");

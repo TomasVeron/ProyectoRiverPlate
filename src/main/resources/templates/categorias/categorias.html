@@ -63,10 +63,9 @@
               <td class="table__rows-td" th:text="${categoria.edadDesde}"></td>
               <td class="table__rows-td" th:text="${categoria.edadHasta}"></td>
               <td class="table__rows-td" th:text="${categoria.valorCuota}"></td>
-              <td class="table__rows-td">
+              <td class="table__rows-td" th:if="${#authentication.getPrincipal().getRol()}">
                 <a th:href="@{/categorias/edit/{id}(id=${categoria.id})}"/> <i class="fas fa-edit"></i>Editar</a>
               </td>
-              
             </tr>
           </tbody>
         </table>

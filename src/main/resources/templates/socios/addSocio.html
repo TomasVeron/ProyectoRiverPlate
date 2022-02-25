@@ -7,6 +7,8 @@
 
     <link rel="stylesheet" th:href="@{/css/addSocio.css}" />
     <link rel="stylesheet" th:href="@{css/normalize.css}" />
+    <link rel="stylesheet" th:href="@{/css/modalDelete.css}" />
+
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -53,9 +55,9 @@
                         <label for="login__email" class="login__lbl"><i class="fas fa-envelope"></i><span class="login__lbl-text">Email</span></label>
                     </div>
 
-                    <div class="login__input-container">
+                    <div class="login__input-container domicilio-div show">
                         <div class="login__input-errors" th:if="${#fields.hasErrors('domicilio')}" th:errors="*{domicilio}">errors</div>
-                        <input type="text"class="login__input" id="login__address" th:field="*{domicilio}" autocomplete="off" required/>
+                        <input type="text"class="login__input" id="login__address" th:field="*{domicilio}" autocomplete="off"/>
                         <label for="login__address" class="login__lbl"><i class="fas fa-map-marker-alt"></i><span class="login__lbl-text">Domicilio</span></label>
                     </div>
                 </div>
@@ -103,7 +105,7 @@
 
                     <div class="login__input-container addSocio" >
                         <!-- <div class="login__input-errors" th:if="${#fields.hasErrors('socioTitular')}" th:errors="*{socioTitular}">errors</div> -->
-                        <input type="text" class="login__input" id="login__titular" th:field="*{codigoSocioTitular}"  autocomplete="off"/>
+                        <input type="text" class="login__input" id="login__titular" th:onchange="mostrarDomicilio()" th:field="*{codigoSocioTitular}"  autocomplete="off"/>
                         <label for="login__titular" class="login__lbl"><i class="fas fa-handshake"></i><span class="login__lbl-text">Socio Titular</span></label>
                     </div>
                 </div>
@@ -113,6 +115,8 @@
         </div>
     </div>
 </div>
+<div th:include="/modal-error.html" th:remove="tag"></div>
+<script th:src="@{/js/errorModal.js}"></script>
 <script th:src="@{/js/addSocio.js}"></script>
 </body>
 </html>

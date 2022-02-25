@@ -34,7 +34,11 @@ public class UserController {
     }
 
     @GetMapping("/register")
-    public String registerUser(Model model){
+    public String registerUser(Model model, Authentication authentication){
+        User sessionUser = (User)authentication.getPrincipal();
+        if(sessionUser.getRol()==false){
+            return "redirect:/users";
+        }
         model.addAttribute("user", new User());
         return "register";
     }
@@ -58,7 +62,9 @@ public class UserController {
     }
 
     @GetMapping("/users")
-    public String usersView(Model model){
+    public String usersView(Model model,  Authentication authentication){
+        User sessionUser = (User)authentication.getPrincipal();
+        System.out.println(sessionUser.getRol());
         model.addAttribute("users", userService.getAllUsers());
         return "/users/users";
 
@@ -68,6 +74,9 @@ public class UserController {
     public String usersDelete(@PathVariable("id") Long userId,  Authentication authentication, RedirectAttributes redirectAttributes){
         User user = userService.getUserById(userId);
         User sessionUser = (User)authentication.getPrincipal();
+        if(sessionUser.getRol()==false){
+            return "redirect:/users";
+        }
         try {
             userService.deleteUser(user,sessionUser);
         } catch (Exception e) {

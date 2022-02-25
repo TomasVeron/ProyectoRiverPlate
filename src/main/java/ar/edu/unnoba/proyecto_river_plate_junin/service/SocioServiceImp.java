@@ -24,19 +24,23 @@ public class SocioServiceImp implements SocioService{
 
     @Override
     public Socio createSocio(Socio socio, String socioTitular) throws Exception {
-        
-        String codigo = String.valueOf(repository.contarSocios() + 1) ;
+         String codigo = String.valueOf(contarSocios() + 1L) ;
         socio.setCodigo(codigo);
-        if(socio.getDni()==repository.findByDni(socio.getDni())){
+    
+        if(socio.getDni().equals(repository.findByDni(socio.getDni()))){
             throw new Exception("el dni de socio no esta disponible");
         }
         if(!socioTitular.equals("")){
             if(encontrarSocioTitular(socioTitular) == null){
                 throw new Exception("Socio Titular ingresado no existe!!");
             }
+            Socio socioTi = encontrarSocioTitular(socioTitular);
+            if(repository.contarSociosGrupoFamiliar(socioTi.getId()) >= 4 ){
+                throw new Exception("Se ha superado el limite del grupo familiar");
+            }
+            socio.setDomicilio(socioTi.getDomicilio());
+            socio.setSocioTitular(socioTi);
         }
-        Socio socioTi =encontrarSocioTitular(socioTitular);
-        socio.setSocioTitular(socioTi);
         socio.setFechaAlta(new Date());
         socio.setEstado(true);
         
@@ -98,7 +102,7 @@ public class SocioServiceImp implements SocioService{
 
 
     @Override
-    public int contarSocios() {
+    public Long contarSocios() {
         return repository.contarSocios();
     }
 

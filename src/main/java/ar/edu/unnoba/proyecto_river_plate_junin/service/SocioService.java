@@ -18,7 +18,7 @@ public interface SocioService {
 
     public List<Socio> buscarEnSocio(String keyword);
 
-    public int contarSocios();
+    public Long contarSocios();
 
     public int contarSociosActivos();
 

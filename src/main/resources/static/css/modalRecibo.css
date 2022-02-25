@@ -14,6 +14,9 @@
     align-items: center;
 }
 
+.modal-content-container{
+    background-color: #fff;
+}
 
 .modal-content{
     background-color: #fff;
@@ -24,6 +27,18 @@
     display: flex;
     flex-direction: column;
     justify-content: space-around;
+}
+
+.content-confirmPayment{
+    background-color: #fff;
+    width: 445px;
+    height: 100px;
+    position: relative;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
 }
 .modal-header{
     display: flex;
