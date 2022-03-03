@@ -90,5 +90,11 @@ public interface SocioRepository extends JpaRepository<Socio, Long> {
     "WHERE UPPER(c.nombre) LIKE '%GRUPO FAMILIAR%' and s.socio_titular=?1 ", nativeQuery = true)
     public int contarSociosGrupoFamiliar(Long idSocioTitular);
 
+    @Query(value = 
+        "SELECT * FROM socios s WHERE s.socio_titular is NULL and lower(s.nombre) LIKE lower(CONCAT('%', ?1, '%'))" + 
+        "OR lower(s.codigo_socio) LIKE lower(CONCAT('%', ?1, '%'))" + 
+        "OR lower(s.apellido) LIKE lower(CONCAT('%', ?1, '%'))", nativeQuery = true)
+    public List<Socio> buscarSociosNoDependientes(String keyword);
+
 
 }

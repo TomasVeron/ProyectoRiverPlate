@@ -46,9 +46,9 @@ public String addSocioView(Model model1, Model model2){
 
 @PostMapping("/socios/addSocio")
     public String createUser(@Valid @ModelAttribute("socio")Socio socio, BindingResult result, ModelMap model,ModelMap model2){
-        System.out.println(socio);
         if (result.hasErrors()){
             model.addAttribute("socio", socio);
+            model2.addAttribute("categorias",categoriaService.getCategorias());
             return"/socios/addSocio";
         }
         try{

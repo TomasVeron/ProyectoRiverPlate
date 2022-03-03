@@ -266,6 +266,14 @@ body{
     display: block;
 }
 
+.dni-input{
+    width: 80%;
+}
+
+#login__dni{
+    width: 91%;
+}
+
 @media screen and (max-width:700px){
     .login{
         width: 500px;

@@ -54,7 +54,8 @@
             </div>
             <div class="details-container">
               <h3 class="details__detailName">Telefono</h3>
-              <span class="details__detailInfo" th:text="${socio.telefono}"></span>
+              <span class="details__detailInfo" th:if="${socio.telefono==''}">No tiene telefono</span>
+              <span class="details__detailInfo" th:if="${socio.telefono!=''}" th:text="${socio.telefono}"></span>
             </div>
             <div class="details-container">
               <h3 class="details__detailName">Fecha de Nacimiento</h3>

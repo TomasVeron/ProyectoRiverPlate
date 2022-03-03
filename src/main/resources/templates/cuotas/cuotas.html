@@ -16,6 +16,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@700&display=swap" rel="stylesheet" />
     <script src="https://kit.fontawesome.com/62ea397d3a.js" crossorigin="anonymous"></script>
+    <script src="https://www.kryogenix.org/code/browser/sorttable/sorttable.js"></script>
     <title>Cuotas</title>
   </head>
   <body>
@@ -25,7 +26,7 @@
         <h1 class="listTitle">Cuotas</h1>
         <div class="list-menuControl">
           <div class="list__search-container">
-            <form th:action="@{/users/buscarEnUsuario}" method="get">
+            <form th:action="@{/cuotas/buscarSociosNoDependientes}" method="get">
               <input
                 type="text"
                 class="list__inputSearch"
@@ -42,7 +43,7 @@
                 
           </div>
         </div>
-        <table class="table">
+        <table class="table sortable table-bordered table-sm mt-2">
           <thead>
             <tr class="table__colums">
               <th class="table__colums-th"><i class="fas fa-user-tag"></i>Codigo</th>

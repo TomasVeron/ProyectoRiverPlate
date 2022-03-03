@@ -86,4 +86,13 @@ public class CuotaController {
 
     }
 
+    @GetMapping("/cuotas/buscarSociosNoDependientes")
+    public String buscarEnSocios (Socio socio, Model model, String keyword) {
+        if (keyword != null) {
+            List<Socio> socios = socioService.buscarSociosNoDependientes(keyword);
+            model.addAttribute("socioNoDependientes", socios);
+        }
+        return "/cuotas/cuotas";
+    }
+
 }

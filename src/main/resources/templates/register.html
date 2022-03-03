@@ -46,6 +46,24 @@
               <input type="password" name="password" class="login__input" id="login__confirm-pass" required th:field="*{confirmarPassword}" />
               <label for="login__passwd" class="login__lbl"><i class="fas fa-key"></i><span class="login__lbl-text">confirm password</span></label>
             </div>
+            <div class="login__input-container">
+              <!-- <label for="login__rol"><i class="fas fa-key"></i><span style="padding:0 30px">Rol</span></label>
+              <select name="rol" type="rol" id="login__rol" th:field="*{rol}">
+                <option value="true">Admin</option>
+                <option value="false">User</option>
+              </select> -->
+              <div class="login__rol-options-container">
+                <label for="login__rol"><i class="fas fa-key"></i><span style="padding:0 30px">Rol</span></label>
+                <div class="rol-option">
+                  <input type="radio" id="recibeSaldo" name="recibe" class="custom-control-input" value="1" th:field="*{rol}" />
+                  <label class="custom-control-label" for="habilitado">Admin</label>
+                </div>
+                <div class="rol-option">
+                  <input type="radio" id="noRecibeSaldo" name="noRecibe" class="custom-control-input" value="0" th:field="*{rol}" />
+                  <label class="custom-control-label" for="deshabilitado">User</label>
+                </div>
+              </div>
+            </div>
             <input type="submit" class="login__input login__submit" value="register" />
           </form>
         </div>

@@ -163,4 +163,9 @@ public class SocioServiceImp implements SocioService{
     public Socio getSocio(Long socioId) {
         return repository.getSocio(socioId);
     }
+
+    @Override
+    public List<Socio> buscarSociosNoDependientes(String keyword) {
+        return repository.buscarSociosNoDependientes(keyword);
+    }
 }

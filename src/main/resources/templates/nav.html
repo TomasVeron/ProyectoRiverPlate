@@ -25,7 +25,11 @@
       </ul>
     </div>
     <div class="nav__logout-container">
-      <div class="nav__logout-userSession"><i class="fas fa-user"></i><span th:text="${#authentication.getPrincipal().getNombre()}"></span></div>
+      <div class="nav__logout-userSession"><i class="fas fa-user"></i>
+        <span th:text="${#authentication.getPrincipal().getNombre()}"></span>
+        <span style="font-size: small;" th:if="${#authentication.getPrincipal().getRol()==false}">(User)</span>
+        <span style="font-size: small;" th:if="${#authentication.getPrincipal().getRol()==true}">(Admin)</span>
+      </div>
       <div>
         <a class="nav__logout-button" th:href="@{/logout}">Logout <i class="fas fa-sign-out-alt"></i></a>
       </div>

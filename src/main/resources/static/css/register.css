@@ -86,7 +86,7 @@ body{
     justify-content: center;
     align-items: center;
     width: 500px;
-    height: 600px;
+    height: 670px;
 
 }
 
@@ -221,6 +221,15 @@ body{
     width: 100%;
     color: #f00;
     margin-left: 90px;
+}
+
+.login__rol-options-container{
+    display: flex;
+    margin: 20px 0;
+}
+
+.rol-option{
+    margin: 0 2em;
 }
 
 @media screen and (max-width:550px){
