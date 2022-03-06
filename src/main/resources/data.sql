@@ -15,8 +15,8 @@ WHERE
     );
 
 INSERT INTO usuarios
-    (id_usuario, apellido, email, nombre, password)
-SELECT 99, 'admin','admin@admin','admin','$2a$10$EDpfGI64PyGS2swEPonP/uHntHpEWWAxzHTOfa3LuPAkP8LM64PQi'
+    (id_usuario, apellido, email, nombre, password,rol)
+SELECT 99, 'admin','admin@admin','admin','$2a$10$EDpfGI64PyGS2swEPonP/uHntHpEWWAxzHTOfa3LuPAkP8LM64PQi',true
 WHERE
     NOT EXISTS (
         SELECT id_usuario FROM usuarios WHERE id_usuario =99

@@ -36,7 +36,6 @@ public class Socio implements Serializable {
     private String email;
 
     @Column(name = "domicilio")
-    @NotBlank(message = "El domicilio no puede estar vacio")
     private String domicilio;
 
     @Column(name = "dni")
@@ -79,5 +78,25 @@ public class Socio implements Serializable {
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     public Date getFechaNacimiento() {
         return fechaNacimiento;
+    }
+
+    public boolean isCategoriaGrupoFamiliar(){
+        return getCategoria().isGrupoFamiliar();
+    }
+
+    public boolean isCategoriaIndividual(){
+        return getCategoria().isIndividual();
+    }
+
+    public boolean isTitular(){
+        return (isCategoriaGrupoFamiliar() && getSocioTitular()==null);
+    }
+
+    public boolean isDependiente(){
+        return (getSocioTitular()!=null);
+    }
+
+    public boolean isIndividual(){
+        return (isCategoriaIndividual() && getSocioTitular()==null);
     }
 }

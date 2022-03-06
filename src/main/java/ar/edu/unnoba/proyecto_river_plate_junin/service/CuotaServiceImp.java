@@ -70,7 +70,7 @@ public class CuotaServiceImp implements CuotaService{
 
     @Override
     public Cuota generarCuotaSocio(Socio socio) throws Exception{//hay que comprobar que para generar una cuota haya pasado un mes de la ultima cuota
-        if(socio.getSocioTitular()!=null){
+        if(socio.isDependiente()){
             throw new Exception("No se puede generar cuotas para un socio dependiente");
         }
         Date fecha_creacion= new Date();

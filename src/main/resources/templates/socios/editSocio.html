@@ -50,7 +50,8 @@
           </div>
           <div class="details-container">
             <h3 class="details__detailName">Direccion</h3>
-            <input type="text" class="details__inputs" th:field="*{domicilio}" />
+            <input th:if="${socio.socioTitular == null}" type="text" class="details__inputs" th:field="*{domicilio}" />
+            <span th:if="${socio.socioTitular != null}" type="text" class="details__detailInfo" th:text="${socio.domicilio}" />
           </div>
           <div class="details-container">
             <h3 class="details__detailName">Telefono</h3>
@@ -73,16 +74,19 @@
           </div>
           <div class="details-container">
             <h3 class="details__detailName">Categoria</h3>
-            <select th:field="*{categoria}">
+            <select th:field="*{categoria}" class="categoriaSocioSelect">
               <option th:each="categoria: ${categorias}" th:value="${categoria.id}" th:text="${categoria.nombre}"></option>
             </select>
           </div>
 
           <div class="details-container">
             <h3 class="details__detailName">Socio Titular</h3>
-            <input th:if="${socio.socioTitular != null}" class="details__inputs" th:field="*{codigoSocioTitular}" />
+            <input th:if="${socio.categoria.id==2}"  class="details__inputs inputSocioTitular " th:field="*{codigoSocioTitular}" />
+            <input th:if="${socio.categoria.id==1}"  class="details__inputs inputSocioTitular show " th:field="*{codigoSocioTitular}" />
             <input type="hidden" th:field="*{socioTitular}" />
-            <span th:if="${socio.socioTitular == null}" class="details__detailInfo">No tiene socio titular</span>
+            
+            <span th:if="${socio.categoria.id==1}"  class="details__detailInfo spanNoSocio ">No tiene socio titular</span>
+            <span th:if="${socio.categoria.id==2}"  class="details__detailInfo spanNoSocio show">No tiene socio titular</span>
           </div>
           <input type="submit" class="details__btn-submit" value="Editar Socio" />
         </form>
@@ -90,5 +94,6 @@
     </div>
     <div th:include="/modal-error.html" th:remove="tag"></div>
     <script th:src="@{/js/errorModal.js}"></script>
+    <script th:src="@{/js/editSocio.js}"></script>
   </body>
 </html>

@@ -33,4 +33,12 @@ public class Categoria implements Serializable {
     private double valorCuota;
 
 
+    public boolean isGrupoFamiliar(){
+        return getId()==1;
+    }
+
+    public boolean isIndividual(){
+        return getId()==2;
+    }
+
 }

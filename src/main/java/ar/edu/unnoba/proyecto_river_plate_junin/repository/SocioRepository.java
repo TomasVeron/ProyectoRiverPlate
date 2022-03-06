@@ -64,7 +64,7 @@ public interface SocioRepository extends JpaRepository<Socio, Long> {
     @Query(value = 
     "SELECT *"+
     "FROM socios s " +
-    "WHERE lower(s.codigo_socio) = lower(CONCAT('', ?1, '')) and s.socio_titular is null ", nativeQuery = true)
+    "WHERE lower(s.codigo_socio) like lower(CONCAT('%', ?1, '%')) and s.socio_titular is null ", nativeQuery = true)
     public Socio encontrarSocioTitular(String codigoSocio);
    
     @Query(value = "SELECT id_socio FROM socios s WHERE lower(s.codigo_socio) = lower(?1)", nativeQuery=true)
@@ -72,8 +72,8 @@ public interface SocioRepository extends JpaRepository<Socio, Long> {
     
     @Modifying
     @Query(value = 
-        "UPDATE socios SET estado = ?1 WHERE socio_titular = ?2", nativeQuery = true)
-    public void actualizarGrupoFamiliar(boolean habilitado, Long codigo);
+        "UPDATE socios SET estado = ?1, domicilio = ?2 WHERE socio_titular = ?3", nativeQuery = true)
+    public void actualizarGrupoFamiliar(boolean habilitado, String domicilio, Long codigo);
 
     @Query(value = 
         "SELECT * FROM socios s  WHERE socio_titular = ?1", nativeQuery = true)

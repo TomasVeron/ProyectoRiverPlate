@@ -67,3 +67,19 @@
     outline: none;
     text-align: end;
 }
+
+.inputSocioTitular{
+    display: none;
+}
+
+.inputSocioTitular.show{
+    display:block;
+}
+
+.spanNoSocio{
+    display: none;
+}
+
+.spanNoSocio.show{
+    display: block;
+}

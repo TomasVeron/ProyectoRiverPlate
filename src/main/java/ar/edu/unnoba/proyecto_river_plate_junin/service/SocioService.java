@@ -1,6 +1,8 @@
 package ar.edu.unnoba.proyecto_river_plate_junin.service;
 import org.springframework.stereotype.Service;
 import ar.edu.unnoba.proyecto_river_plate_junin.model.Socio;
+
+import java.util.Date;
 import java.util.List;
 @Service
 public interface SocioService {
@@ -25,7 +27,7 @@ public interface SocioService {
     public int contarSociosGf();
     public int contarSociosInd();
 
-    public void actualizarGrupoFamiliar(boolean habilitado, String codigo);
+    public void actualizarGrupoFamiliar(boolean habilitado,String domicilio, String codigo);
 
     public Socio consultarSocioTitular(String socioTitular);
 
@@ -36,6 +38,8 @@ public interface SocioService {
     public List<Socio> getSocioNoDependientes();
 
     public List<Socio> buscarSociosNoDependientes(String keyword);
+
+    public boolean validacionEdadMinima(Date fechaNacimiento, int edadMinima);
 
 
 

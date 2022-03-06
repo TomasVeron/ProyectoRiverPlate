@@ -1,4 +1,5 @@
 package ar.edu.unnoba.proyecto_river_plate_junin.service;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,22 +19,42 @@ public class SocioServiceImp implements SocioService{
         return repository.filterSocios();
     }
 
-    public Socio encontrarSocioTitular(String socioTitular){
-        return repository.encontrarSocioTitular(socioTitular);
+    public Socio encontrarSocioTitular(String socioTitular) throws Exception{
+        Socio titular = repository.encontrarSocioTitular(socioTitular);
+        if(titular==null){
+            throw new Exception("Socio Titular ingresado no existe!!");
+        }
+        if(!titular.isTitular()){
+            throw new Exception("El codigo de socio ingresado no pertenece a un socio titular!!");
+        }
+        return titular;
+    }
+
+    @Override
+    public boolean validacionEdadMinima(Date fechaNacimiento, int edadMinima){
+        Calendar fechaEdad = Calendar.getInstance();
+        fechaEdad.setTime(fechaNacimiento);
+        fechaEdad.add(Calendar.YEAR, edadMinima);
+        Date fechaActual = new Date();
+
+        if(fechaEdad.getTime().after(fechaActual)){
+            return false; 
+        }
+        else{
+            return true;
+        }
     }
 
     @Override
     public Socio createSocio(Socio socio, String socioTitular) throws Exception {
          String codigo = String.valueOf(contarSocios() + 1L) ;
         socio.setCodigo(codigo);
+        if(socio.getFechaNacimiento().after(new Date())) throw new Exception("la fecha de nacimiento debe ser antes de la fecha actual");
     
         if(socio.getDni().equals(repository.findByDni(socio.getDni()))){
             throw new Exception("el dni de socio no esta disponible");
         }
-        if(!socioTitular.equals("")){
-            if(encontrarSocioTitular(socioTitular) == null){
-                throw new Exception("Socio Titular ingresado no existe!!");
-            }
+        if(!socioTitular.equals("") && socio.isCategoriaGrupoFamiliar()){
             Socio socioTi = encontrarSocioTitular(socioTitular);
             if(repository.contarSociosGrupoFamiliar(socioTi.getId()) >= 4 ){
                 throw new Exception("Se ha superado el limite del grupo familiar");
@@ -55,36 +76,53 @@ public class SocioServiceImp implements SocioService{
 
     @Override
     @Transactional
-    public Socio updateSocio(Socio socio) throws Exception { 
-        Socio uDB = repository.findById(socio.getId()).orElse(null);
-        if(socio.getSocioTitular() != null){//socio dependiente
-            if(socio.getCategoria().getNombre().equals("Individual")){
+    public Socio updateSocio(Socio socio) throws Exception {
+        
+        Socio uDB = repository.findById(socio.getId()).orElse(null);//Socio uDB (anterior), Socio socio ( nuevo )
+
+        //INDIVIDUAL O TITULAR
+        if(uDB.getSocioTitular()==null){
+            if(uDB.isCategoriaGrupoFamiliar()){//TITULAR
+                if(socio.isCategoriaIndividual()){//TITULAR -> INDIVIDUAL
+                    uDB.setCategoria(socio.getCategoria());
+                    actualizarGrupoFamiliar(false,socio.getDomicilio(), uDB.getCodigo());//ACTUALIZA A LA FAMILIAR EN ESTADO INACTIVO
+                }
+                else if(!socio.getCodigoSocioTitular().equals("")){//TITULAR -> DEPENDIENTE
+                    if(repository.contarSociosGrupoFamiliar(socio.getId())>0){
+                            throw new Exception("El socio titular no puede pasar a ser dependiente de otro socio porque tiene socios familiares");
+                        }
+                    Socio titular = encontrarSocioTitular(socio.getCodigoSocioTitular());
+                    actualizarGrupoFamiliar(false,socio.getDomicilio(), uDB.getCodigo());//ACTUALIZA A LA FAMILIAR EN ESTADO INACTIVO
+                    uDB.setSocioTitular(titular);
+                }
+                if(socio.getEstado()!=uDB.getEstado() || socio.getDomicilio().equals(uDB.getDomicilio())==false){//CAMBIO EL ESTADO O EL DOMICILIO
+                    actualizarGrupoFamiliar(socio.getEstado(),socio.getDomicilio(), uDB.getCodigo());
+                }
+            }
+            if(uDB.isCategoriaIndividual()){//INDIVIDUAL
+                if(socio.isCategoriaGrupoFamiliar()){//INDIVIDUAL -> TITULAR
+                    uDB.setCategoria(socio.getCategoria());
+                    actualizarGrupoFamiliar(socio.getEstado(),socio.getDomicilio(), uDB.getCodigo());
+                    if(!socio.getCodigoSocioTitular().equals("")){//INDIVIDUAL -> DEPENDIENTE
+                        Socio titular = encontrarSocioTitular(socio.getCodigoSocioTitular());
+                        uDB.setSocioTitular(titular);
+                    }
+                }
+            }
+        uDB.setDomicilio(socio.getDomicilio()); //SETEA EL DOMICIOLIO ANTES PORQUE SI ES DEPENDIENTE LLEGA NULO
+        //SOCIO DEPENDIENTE
+        }else if(uDB.getSocioTitular()!=null){
+            if(socio.isCategoriaGrupoFamiliar()){//DEPENDIENTE -> INDIVIDUAL
+                uDB.setSocioTitular(null);
+                uDB.setCategoria(socio.getCategoria());
+                
+            }else if(socio.getCodigoSocioTitular().equals("")){//DEPENDIENTE -> TITULAR
                 uDB.setSocioTitular(null);
             }
-            else if (socio.getEstado() == true && titularHabilitado(socio.getSocioTitular().getId()) == false) {
-                    throw new Exception("No se puede habilitar un familiar cuando el titular esta inactivo");
-            }
-            if(socio.getCodigoSocioTitular().equals(uDB.getSocioTitular().getCodigo())==false){//verifica si hubo un cambio de titular
-                if(encontrarSocioTitular(socio.getCodigoSocioTitular())==null){
-                    throw new Exception("Socio Titular ingresado no existe!!");
-                }
-                Socio titular = encontrarSocioTitular(socio.getCodigoSocioTitular());
-                uDB.setSocioTitular(titular); 
-            }
         }
-        if(socio.getSocioTitular() == null){// socio titular o Individual
-            if(socio.getCategoria().getId()==1 && socio.getEstado()!=uDB.getEstado()){//actualiza a la familia si es socio titular y si hubo un cambio de estado   
-                actualizarGrupoFamiliar(socio.getEstado(), uDB.getCodigo());
-            }
-            if(socio.getCategoria().getNombre().equals("Individual") && uDB.getCategoria().getId()==1){
-                actualizarGrupoFamiliar(false, uDB.getCodigo());
-            }
-        }
-        uDB.setEmail(socio.getEmail());
-        uDB.setDomicilio(socio.getDomicilio());
-        uDB.setTelefono(socio.getTelefono());
         uDB.setEstado(socio.getEstado());
-        uDB.setCategoria(socio.getCategoria());
+        uDB.setTelefono(socio.getTelefono());
+        uDB.setEmail(socio.getEmail());
         return repository.save(uDB);
     }
 
@@ -133,17 +171,18 @@ public class SocioServiceImp implements SocioService{
 
     @Override
     @Transactional
-    public void actualizarGrupoFamiliar(boolean habilitado, String codigo) {
+    public void actualizarGrupoFamiliar(boolean habilitado,String domicilio,  String codigo) {
         Long idSocio = repository.obtenerIdSocio(codigo);
-        repository.actualizarGrupoFamiliar(habilitado, idSocio);
+        repository.actualizarGrupoFamiliar(habilitado,domicilio, idSocio);
     }
+
 
 
     @Override
     @Transactional(readOnly = true)
     public boolean titularHabilitado(Long id) {
         Socio socioTitular = repository.findById(id).orElse(null);
-        if (socioTitular.getEstado() == true && socioTitular.getCategoria().getId()==1) {
+        if (socioTitular.getEstado() == true && socioTitular.isCategoriaGrupoFamiliar()) {
             return true;
         }
         return false;
