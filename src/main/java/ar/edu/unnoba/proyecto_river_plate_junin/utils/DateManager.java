@@ -2,10 +2,10 @@ package ar.edu.unnoba.proyecto_river_plate_junin.utils;
 
 import java.util.Calendar;
 import java.util.Date;
-
+import org.springframework.stereotype.Component;
 import ar.edu.unnoba.proyecto_river_plate_junin.model.Cuota;
 import ar.edu.unnoba.proyecto_river_plate_junin.model.Socio;
-
+@Component
 public class DateManager {
     
     public boolean validacionEdadMinima(Date fechaNacimiento, int edadMinima){
