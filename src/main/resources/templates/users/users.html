@@ -15,6 +15,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@700&display=swap" rel="stylesheet" />
     <script src="https://kit.fontawesome.com/62ea397d3a.js" crossorigin="anonymous"></script>
+    <script src="https://www.kryogenix.org/code/browser/sorttable/sorttable.js"></script>
     <title>Usuarios</title>
   </head>
   <body>
@@ -40,7 +41,7 @@
 
           <a class="list__actionButton" th:if="${#authentication.getPrincipal().getRol()}" th:href="@{/register}"><i class="fas fa-user-plus"></i><p>Agregar Usuario</p></a>
         </div>
-        <table class="table">
+        <table class="table sortable">
           <thead>
             <tr class="table__colums">
               <th class="table__colums-th"><i class="far fa-envelope"></i>Email</th>

@@ -24,19 +24,19 @@
         </div>
         <div class="login-container">
           <form class="login" method="POST" th:object="${user}" th:action="@{/login}">
-            <h2>Welcome!</h2>
+            <h2>¡Bienvenido!</h2>
             <div class="login__input-errors" th:if="${param.error}">El email o la contraseña son incorrectos</div>
-            <div class="login__input-logout" th:if="${param.logout}">usted a cerrado sesion correctamente</div>
+            <div class="login__input-logout" th:if="${param.logout}">Usted ha cerrado la sesión correctamente</div>
             <div class="login__input-container">
               <input type="text" name="username" class="login__input" id="login__user" th:field="*{email}" autocomplete="off" required />
               <label for="login__user" class="login__lbl"><i class="fas fa-user"></i><span class="login__lbl-text">Email</span> </label>
             </div>
             <div class="login__input-container">
               <input type="password" name="password" class="login__input" id="login__passwd" th:field="*{password}" required="" />
-              <label for="login__passwd" class="login__lbl"><i class="fas fa-key"></i><span class="login__lbl-text">Password</span></label>
+              <label for="login__passwd" class="login__lbl"><i class="fas fa-key"></i><span class="login__lbl-text">Contraseña</span></label>
             </div>
             <span class="has-error" th:text="${err}"></span>
-            <input type="submit" name="submit" class="login__input login__submit" value="Login" />
+            <input type="submit" name="submit" class="login__input login__submit" value="Iniciar Sesión" />
           </form>
         </div>
       </div>

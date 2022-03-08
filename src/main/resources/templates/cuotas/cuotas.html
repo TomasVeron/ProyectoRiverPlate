@@ -47,8 +47,8 @@
           <thead>
             <tr class="table__colums">
               <th class="table__colums-th"><i class="fas fa-user-tag"></i>Codigo</th>
-              <th class="table__colums-th"><i class="fas fa-user"></i>Nombre</th>
-              <th class="table__colums-th"><i class="fas fa-address-card"></i>Apellido</th>
+              <th class="table__colums-th"><i class="fas fa-user"></i>Apellido</th>
+              <th class="table__colums-th"><i class="fas fa-address-card"></i>Nombre</th>
               <th class="table__colums-th"><i class="fas fa-sitemap"></i>Categoria</th>
               <th class="table__colums-th"></th>
               <th class="table__colums-th"></th>
@@ -57,8 +57,8 @@
           <tbody class="scroll">
             <tr class="table__rows" th:each="socio : ${socioNoDependientes}">
               <td class="table__rows-td" th:text="${socio.codigo}"></td>
-              <td class="table__rows-td" th:text="${socio.nombre}"></td>
               <td class="table__rows-td" th:text="${socio.apellido}"></td>
+              <td class="table__rows-td" th:text="${socio.nombre}"></td>
               <td class="table__rows-td" th:text="${socio.categoria.nombre}" th:if="${socio.categoria.id==2}"></td>
               <td class="table__rows-td" th:if="${socio.categoria.id==1 and socio.socioTitular==null}">Socio Titular</td>
               <td class="table__rows-td">
