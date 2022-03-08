@@ -6,9 +6,9 @@ import ar.edu.unnoba.proyecto_river_plate_junin.model.Categoria;
 import ar.edu.unnoba.proyecto_river_plate_junin.model.Cuota;
 import ar.edu.unnoba.proyecto_river_plate_junin.model.Socio;
 import ar.edu.unnoba.proyecto_river_plate_junin.repository.CuotaRepository;
+import ar.edu.unnoba.proyecto_river_plate_junin.utils.DateManager;
 import ar.edu.unnoba.proyecto_river_plate_junin.utils.SendEmail;
 
-import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -17,6 +17,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 @Service
 public class CuotaServiceImp implements CuotaService{
+
+    @Autowired
+    private DateManager dateManager;
     
     @Autowired
     private CuotaRepository repository;
@@ -26,43 +29,20 @@ public class CuotaServiceImp implements CuotaService{
 
     @Autowired
     private SendEmail email;
-	
-
-    public Date generarFechaCaducidad(){
-        Date fecha = new Date();
-        Calendar c = Calendar.getInstance();
-        c.setTime(fecha);
-        c.add(Calendar.MONTH, 6);
-        Date fechaCaducidad= c.getTime();
-        return fechaCaducidad;
-    }
 
     public boolean controlarFechaCuota(Long socioId, Date fechaCreacion) throws Exception{
         Cuota ultimaCuota= repository.consulatarUltimaCuota(socioId);
         Socio socio = socioService.getSocio(socioId);
-
-        Calendar fechaAlta = Calendar.getInstance();
-        Calendar fechaDisponible = Calendar.getInstance();
-        fechaAlta.setTime(socio.getFechaAlta());
-        fechaDisponible.setTime(socio.getFechaAlta());
-        fechaDisponible.add(Calendar.MONTH, 1);
-        Date fechaLimite = fechaDisponible.getTime();
+        Date fechaLimite = dateManager.getFechaLimite(socio);
 
         if (ultimaCuota==null){
-            if (fechaCreacion.after(fechaLimite)==false){// aunque coincidan los meses o el anio la funcion comprueba que la fecha de creacion sea desp de la fecha limite
+            if (dateManager.desdeMayorQueHasta(fechaCreacion,fechaLimite)==false){// aunque coincidan los meses o el anio la funcion comprueba que la fecha de creacion sea desp de la fecha limite
                 throw new Exception("No ha pasado un mes desde que se dio de alta el socio");
             }
             return true;
-        }
-
-        Calendar fechaUltimaCuota = Calendar.getInstance();
-        Calendar fechaUltimaDisponible = Calendar.getInstance();
-        fechaUltimaDisponible.setTime(ultimaCuota.getFechaCreacion());
-        fechaUltimaDisponible.add(Calendar.MONTH, 1);    
-        Date limiteFechaUltimaCuota = fechaUltimaDisponible.getTime();
-        fechaUltimaCuota.setTime(ultimaCuota.getFechaCreacion());
-
-        if(fechaCreacion.after(limiteFechaUltimaCuota)){
+        }  
+        Date limiteFechaUltimaCuota = dateManager.getLimiteFechaUltimaCuota(ultimaCuota);
+        if(dateManager.desdeMayorQueHasta(fechaCreacion, limiteFechaUltimaCuota)){
             return true;
         }
         return false;
@@ -84,24 +64,23 @@ public class CuotaServiceImp implements CuotaService{
         cuota.setCategoria(categoria);
         cuota.setImporte(categoria.getValorCuota());
         cuota.setSocio(socio);
-        cuota.setFechaCaducidad(generarFechaCaducidad());
+        cuota.setFechaCaducidad(dateManager.generarFechaCaducidad(fecha_creacion));
         cuota.setFechaCreacion(fecha_creacion);
         repository.save(cuota);
         email.enviarEmailCuotas(socio, cuota);
         return cuota;
     }
 
-
-
     @Override
     public void generarCuotas(List<Socio> socioNoDependientes) {
         for(Socio socio: socioNoDependientes){
            try {
             generarCuotaSocio(socio);
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
+            }
+            catch (Exception e) {
+                System.out.println(e.getMessage());
+            }
         }
-        }    
     }
 
     @Override
@@ -123,6 +102,5 @@ public class CuotaServiceImp implements CuotaService{
         cDB.setFormaPago(cuota.getFormaPago());
         email.enviarRecibo(cuota.getSocio(), cuota);
         return repository.save(cDB);
-    }
-    
+    }   
 }

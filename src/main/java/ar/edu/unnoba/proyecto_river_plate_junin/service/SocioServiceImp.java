@@ -1,5 +1,4 @@
 package ar.edu.unnoba.proyecto_river_plate_junin.service;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,9 +6,13 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ar.edu.unnoba.proyecto_river_plate_junin.model.Socio;
 import ar.edu.unnoba.proyecto_river_plate_junin.repository.SocioRepository;
+import ar.edu.unnoba.proyecto_river_plate_junin.utils.DateManager;
 
 @Service
 public class SocioServiceImp implements SocioService{
+
+@Autowired
+private DateManager dateManager;
 
     @Autowired
     private SocioRepository repository;
@@ -30,7 +33,7 @@ public class SocioServiceImp implements SocioService{
         return titular;
     }
 
-    @Override
+    /*@Override
     public boolean validacionEdadMinima(Date fechaNacimiento, int edadMinima){
         Calendar fechaEdad = Calendar.getInstance();
         fechaEdad.setTime(fechaNacimiento);
@@ -43,13 +46,14 @@ public class SocioServiceImp implements SocioService{
         else{
             return true;
         }
-    }
+    }*/
 
     @Override
     public Socio createSocio(Socio socio, String socioTitular) throws Exception {
          String codigo = String.valueOf(contarSocios() + 1L) ;
         socio.setCodigo(codigo);
-        if(socio.getFechaNacimiento().after(new Date())) throw new Exception("la fecha de nacimiento debe ser antes de la fecha actual");
+        Date fechaHoy = new Date(); 
+        if(dateManager.desdeMayorQueHasta(socio.getFechaNacimiento(),fechaHoy)) throw new Exception("la fecha de nacimiento debe ser antes de la fecha actual");
     
         if(socio.getDni().equals(repository.findByDni(socio.getDni()))){
             throw new Exception("el dni de socio no esta disponible");
