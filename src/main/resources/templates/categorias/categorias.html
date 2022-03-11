@@ -45,12 +45,6 @@
               <th class="table__colums-th">
                 <i class="far fa-question-circle"></i>Nombre
               </th>
-              <th class="table__colums-th">
-                <i class="fas fa-user"></i>Edad Desde
-              </th>
-              <th class="table__colums-th">
-                <i class="fas fa-address-card"></i>Edad Hasta
-              </th>
               <th class="table__colums-th"><i class="fas fa-dollar-sign"></i> Valor Cuota</th>
               <th class="table__colums-th"></th>
               <th class="table__colums-th"></th>
@@ -60,8 +54,6 @@
             <tr class="table__rows" th:each="categoria : ${categorias}">
 
               <td class="table__rows-td" th:text="${categoria.nombre}"> </td>
-              <td class="table__rows-td" th:text="${categoria.edadDesde}"></td>
-              <td class="table__rows-td" th:text="${categoria.edadHasta}"></td>
               <td class="table__rows-td" th:text="${categoria.valorCuota}"></td>
               <td class="table__rows-td" th:if="${#authentication.getPrincipal().getRol()}">
                 <a th:href="@{/categorias/edit/{id}(id=${categoria.id})}"/> <i class="fas fa-edit"></i>Editar</a>
