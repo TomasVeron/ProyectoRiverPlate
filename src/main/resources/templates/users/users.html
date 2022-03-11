@@ -36,7 +36,6 @@
               />
               <button type="submit" class="list__btnSearch"><i class="fas fa-search"></i></button>
             </form>
-            <div class="listUser__errorDelete" th:if="${userDeleteError}" th:text="${userDeleteError}"></div>
           </div>
 
           <a class="list__actionButton" th:if="${#authentication.getPrincipal().getRol()}" th:href="@{/register}"><i class="fas fa-user-plus"></i><p>Agregar Usuario</p></a>
@@ -46,8 +45,8 @@
             <tr class="table__colums">
               <th class="table__colums-th"><i class="far fa-envelope"></i>Email</th>
               <th class="table__colums-th"><i class="fas fa-user"></i>Nombre</th>
-              <th class="table__colums-th"><i class="fas fa-address-card"></i>Apellido</th>
-              <th class="table__colums-th"><i class="fas fa-address-card"></i>Rol</th>
+              <th class="table__colums-th"><i class="fas fa-user"></i>Apellido</th>
+              <th class="table__colums-th"><i class="fas fa-user-lock"></i>Rol</th>
               <th class="table__colums-th"></th>
             </tr>
           </thead>
@@ -67,6 +66,7 @@
       </div>
     </div>
     <div th:include="users/modal-cancel-or-confirm.html" th:remove="tag"></div>
+    <div th:include="/modal-error.html" th:remove="tag"></div>
     <script type="text/javascript">
       function confirmDelete(id) {
         const modal = document.querySelector(".modal");
@@ -80,11 +80,13 @@
         window.location = "users/delete/" + userHidden.value; //va a la url /users/delete/{id} para eliminar el usuario
       }
 
-      function hiddenModal() {
-        const modal = document.querySelector(".modal");
+      function hiddenModalDelete() {
+        const modal = document.querySelector("#deleteModal");
         modal.classList.toggle("show"); //quita la clase show para dejar de mostrar el modal
       }
+
     </script>
     <script src="js/main.js"></script>
+    <script src="js/errorModal.js"></script>
   </body>
 </html>

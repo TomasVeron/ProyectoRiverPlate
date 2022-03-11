@@ -63,8 +63,6 @@ public class UserController {
 
     @GetMapping("/users")
     public String usersView(Model model,  Authentication authentication){
-        User sessionUser = (User)authentication.getPrincipal();
-        System.out.println(sessionUser.getRol());
         model.addAttribute("users", userService.getAllUsers());
         return "/users/users";
 
@@ -80,7 +78,7 @@ public class UserController {
         try {
             userService.deleteUser(user,sessionUser);
         } catch (Exception e) {
-            redirectAttributes.addFlashAttribute("userDeleteError", e.getMessage());
+            redirectAttributes.addFlashAttribute("error", e.getMessage());
         }
         return "redirect:/users";
     }

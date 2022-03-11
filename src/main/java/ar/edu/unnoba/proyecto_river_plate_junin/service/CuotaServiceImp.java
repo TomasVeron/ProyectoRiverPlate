@@ -1,6 +1,7 @@
 package ar.edu.unnoba.proyecto_river_plate_junin.service;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 
 import ar.edu.unnoba.proyecto_river_plate_junin.model.Categoria;
 import ar.edu.unnoba.proyecto_river_plate_junin.model.Cuota;
@@ -8,6 +9,8 @@ import ar.edu.unnoba.proyecto_river_plate_junin.model.Socio;
 import ar.edu.unnoba.proyecto_river_plate_junin.repository.CuotaRepository;
 import ar.edu.unnoba.proyecto_river_plate_junin.utils.DateManager;
 import ar.edu.unnoba.proyecto_river_plate_junin.utils.SendEmail;
+import ar.edu.unnoba.proyecto_river_plate_junin.utils.SocioException;
+import ar.edu.unnoba.proyecto_river_plate_junin.utils.SociosException;
 
 import java.util.Date;
 import java.util.List;
@@ -37,7 +40,7 @@ public class CuotaServiceImp implements CuotaService{
 
         if (ultimaCuota==null){
             if (dateManager.desdeMayorQueHasta(fechaCreacion,fechaLimite)==false){// aunque coincidan los meses o el anio la funcion comprueba que la fecha de creacion sea desp de la fecha limite
-                throw new Exception("No ha pasado un mes desde que se dio de alta el socio");
+                throw new SocioException(socio,"No ha pasado un mes desde que se dio de alta el socio");
             }
             return true;
         }  
@@ -51,11 +54,11 @@ public class CuotaServiceImp implements CuotaService{
     @Override
     public Cuota generarCuotaSocio(Socio socio) throws Exception{//hay que comprobar que para generar una cuota haya pasado un mes de la ultima cuota
         if(socio.isDependiente()){
-            throw new Exception("No se puede generar cuotas para un socio dependiente");
+            throw new SocioException(socio,"No se puede generar cuotas para un socio dependiente");
         }
         Date fecha_creacion= new Date();
         if(!controlarFechaCuota(socio.getId(), fecha_creacion)){
-            throw new Exception("No se pueden generar mas de una cuota por mes");
+            throw new SocioException(socio,"No se pueden generar mas de una cuota por mes");
         }
         Cuota cuota = new Cuota();
         Long numeroCuota = repository.numeroCuota() + 1L ;
@@ -71,17 +74,26 @@ public class CuotaServiceImp implements CuotaService{
         return cuota;
     }
 
+    @ExceptionHandler
     @Override
-    public void generarCuotas(List<Socio> socioNoDependientes) {
+    public void generarCuotas(List<Socio> socioNoDependientes) throws Exception {
+        SociosException errores = new SociosException();
         for(Socio socio: socioNoDependientes){
-           try {
-            generarCuotaSocio(socio);
+            try {
+                generarCuotaSocio(socio);
+            }catch(SocioException e){
+                 errores.addError(e.getSocio(), e.getMessage());
+            } catch (Exception e) {
+                throw new Exception(e.getMessage());
             }
-            catch (Exception e) {
-                System.out.println(e.getMessage());
-            }
+
+        }
+        if(!errores.getErrores().isEmpty()){
+            throw errores;
         }
     }
+
+
 
     @Override
     public List<Cuota> getCuotasSocio(Long socioId) {

@@ -50,6 +50,7 @@
 			<div class="dates__card">
 				<input type="hidden" th:value="${sociosGf}" name="gf" id="sociosGf">
 				<input type="hidden" th:value="${sociosInd}" name="ind" id="sociosInd">
+				<input type="hidden" th:value="${sociosTitulares}" name="titular" id="sociosTitulares">
 				<canvas id="myChart"></canvas>
 				<div class="dates__card-footer">
 					<h4 class="dates__date-tittle">Categorias</h4>
@@ -64,15 +65,16 @@
 	let ctx = document.getElementById('myChart').getContext('2d');
 	let sociosGf = document.getElementById('sociosGf').value;
 	let sociosInd = document.getElementById('sociosInd').value;
+	let sociosTitulares = document.getElementById('sociosTitulares').value;
 
 	let chart = new Chart(ctx, {
 		type: 'doughnut',
 		data:{
 		datasets: [{
-			data: [`${sociosInd}`,`${sociosGf}`],
-			backgroundColor: ['rgb(255, 205, 0)', '#000'],
+			data: [`${sociosInd}`,`${sociosGf}`, `${sociosTitulares}`],
+			backgroundColor: ['rgb(255, 205, 0)', '#000', '#0036ff'],
 			label: 'Comparacion de Categorias de Socios'}],
-			labels: ['Individuales','Grupo Familiares']},
+			labels: ['Individuales','Grupo Familiares', 'Titulares']},
 		options: {responsive: true}
 	});
 </script>

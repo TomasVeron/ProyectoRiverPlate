@@ -1,0 +1,16 @@
+<!-- Modal -->
+<div class="modal fade show" th:if="${errores}"   id="errorModal">
+    <div class="modal-content-container">
+        <div class="modal-content" >
+            <div class="modal-header">
+                <h5 class="modal-title"> <i class="fas fa-exclamation-triangle"></i>Error</h5>
+            </div>
+                <div class="modal-body">
+                    <li class="error" th:each="error : ${errores}" th:text="${error}"></li>
+                </div>
+            <div class="modal-footer">
+                <button class="modal-footer__button-cancel" type="button"  th:onclick="hiddenModal()">Cerrar</button>
+            </div>
+        </div>
+    </div>
+</div>

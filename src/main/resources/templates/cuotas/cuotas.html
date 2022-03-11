@@ -48,7 +48,7 @@
             <tr class="table__colums">
               <th class="table__colums-th"><i class="fas fa-user-tag"></i>Codigo</th>
               <th class="table__colums-th"><i class="fas fa-user"></i>Apellido</th>
-              <th class="table__colums-th"><i class="fas fa-address-card"></i>Nombre</th>
+              <th class="table__colums-th"><i class="fas fa-user"></i>Nombre</th>
               <th class="table__colums-th"><i class="fas fa-sitemap"></i>Categoria</th>
               <th class="table__colums-th"></th>
               <th class="table__colums-th"></th>
@@ -62,7 +62,7 @@
               <td class="table__rows-td" th:text="${socio.categoria.nombre}" th:if="${socio.categoria.id==2}"></td>
               <td class="table__rows-td" th:if="${socio.categoria.id==1 and socio.socioTitular==null}">Socio Titular</td>
               <td class="table__rows-td">
-                <a th:href="@{/cuotas/ver/socio/{id}(id=${socio.id})}"><i class="fas fa-file-invoice-dollar"></i>Cuotas</a>
+                <a th:href="@{/cuotas/ver/socio/{id}(id=${socio.id})}"><i class="fas fa-eye"></i>Cuotas</a>
               </td>
               <td class="table__rows-td" th:if="${#authentication.getPrincipal().getRol()}">
                 <form th:action="@{/cuotas/generarCuotaSocio/{id}(id=${socio.id})}" method="post">
@@ -75,6 +75,7 @@
       </div>
     </div>
   <div th:include="/modal-error.html" th:remove="tag"></div>
+  <div th:include="/modal-errores.html" th:remove="tag"></div>
   <script th:src="@{/js/errorModal.js}"></script>
   </body>
 </html>

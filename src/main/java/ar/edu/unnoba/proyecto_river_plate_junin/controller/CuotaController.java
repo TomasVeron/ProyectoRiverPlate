@@ -12,6 +12,7 @@ import ar.edu.unnoba.proyecto_river_plate_junin.model.Cuota;
 import ar.edu.unnoba.proyecto_river_plate_junin.model.Socio;
 import ar.edu.unnoba.proyecto_river_plate_junin.service.CuotaService;
 import ar.edu.unnoba.proyecto_river_plate_junin.service.SocioService;
+import ar.edu.unnoba.proyecto_river_plate_junin.utils.SociosException;
 
 import java.util.List;
 
@@ -38,11 +39,16 @@ public class CuotaController {
 
 
     @PostMapping("/cuotas/generarCuotas")
-    public String generarCuotas() {
+    public String generarCuotas(RedirectAttributes redirectAttributes) {
         List<Socio> socioNoDependientes = socioService.getSocioNoDependientes();
-        cuotaService.generarCuotas(socioNoDependientes);
+        try{
+            cuotaService.generarCuotas(socioNoDependientes);
+        }catch(SociosException e){
+            redirectAttributes.addFlashAttribute("errores",e.getErrores());
+        }catch(Exception e){
+            redirectAttributes.addFlashAttribute("error",e.getMessage());
+        }
         return"redirect:/cuotas";
-
     }
 
     @PostMapping("/cuotas/generarCuotaSocio/{id}")

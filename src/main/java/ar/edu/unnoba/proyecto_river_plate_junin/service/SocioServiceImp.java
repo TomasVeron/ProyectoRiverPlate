@@ -160,7 +160,11 @@ private DateManager dateManager;
         return repository.contarSociosGf();
     }
 
-
+    @Override
+    public int contarSociosTitulares() {
+        return repository.contarSociosTitulares();
+    }
+    
     @Override
     public int contarSociosInd() {
         return repository.contarSociosInd();

@@ -13,17 +13,22 @@
     align-items: center;
     z-index: 100;
 }
+.modal-title{
+    font-size: 20px;
+}
 
+.modal-title i{
+    padding: 5px;
+}
 
 .modal-content{
     background-color: #fff;
-    width: 400px;
-    height: 200px;
     position: relative;
     margin: auto;
     display: flex;
     flex-direction: column;
     justify-content: space-around;
+    border-radius: 20px;
 }
 .modal-header{
     display: flex;
@@ -35,8 +40,15 @@
     display: flex;
     justify-content: center;
     padding: 20px;
+    flex-direction: column;
+    overflow: auto;
+    max-height: 350px;
 }
 
+.error{
+    position: relative;
+    padding: 6px 0;
+}
 .modal-footer{
     display: flex;
     justify-content: right;
@@ -44,19 +56,23 @@
 }
 
 .modal-footer__button-cancel{
-    background-color: #222;
-    padding: 5px;
+    padding: 10px;
+    background-color: #000;
+    text-decoration: none;
     color: #fff;
-    margin: 5px;
-    border: none;
+    text-shadow: 0 0 3px #000;
+    border-radius: 30px;
+    border: 1px solid #000;
     cursor: pointer;
 }
 
 .modal-footer__button-confirm{
     background-color: var(--color-predominant);
-    padding: 5px;
+    padding: 10px;
+    text-decoration: none;
     color: #fff;
-    margin: 5px;
-    border: none;
+    text-shadow: 0 0 3px #000;
+    border-radius: 30px;
+    border: 1px solid #000;
     cursor: pointer;
 }

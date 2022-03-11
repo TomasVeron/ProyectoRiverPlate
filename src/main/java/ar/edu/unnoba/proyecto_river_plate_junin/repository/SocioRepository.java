@@ -58,8 +58,14 @@ public interface SocioRepository extends JpaRepository<Socio, Long> {
     @Query(value = 
     "SELECT COUNT(id_socio)"+
     "FROM socios s INNER JOIN categorias c ON s.categoria = c.id_categoria " +
-    "WHERE UPPER(c.nombre) LIKE '%GRUPO FAMILIAR%' ", nativeQuery = true)
+    "WHERE UPPER(c.nombre) LIKE '%GRUPO FAMILIAR%'and s.socio_titular IS NOT NULL", nativeQuery = true)
     public int contarSociosGf();
+
+    @Query(value = 
+    "SELECT COUNT(id_socio)"+
+    "FROM socios s INNER JOIN categorias c ON s.categoria = c.id_categoria " +
+    "WHERE UPPER(c.nombre) LIKE '%GRUPO FAMILIAR%'and s.socio_titular IS NULL", nativeQuery = true)
+    public int contarSociosTitulares();
 
     @Query(value = 
     "SELECT *"+

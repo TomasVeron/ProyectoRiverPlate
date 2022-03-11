@@ -27,6 +27,7 @@ public class IndexController {
         model.addAttribute("sociosActivos", sociosActivos);
         model.addAttribute("sociosGf", socioService.contarSociosGf());
         model.addAttribute("sociosInd", socioService.contarSociosInd());
+        model.addAttribute("sociosTitulares", socioService.contarSociosTitulares());
         return "index";
     }
     

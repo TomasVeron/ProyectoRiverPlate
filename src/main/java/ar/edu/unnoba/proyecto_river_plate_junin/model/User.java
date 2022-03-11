@@ -26,8 +26,8 @@ public class User implements UserDetails {
     private Long id;
 
     @Column(name="email", nullable = false) 
-    @NotBlank(message = "el email no puede estar vacio")
-    @Email(message = "email no valido")
+    @NotBlank(message = "El email no puede estar vacio")
+    @Email(message = "Email no valido")
     private String email;
 
     @Column(name = "nombre")
@@ -40,12 +40,12 @@ public class User implements UserDetails {
 
     
     @Column(name ="password")
-    @NotBlank( message = "la clave no puede estar vacia")
-    @Size(min = 8, message = "la contraseña debe ser de al menos 8 caracteres")
+    @NotBlank( message = "la Contraseña no puede estar vacia")
+    @Size(min = 8, message = "La contraseña debe ser de al menos 8 caracteres")
     private String password;
 
     @Transient
-    @NotBlank( message = "la clave no puede estar vacia")
+    @NotBlank( message = "La contraseña no puede estar vacia")
     @Size(min = 8, message = "la contraseña debe ser de al menos 8 caracteres")
     private String confirmarPassword;
 

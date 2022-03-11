@@ -24,6 +24,7 @@ public interface SocioService {
 
     public int contarSociosGf();
     public int contarSociosInd();
+    public int contarSociosTitulares();
 
     public void actualizarGrupoFamiliar(boolean habilitado,String domicilio, String codigo);
 
