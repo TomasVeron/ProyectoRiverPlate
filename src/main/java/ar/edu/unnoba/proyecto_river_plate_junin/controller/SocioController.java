@@ -33,7 +33,7 @@ private CategoriaService categoriaService;
 @GetMapping("/socios")
 public String sociosView(Model model){
     model.addAttribute("socios",socioService.getAllSocios());
-    return "/socios/socios";
+    return "socios/socios";
     }
 
 @GetMapping("/socios/addSocio")
@@ -41,7 +41,7 @@ public String addSocioView(Model model1, Model model2){
     model1.addAttribute("socio", new Socio());
     List<Categoria> categorias = categoriaService.getCategorias();
     model2.addAttribute("categorias",categorias);
-    return "/socios/addSocio";
+    return "socios/addSocio";
 }
 
 @PostMapping("/socios/addSocio")
@@ -49,7 +49,7 @@ public String addSocioView(Model model1, Model model2){
         if (result.hasErrors()){
             model.addAttribute("socio", socio);
             model2.addAttribute("categorias",categoriaService.getCategorias());
-            return"/socios/addSocio";
+            return"socios/addSocio";
         }
         try{
             socioService.createSocio(socio, socio.getCodigoSocioTitular());
@@ -57,7 +57,7 @@ public String addSocioView(Model model1, Model model2){
             model.addAttribute("socio", socio);
             model2.addAttribute("categorias", categoriaService.getCategorias());
             model2.addAttribute("error", e.getMessage());
-            return "/socios/addSocio";
+            return "socios/addSocio";
         }
 
         return "redirect:/socios";
@@ -87,7 +87,7 @@ public String addSocioView(Model model1, Model model2){
         model.addAttribute("socio",socio);
         model.addAttribute("categorias",categoriaService.getCategorias());
         
-        return "/socios/editSocio";
+        return "socios/editSocio";
     }
  
     @GetMapping("/socios/ver/{id}")
@@ -95,7 +95,7 @@ public String addSocioView(Model model1, Model model2){
         socio = socioService.getSocio(socio);
         model.addAttribute("socio",socio);
         model.addAttribute("familiares",socioService.getFamiliares(socio.getId()));
-        return "/socios/verSocio";
+        return "socios/verSocio";
     }
 
     @GetMapping("/socios/buscarEnSocios")
@@ -104,11 +104,7 @@ public String addSocioView(Model model1, Model model2){
             List<Socio> socios = socioService.buscarEnSocio(keyword);
             model.addAttribute("socios", socios);
         }
-        /* else {
-            List<Usuario> listaUsuarios = usuarioService.listarUsuarios();
-            model.addAttribute("listaUsuarios", listaUsuarios);
-        } */
-        return "/socios/socios";
+        return "socios/socios";
     }
 
 }

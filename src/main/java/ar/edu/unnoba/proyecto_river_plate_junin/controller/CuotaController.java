@@ -34,7 +34,7 @@ public class CuotaController {
     public String cuotasView(Model model){
         List<Socio> socioNoDependientes= socioService.getSocioNoDependientes();
         model.addAttribute("socioNoDependientes", socioNoDependientes);
-        return "/cuotas/cuotas";
+        return "cuotas/cuotas";
     }
 
 
@@ -65,23 +65,23 @@ public class CuotaController {
     @GetMapping("/cuotas/ver/socio/{id}")
     public String verCuotasSocio(@PathVariable("id") Socio socio,Model model){
         model.addAttribute("cuotas", cuotaService.getCuotasSocio(socio.getId()));
-        return "/cuotas/listaCuotasSocio";
+        return "cuotas/listaCuotasSocio";
     }
 
     @GetMapping("/cuotas/ver/{id}")
     public String verCuotasSocio(@PathVariable("id") Cuota cuota,Model model){
         model.addAttribute("cuota", cuota);
-        return "/cuotas/verCuota";
+        return "cuotas/verCuota";
     }
 
     @GetMapping("/cuotas/socio/registrarPago/{id}")
     public String registrarPagoCuota(@PathVariable("id") Cuota cuota,Model model){
         model.addAttribute("cuota", cuota);
-        return "/cuotas/registrarPago";
+        return "cuotas/registrarPago";
     }
 
 
-    @PostMapping("/cuotas/registrarPago")
+    @PostMapping("cuotas/registrarPago")
     public String registrarPago(@ModelAttribute("cuota")Cuota cuota) {
         try {
             cuotaService.registrarPago(cuota);
@@ -98,7 +98,7 @@ public class CuotaController {
             List<Socio> socios = socioService.buscarSociosNoDependientes(keyword);
             model.addAttribute("socioNoDependientes", socios);
         }
-        return "/cuotas/cuotas";
+        return "cuotas/cuotas";
     }
 
 }

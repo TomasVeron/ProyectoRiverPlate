@@ -48,14 +48,14 @@ public class UserController {
     public String createUser(@Valid @ModelAttribute("user")User user, BindingResult result, ModelMap model){
         if (result.hasErrors()){
             model.addAttribute("user", user);
-            return"/register";
+            return"register";
         }
         try{
             userService.createUser(user);
         }catch(Exception e){
             model.addAttribute("formError", e.getMessage());
             model.addAttribute("user", user);
-            return "/register";
+            return "register";
         }
 
         return "redirect:/";
@@ -64,7 +64,7 @@ public class UserController {
     @GetMapping("/users")
     public String usersView(Model model,  Authentication authentication){
         model.addAttribute("users", userService.getAllUsers());
-        return "/users/users";
+        return "users/users";
 
     }
 
@@ -90,11 +90,7 @@ public class UserController {
             List<User> users = userService.buscarEnUsuario(keyword);
             model.addAttribute("users", users);
         }
-        /* else {
-            List<Usuario> listaUsuarios = usuarioService.listarUsuarios();
-            model.addAttribute("listaUsuarios", listaUsuarios);
-        } */
-        return "/users/users";
+        return "users/users";
     }
 
 

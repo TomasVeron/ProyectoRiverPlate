@@ -85,8 +85,8 @@
           <!-- <input type="submit" class="details__btn-submit" value="Registrar Pago" /> -->
         </form>
         <button style="cursor:pointer" class="details__btn-submit" type="button" th:onclick="validateInputs()">Registrar Pago</button>
-        <div th:replace="/cuotas/modalRecibo.html" th:remove="tag"></div>
-        <div th:replace="/cuotas/modalConfirmarPago.html" th:remove="tag"></div>
+        <div th:replace="cuotas/modalRecibo.html" th:remove="tag"></div>
+        <div th:replace="cuotas/modalConfirmarPago.html" th:remove="tag"></div>
       </div>
     </div>
   </body>

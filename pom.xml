@@ -11,7 +11,7 @@
 	<groupId>ar.edu.unnoba</groupId>
 	<artifactId>proyecto_river_plate_junin</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<packaging>war</packaging>
+	<packaging>jar</packaging>
 	<name>proyecto_river_plate_junin</name>
 	<description>Proyecto Club River Plate Junín</description>
 	<properties>
