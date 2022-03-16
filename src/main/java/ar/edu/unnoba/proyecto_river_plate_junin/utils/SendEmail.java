@@ -151,14 +151,14 @@ public class SendEmail {
             helper.setSubject("Club River Plate Junin - Recibo de Pago - Cuota Mes: " + fechaEmisionString);
             helper.setText("Se envia adjunto a este mail el recibo en pdf");
             // hard coded a file path
-            FileSystemResource file = new FileSystemResource("src/main/resources/recibos/recibo.pdf");
+            FileSystemResource file = new FileSystemResource("./recibo.pdf");
             helper.addAttachment("recibo.pdf",file);
             
         }catch(Exception e){
             System.out.println("ha ocurrido un error......");
         }
         javaMailSender.send(msg);
-        File recibo = new File("src/main/resources/recibos/recibo.pdf");
+        File recibo = new File("./recibo.pdf");
         recibo.delete();
 
 

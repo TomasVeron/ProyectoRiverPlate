@@ -23,7 +23,7 @@ public class ReciboRestController {
     @RequestMapping(path = "/cuotas/generarRecibo", method = RequestMethod.POST, consumes = { MediaType.MULTIPART_FORM_DATA_VALUE })
     public void guardarPdf(@RequestPart MultipartFile pdf)throws IOException {
         byte [] bytes = pdf.getBytes();
-        DataOutputStream out = new DataOutputStream(new  BufferedOutputStream(new FileOutputStream(new File("src/main/resources/recibos/recibo.pdf"))));
+        DataOutputStream out = new DataOutputStream(new  BufferedOutputStream(new FileOutputStream(new File("./recibo.pdf"))));
         out.write(bytes);
     }
 }
