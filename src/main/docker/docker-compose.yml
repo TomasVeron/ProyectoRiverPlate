@@ -21,4 +21,6 @@ services:
     container_name: db
     environment:
       - POSTGRES_USER=compose-postgres
-      - POSTGRES_PASSWORD=compose-postgres
+      - POSTGRES_PASSWORD=compose-postgres 
+    volumes:
+      - ./dbBackup/:/var/lib/postgresql/data/
