@@ -77,7 +77,7 @@
 
             <div class="details-container">
               <h3 class="details__detailName">Socio Titular</h3>
-              <span th:if="${socio.socioTitular != null}" class="details__detailInfo" th:text="${socio.socioTitular.nombre}"></span>
+              <span th:if="${socio.socioTitular != null}" class="details__detailInfo" th:text="${socio.socioTitular.codigo}+' - '+${socio.socioTitular.nombre}+' '+${socio.socioTitular.apellido}"></span>
               <span th:if="${socio.socioTitular == null}" class="details__detailInfo">No tiene socio titular</span>
             </div>
           </div>

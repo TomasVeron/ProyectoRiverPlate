@@ -172,6 +172,7 @@ body{
     -webkit-border-radius: 20px;
     -moz-border-radius: 20px;
     border-radius: 20px;
+    transition: .5s all ease-in-out;
 }
 
 .login__submit:hover{
