@@ -53,6 +53,9 @@ public class CuotaServiceImp implements CuotaService{
 
     @Override
     public Cuota generarCuotaSocio(Socio socio) throws Exception{//hay que comprobar que para generar una cuota haya pasado un mes de la ultima cuota
+        if(socio.getEstado()==false){
+            throw new SocioException(socio,"No se puede generar cuotas para un socio inactivo");
+        }
         if(socio.isDependiente()){
             throw new SocioException(socio,"No se puede generar cuotas para un socio dependiente");
         }

@@ -46,6 +46,7 @@
         <table class="table sortable table-bordered table-sm mt-2">
           <thead>
             <tr class="table__colums">
+              <th class="table__colums-th"><i class="far fa-question-circle"></i>Estado</th>
               <th class="table__colums-th"><i class="fas fa-user-tag"></i>Codigo</th>
               <th class="table__colums-th"><i class="fas fa-user"></i>Apellido</th>
               <th class="table__colums-th"><i class="fas fa-user"></i>Nombre</th>
@@ -56,6 +57,11 @@
           </thead>
           <tbody class="scroll">
             <tr class="table__rows" th:each="socio : ${socioNoDependientes}">
+              <td class="table__rows-td">
+                <i th:if="${socio.estado==true}" class="table__socio-active fas fa-check-circle"></i>
+                <i th:if="${socio.estado==false}" class="table__socio-inactive fas fa-times-circle"></i>
+                <span th:text="${socio.estado ? 'Activo/a':'Inactivo/a'}"></span>
+              </td>
               <td class="table__rows-td" th:text="${socio.codigo}"></td>
               <td class="table__rows-td" th:text="${socio.apellido}"></td>
               <td class="table__rows-td" th:text="${socio.nombre}"></td>

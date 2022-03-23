@@ -40,9 +40,9 @@ public class CuotaController {
 
     @PostMapping("/cuotas/generarCuotas")
     public String generarCuotas(RedirectAttributes redirectAttributes) {
-        List<Socio> socioNoDependientes = socioService.getSocioNoDependientes();
+        List<Socio> socioNoDependientesActivos = socioService.getSocioNoDependientesActivos();
         try{
-            cuotaService.generarCuotas(socioNoDependientes);
+            cuotaService.generarCuotas(socioNoDependientesActivos);
         }catch(SociosException e){
             redirectAttributes.addFlashAttribute("errores",e.getErrores());
         }catch(Exception e){

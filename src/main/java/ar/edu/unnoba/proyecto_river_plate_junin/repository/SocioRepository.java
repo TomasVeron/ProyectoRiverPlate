@@ -89,6 +89,10 @@ public interface SocioRepository extends JpaRepository<Socio, Long> {
     "SELECT * FROM socios s  WHERE s.socio_titular is NULL", nativeQuery = true)
     public List<Socio> getSociosNoDependientes();
 
+    @Query(value = 
+    "SELECT * FROM socios s  WHERE s.socio_titular is NULL and s.estado = true", nativeQuery = true)
+    public List<Socio> getSociosNoDependientesActivos();
+
 
     @Query(value = 
     "SELECT COUNT(id_socio)"+

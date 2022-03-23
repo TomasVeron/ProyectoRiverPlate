@@ -215,4 +215,9 @@ private DateManager dateManager;
     public List<Socio> buscarSociosNoDependientes(String keyword) {
         return repository.buscarSociosNoDependientes(keyword);
     }
+
+    @Override
+    public List<Socio> getSocioNoDependientesActivos() {
+        return repository.getSociosNoDependientesActivos();
+    }
 }

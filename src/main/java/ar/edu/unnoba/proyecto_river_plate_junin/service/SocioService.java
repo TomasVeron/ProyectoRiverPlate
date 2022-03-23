@@ -35,6 +35,7 @@ public interface SocioService {
     public List<Socio> getFamiliares(Long id);
 
     public List<Socio> getSocioNoDependientes();
+    public List<Socio> getSocioNoDependientesActivos();
 
     public List<Socio> buscarSociosNoDependientes(String keyword);
 
