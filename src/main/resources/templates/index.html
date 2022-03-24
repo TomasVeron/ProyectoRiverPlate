@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+	<link rel="stylesheet" th:href="@{/css/main.css}">
+	<link rel="stylesheet" th:href="@{/css/normalize.css}">
+	<link rel="stylesheet" th:href="@{/css/nav.css}">
+	<link rel="stylesheet" th:href="@{/css/home.css}">
+
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@700&display=swap" rel="stylesheet">
+	<script src="https://kit.fontawesome.com/62ea397d3a.js" crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.0/chart.min.js" integrity="sha512-TW5s0IT/IppJtu76UbysrBH9Hy/5X41OTAbQuffZFU6lQ1rdcLHzpU5BzVvr/YFykoiMYZVWlr/PX1mDcfM9Qg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>	
+	<title>Home</title>
+</head>
+<body>
+	<header th:replace="nav.html">
+	</header>
+	<div class="main">
+
+		<h1 class="home-tittle">Informacion General</h1>
+
+		<div class="dates">
+			<div class="dates__card">
+				<img class="dates__icons" th:src="@{/img/socios-icons.png}"></img>
+				<div class="dates__card-footer">
+					<h3 class="dates__date" th:text="${sociosTotales}"></h3>
+					<h4 class="dates__date-tittle">Socios Totales</h4>
+				</div>
+			</div>
+			<div class="dates__card">
+				<img class="dates__icons" th:src="@{/img/socios-check.png}"></img>
+				<div class="dates__card-footer">
+					<h3 class="dates__date" th:text="${sociosActivos}"></h3>
+					<h4 class="dates__date-tittle">Socios Activos</h4>
+				</div>
+			</div>
+			<div class="dates__card">
+				<img class="dates__icons" th:src="@{/img/users-icons.png}"></img>
+				<div class="dates__card-footer">
+					<h3 class="dates__date" th:text="${usuarios}"></h3>
+					<h4 class="dates__date-tittle">Usuarios Totales</h4>
+				</div>
+			</div>
+
+			<div class="dates__card">
+				<input type="hidden" th:value="${sociosGf}" name="gf" id="sociosGf">
+				<input type="hidden" th:value="${sociosInd}" name="ind" id="sociosInd">
+				<input type="hidden" th:value="${sociosTitulares}" name="titular" id="sociosTitulares">
+				<canvas id="myChart"></canvas>
+				<div class="dates__card-footer">
+					<h4 class="dates__date-tittle">Categorias</h4>
+				</div>
+			</div>
+		
+	</div>
+	<script src="js/main.js"></script>
+
+	<script src="chart.js"></script>
+<script>
+	let ctx = document.getElementById('myChart').getContext('2d');
+	let sociosGf = document.getElementById('sociosGf').value;
+	let sociosInd = document.getElementById('sociosInd').value;
+	let sociosTitulares = document.getElementById('sociosTitulares').value;
+
+	let chart = new Chart(ctx, {
+		type: 'doughnut',
+		data:{
+		datasets: [{
+			data: [`${sociosInd}`,`${sociosGf}`, `${sociosTitulares}`],
+			backgroundColor: ['rgb(255, 205, 0)', '#000', '#0036ff'],
+			label: 'Comparacion de Categorias de Socios'}],
+			labels: ['Individuales','Grupo Familiares', 'Titulares']},
+		options: {responsive: true}
+	});
+</script>
+</body>
+</html>
+
+

@@ -1,0 +1,44 @@
+version: '2'
+
+services:
+  app:
+    image: app
+    restart: always
+    build:
+      context: .
+    container_name: app
+    ports:
+      - "8080:8080"
+    depends_on:
+      - db
+  db:
+    image: 'postgres:13.1-alpine'
+    restart: always
+    container_name: db
+    environment:
+      - POSTGRES_USER=sociosriverplatejunin
+      - POSTGRES_PASSWORD=sociosriverplatejunin
+      - POSTGRES_DB=sociosriverplatejunin
+    volumes:
+      - ./dbBackup/:/var/lib/postgresql/data/
+  pgbackups:
+        image: prodrigestivill/postgres-backup-local
+        restart: always
+        user: postgres:postgres # Optional: see below
+        volumes:
+            - ./backups:/backups
+        links:
+            - db
+        depends_on:
+            - db
+        environment:
+            - POSTGRES_HOST=db
+            - POSTGRES_DB=sociosriverplatejunin
+            - POSTGRES_USER=sociosriverplatejunin
+            - POSTGRES_PASSWORD=sociosriverplatejunin
+            - POSTGRES_EXTRA_OPTS=-Z6 --schema=public --blobs
+            - SCHEDULE=@daily
+            - BACKUP_KEEP_DAYS=7
+            - BACKUP_KEEP_WEEKS=4
+            - BACKUP_KEEP_MONTHS=6
+            - HEALTHCHECK_PORT=3000
