@@ -116,7 +116,7 @@ private DateManager dateManager;
         uDB.setDomicilio(socio.getDomicilio()); //SETEA EL DOMICIOLIO ANTES PORQUE SI ES DEPENDIENTE LLEGA NULO
         //SOCIO DEPENDIENTE
         }else if(uDB.getSocioTitular()!=null){
-            if(socio.isCategoriaGrupoFamiliar()){//DEPENDIENTE -> INDIVIDUAL
+            if(socio.isCategoriaIndividual()){//DEPENDIENTE -> INDIVIDUAL
                 uDB.setSocioTitular(null);
                 uDB.setCategoria(socio.getCategoria());
                 
