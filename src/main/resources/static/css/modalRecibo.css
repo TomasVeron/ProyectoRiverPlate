@@ -1,0 +1,82 @@
+.modal, .confirm{
+    display: none;
+}
+
+.modal.show, .confirm.active{
+    display: flex;
+    background-color: #0008;
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom:0;
+    right: -150px;
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-content-container{
+    background-color: #fff;
+}
+
+.modal-content{
+    background-color: #fff;
+    width: 550px;
+    height: 500px;
+    position: relative;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
+
+.content-confirmPayment{
+    background-color: #fff;
+    width: 445px;
+    height: 100px;
+    position: relative;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+}
+.modal-header{
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+}
+
+.modal-body{
+    display: flex;
+    justify-content: center;
+    padding: 20px;
+}
+
+.modal-footer{
+    display: flex;
+    justify-content: space-evenly;
+    padding: 10px;
+}
+
+.modal-footer__button-cancel{
+    padding: 10px;
+    background-color: #000;
+    text-decoration: none;
+    color: #fff;
+    text-shadow: 0 0 3px #000;
+    border-radius: 30px;
+    border: 1px solid #000;
+    cursor: pointer;
+}
+
+.modal-footer__button-confirm{
+    padding: 10px;
+    background-color: var(--color-predominant);
+    text-decoration: none;
+    color: #fff;
+    text-shadow: 0 0 3px #000;
+    border-radius: 30px;
+    border: 1px solid #000;
+    cursor: pointer;
+
+}

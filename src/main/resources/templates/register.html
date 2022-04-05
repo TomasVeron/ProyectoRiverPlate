@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link rel="stylesheet" th:href="@{/css/register.css}" />
+    <link rel="stylesheet" th:href="@{css/normalize.css}" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@700&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Permanent+Marker&display=swap" rel="stylesheet" />
+    <script src="https://kit.fontawesome.com/62ea397d3a.js" crossorigin="anonymous"></script>
+    <title>Sistema de Administracion de Socios</title>
+  </head>
+  <body>
+    <div class="main">
+      <div class="presentation-container">
+        <div class="login-container">
+          <form class="login" method="POST" th:object="${user}" th:action="@{/register}">
+            <div class="login__input-formError" th:if="${formError}" th:text="${formError}">errors</div>
+            <div class="login__input-container">
+              <div class="login__input-errors" th:if="${#fields.hasErrors('email')}" th:errors="*{email}">errors</div>
+              <input type="text" name="username" class="login__input" id="login__user" th:field="*{email}" autocomplete="off" required />
+              <label for="login__user" class="login__lbl"><i class="fas fa-envelope"></i><span class="login__lbl-text">Email</span> </label>
+            </div>
+            <div class="login__input-container">
+              <div class="login__input-errors" th:if="${#fields.hasErrors('nombre')}" th:errors="*{nombre}">errors</div>
+              <input type="text" name="nombre" class="login__input" id="login__name" th:field="*{nombre}" autocomplete="off" required />
+              <label for="login__user" class="login__lbl"><i class="fas fa-user"></i><span class="login__lbl-text">Nombre</span> </label>
+            </div>
+            <div class="login__input-container">
+              <div class="login__input-errors" th:if="${#fields.hasErrors('apellido')}" th:errors="*{apellido}">errors</div>
+              <input type="text" name="nombre" class="login__input" id="login__lastName" th:field="*{apellido}" autocomplete="off" required />
+              <label for="login__user" class="login__lbl"><i class="fas fa-user"></i><span class="login__lbl-text">Apellido</span> </label>
+            </div>
+
+            <div class="login__input-container">
+              <div class="login__input-errors" th:if="${#fields.hasErrors('password')}" th:errors="*{password}">errors</div>
+              <input type="password" name="password" class="login__input" id="login__passwd" th:field="*{password}" required />
+              <label for="login__passwd" class="login__lbl"><i class="fas fa-key"></i><span class="login__lbl-text">Contraseña</span></label>
+            </div>
+            <div class="login__input-container">
+              <input type="password" name="password" class="login__input" id="login__confirm-pass" required th:field="*{confirmarPassword}" />
+              <label for="login__passwd" class="login__lbl"><i class="fas fa-key"></i><span class="login__lbl-text">Confirmar Contraseña</span></label>
+            </div>
+            <div class="login__input-container">
+              <!-- <label for="login__rol"><i class="fas fa-key"></i><span style="padding:0 30px">Rol</span></label>
+              <select name="rol" type="rol" id="login__rol" th:field="*{rol}">
+                <option value="true">Admin</option>
+                <option value="false">User</option>
+              </select> -->
+              <div class="login__rol-options-container">
+                <label for="login__rol"><i class="fas fa-user-lock"></i><span style="padding:0 30px">Rol</span></label>
+                <div class="rol-option">
+                  <input type="radio" id="recibeSaldo" name="recibe" class="custom-control-input" value="1" th:field="*{rol}" />
+                  <label class="custom-control-label" for="habilitado">Admin</label>
+                </div>
+                <div class="rol-option">
+                  <input type="radio" id="noRecibeSaldo" name="noRecibe" class="custom-control-input" value="0" th:field="*{rol}" />
+                  <label class="custom-control-label" for="deshabilitado">User</label>
+                </div>
+              </div>
+            </div>
+            <input type="submit" class="login__input login__submit" value="Registrar Usuario" />
+          </form>
+        </div>
+      </div>
+    </div>
+    <script th:src="@{/js/main.js}"></script>
+  </body>
+</html>

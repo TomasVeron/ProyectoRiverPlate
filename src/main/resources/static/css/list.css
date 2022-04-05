@@ -1,0 +1,164 @@
+:root{
+    --color-predominant: rgb(255, 205, 0);
+    --color-predominant-hover:rgb(0, 0, 0);
+}
+
+.listTitle{
+    display: block;
+    background-color: #000;
+    color: #fff;
+    width: 100%;
+    padding: 20px;
+    border-radius: 16px 16px 0 0;
+    margin: 0;
+}
+
+.list-container{
+    margin: 30px;
+    border-radius: 16px;
+    width: 100%;
+    box-shadow: 0 0 10px #000;
+    background-color: #fff;
+}
+.table{
+    width: 100%;
+    margin: 20px 0;
+    border-spacing: 0;
+}
+
+
+.table__colums{
+    background-color: #000;
+    color: #fff;
+    text-align: left;
+}
+.table__colums-th{
+    padding: 18px 10px;
+}
+
+.table__rows{
+    text-align: left;
+}
+
+.table__rows-td{
+    padding: 10px;
+}
+
+.list-menuControl{
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    margin: 20px 0;
+}
+
+.list__actionButton{
+    padding: 7px 20px;
+    background-color: var(--color-predominant);
+    text-decoration: none;
+    text-shadow: 0 0 3px #000;
+    color: #fff;
+    margin: 0 20px;
+    border-radius: 30px;
+    border: 1px solid #000;
+    text-align: center;
+}
+
+.scroll{
+    overflow-y: auto;
+}
+
+.list__actionButton i, .table__colums-th i{
+    margin: 0 5px;
+}
+
+.table__rows-td a{
+    padding: 5px 10px;
+    text-decoration: none;
+    background-color: var(--color-predominant);
+    color: #fff;
+    text-shadow: 0 0 3px #000;
+    border-radius: 30px;
+    border: 1px solid #000;
+    white-space: nowrap;
+}
+
+.table__rows-td button{
+    padding: 5px 10px;
+    text-decoration: none;
+    background-color: var(--color-predominant);
+    color: #fff;
+    text-shadow: 0 0 3px #000;
+    border-radius: 30px;
+    border: 1px solid #000;
+    cursor: pointer;
+    white-space: nowrap;
+}
+
+.table__rows-td i{
+    margin: 0 5px;
+}
+
+.list__search-container{
+    display: flex;
+    margin: 0 20px;
+    outline: none;
+    width: 100%;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.list__inputSearch{
+    border-radius: 16px 0 0 16px;
+    padding: 10px;
+    width: 73%;
+    margin: -5px;
+}
+
+.list__btnSearch{
+    background-color: var(--color-predominant);
+    outline: none;
+    border-radius: 0 16px 16px 0;
+    padding: 10px;
+}
+
+.listUser__errorDelete{
+    background-color: #ff8b94;
+    border: 1px solid #f00;
+    color: #f00;
+    margin: 0 10px;
+    text-align: center;
+    padding: 0 5px;
+}
+
+.table__socio-active{
+    color: #1e8f1e;
+}
+.table__socio-inactive{
+    color: rgba(255, 0, 0, 0.68);
+}
+
+@media screen and (max-width:768px) {
+    .table thead{
+        display: none;
+    }
+
+    .scroll{
+        display: flex;
+        flex-direction: column;
+    }
+
+    .table__rows{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        border:1px solid #000;
+    }
+    .list__actionButton p{
+        font-size: 0;
+    }
+
+    .list__actionButton i{
+        font-size: 1em;
+    }
+}
+

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" th:href="@{/css/recibo.css}" />
+    <title>Document</title>
+</head>
+<body>
+   <main class="recibo-pdf">
+	<div class="recibo">
+        <div class="header"> 
+            <div class="logo-container"><img th:src="@{/img/logo.png}"/></div>
+            <div class="title-container">
+		<div class="title">
+               		<strong>Club Atletico</strong><br>
+			<strong>River Plate de Junin</strong>
+		</div>
+            </div>
+        </div>
+	<div class="subtitle-container">Cuota Social</div>
+        <div class="partner">
+            <div class="partner-container">
+                <span>Socio</span>
+                <p th:text="${cuota.socio.nombre}+' '+${cuota.socio.apellido}+' - '+${cuota.socio.dni}"></p>
+            </div>
+		<br>
+            <div class="direction-container">
+                <span>Direccion</span>
+                <p th:text="${cuota.socio.domicilio}"></p>
+            </div>
+		<br>
+            <div class="date-price">
+                <span>Fecha Cuota</span>
+                <p th:text="${#dates.format(cuota.fechaCreacion, 'dd/MM/yyyy')}"></p>
+                <span>Importe</span>
+                <p th:text="'$'+${cuota.importe}"></p>
+            </div>
+		<br>
+            <div class="datePayment">
+                <span>Fecha de Pago</span>
+                <p th:text="${#dates.format(#dates.createNow(), 'dd/MM/yyyy')}"></p>
+            </div>
+        </div>
+    </div>
+
+</main>
+    
+
+<form action="#" id="formpdf"></form>
+</body>
+</html>
