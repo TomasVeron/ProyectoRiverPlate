@@ -51,7 +51,7 @@
           <div class="details-container">
             <h3 class="details__detailName">Direccion</h3>
             <input th:if="${socio.socioTitular == null}" type="text" class="details__inputs" th:field="*{domicilio}" />
-            <span th:if="${socio.socioTitular != null}" type="text" class="details__detailInfo" th:text="${socio.domicilio}" />
+            <span th:if="${socio.socioTitular != null}" type="text" class="details__detailInfo" th:text="${socio.socioTitular.domicilio}" />
           </div>
           <div class="details-container">
             <h3 class="details__detailName">Telefono</h3>

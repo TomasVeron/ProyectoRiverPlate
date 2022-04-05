@@ -50,7 +50,8 @@
             </div>
             <div class="details-container">
               <h3 class="details__detailName">Direccion</h3>
-              <span class="details__detailInfo" th:text="${socio.domicilio}"></span>
+              <span class="details__detailInfo" th:if="${(socio.socioTitular==null)}" th:text="${socio.domicilio}"></span>
+              <span class="details__detailInfo" th:if="${(socio.socioTitular!=null)}" th:text="${socio.socioTitular.domicilio}"></span>
             </div>
             <div class="details-container">
               <h3 class="details__detailName">Telefono</h3>
