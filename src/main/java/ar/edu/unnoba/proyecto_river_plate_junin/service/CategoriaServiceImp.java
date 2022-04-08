@@ -20,7 +20,7 @@ public class CategoriaServiceImp implements CategoriaService {
     }
 
     @Override
-    public Categoria getCategoria (Categoria categoria) {
+    public Categoria getCategoria(Categoria categoria) {
         return repository.findById(categoria.getId()).orElse(null); 
     }
 

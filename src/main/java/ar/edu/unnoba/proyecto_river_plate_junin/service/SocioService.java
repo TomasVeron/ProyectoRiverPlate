@@ -7,8 +7,6 @@ public interface SocioService {
     public List<Socio> getAllSocios();
 
     public Socio createSocio(Socio socio, String socioTitular) throws Exception;
-    
-    public Socio encontrarSocio(Socio socio);
 
     public Socio updateSocio(Socio socio) throws Exception; 
 
@@ -27,10 +25,6 @@ public interface SocioService {
     public int contarSociosTitulares();
 
     public void actualizarGrupoFamiliar(boolean habilitado,String domicilio, String codigo);
-
-    public Socio consultarSocioTitular(String socioTitular);
-
-    public boolean titularHabilitado(Long id);
 
     public List<Socio> getFamiliares(Long id);
 

@@ -33,21 +33,6 @@ private DateManager dateManager;
         return titular;
     }
 
-    /*@Override
-    public boolean validacionEdadMinima(Date fechaNacimiento, int edadMinima){
-        Calendar fechaEdad = Calendar.getInstance();
-        fechaEdad.setTime(fechaNacimiento);
-        fechaEdad.add(Calendar.YEAR, edadMinima);
-        Date fechaActual = new Date();
-
-        if(fechaEdad.getTime().after(fechaActual)){
-            return false; 
-        }
-        else{
-            return true;
-        }
-    }*/
-
     @Override
     public Socio createSocio(Socio socio, String socioTitular) throws Exception {
          String codigo = String.valueOf(contarSocios() + 1L) ;
@@ -72,11 +57,6 @@ private DateManager dateManager;
         return  repository.save(socio);
     }
 
-    @Override
-    @Transactional(readOnly = true)
-    public Socio encontrarSocio(Socio socio){
-        return repository.findById(socio.getId()).orElse(null); 
-    }
 
     @Override
     @Transactional
@@ -96,6 +76,9 @@ private DateManager dateManager;
                             throw new Exception("El socio titular no puede pasar a ser dependiente de otro socio porque tiene socios familiares");
                         }
                     Socio titular = encontrarSocioTitular(socio.getCodigoSocioTitular());
+                    if(titular.getId()==socio.getId()){
+                        throw new Exception("El codigo de socio ingresado no puede ser el mismo del socio actual");
+                    }
                     if(repository.contarSociosGrupoFamiliar(titular.getId()) >= 4 ){
                         throw new Exception("Se ha superado el limite del grupo familiar");
                     }
@@ -136,11 +119,10 @@ private DateManager dateManager;
         return repository.save(uDB);
     }
 
-    public Socio getSocio (Socio socio) {
+    public Socio getSocio(Socio socio) {
         return repository.findById(socio.getId()).orElse(null); 
     
     }
-
 
     @Override
     @Transactional(readOnly = true)
@@ -148,18 +130,15 @@ private DateManager dateManager;
         return repository.searchSocios(keyword);
    }
 
-
     @Override
     public Long contarSocios() {
         return repository.contarSocios();
     }
 
-
     @Override
     public int contarSociosActivos() {
         return repository.contarSociosActivos();
     }
-
 
     @Override
     public int contarSociosGf() {
@@ -176,30 +155,11 @@ private DateManager dateManager;
         return repository.contarSociosInd();
     }
 
-
-    @Override
-    public Socio consultarSocioTitular(String socioTitular) {
-        return repository.encontrarSocioTitular(socioTitular);
-    }
-
-
     @Override
     @Transactional
     public void actualizarGrupoFamiliar(boolean habilitado,String domicilio,  String codigo) {
         Long idSocio = repository.obtenerIdSocio(codigo);
         repository.actualizarGrupoFamiliar(habilitado,domicilio, idSocio);
-    }
-
-
-
-    @Override
-    @Transactional(readOnly = true)
-    public boolean titularHabilitado(Long id) {
-        Socio socioTitular = repository.findById(id).orElse(null);
-        if (socioTitular.getEstado() == true && socioTitular.isCategoriaGrupoFamiliar()) {
-            return true;
-        }
-        return false;
     }
 
     @Override
