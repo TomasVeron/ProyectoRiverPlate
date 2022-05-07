@@ -3,6 +3,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
+import ar.edu.unnoba.proyecto_river_plate_junin.configuration.SystemConfig;
 import ar.edu.unnoba.proyecto_river_plate_junin.model.Categoria;
 import ar.edu.unnoba.proyecto_river_plate_junin.model.Cuota;
 import ar.edu.unnoba.proyecto_river_plate_junin.model.Socio;
@@ -31,24 +32,22 @@ public class CuotaServiceImp implements CuotaService{
     private SocioService socioService;
 
     @Autowired
+    private ConfigService configService;
+
+    @Autowired
     private SendEmail email;
 
-    public boolean controlarFechaCuota(Long socioId, Date fechaCreacion) throws Exception{
+    public void controlarFechaCuota(Long socioId, Date fechaCreacion) throws Exception{
         Cuota ultimaCuota= repository.consulatarUltimaCuota(socioId);
+        SystemConfig config = configService.getConfig();
         Socio socio = socioService.getSocio(socioId);
-        Date fechaLimite = dateManager.getFechaLimite(socio);
-
-        if (ultimaCuota==null){
-            if (dateManager.desdeMayorQueHasta(fechaCreacion,fechaLimite)==false){// aunque coincidan los meses o el anio la funcion comprueba que la fecha de creacion sea desp de la fecha limite
-                throw new SocioException(socio,"No ha pasado un mes desde que se dio de alta el socio");
-            }
-            return true;
-        }  
-        Date limiteFechaUltimaCuota = dateManager.getLimiteFechaUltimaCuota(ultimaCuota);
-        if(dateManager.desdeMayorQueHasta(fechaCreacion, limiteFechaUltimaCuota)){
-            return true;
+        Date fechaGeneracionCuota = dateManager.getfechaGeneracionCuotaDia(config.getDiaGeneracionCuota());
+        if(ultimaCuota!=null && dateManager.desdeMayorQueHasta(ultimaCuota.getFechaCreacion(), fechaGeneracionCuota)){
+            throw new SocioException(socio,"Solo se puede hacer una couta por mes");
         }
-        return false;
+        if (dateManager.desdeMayorQueHasta(fechaCreacion, fechaGeneracionCuota)==false){// aunque coincidan los meses o el anio la funcion comprueba que la fecha de creacion sea desp de la fecha limite
+                throw new SocioException(socio,"Aun no es la fecha de generacion de cuota");
+        }
     }
 
     @Override
@@ -59,10 +58,8 @@ public class CuotaServiceImp implements CuotaService{
         if(socio.isDependiente()){
             throw new SocioException(socio,"No se puede generar cuotas para un socio dependiente");
         }
-        Date fecha_creacion= new Date();
-        if(!controlarFechaCuota(socio.getId(), fecha_creacion)){
-            throw new SocioException(socio,"No se pueden generar mas de una cuota por mes");
-        }
+        Date fechaCreacion= new Date();
+        controlarFechaCuota(socio.getId(), fechaCreacion);
         Cuota cuota = new Cuota();
         Long numeroCuota = repository.numeroCuota() + 1L ;
         Categoria categoria = socio.getCategoria();
@@ -70,8 +67,8 @@ public class CuotaServiceImp implements CuotaService{
         cuota.setCategoria(categoria);
         cuota.setImporte(categoria.getValorCuota());
         cuota.setSocio(socio);
-        cuota.setFechaCaducidad(dateManager.generarFechaCaducidad(fecha_creacion));
-        cuota.setFechaCreacion(fecha_creacion);
+        cuota.setFechaCaducidad(dateManager.generarFechaCaducidad(fechaCreacion));
+        cuota.setFechaCreacion(fechaCreacion);
         repository.save(cuota);
         email.enviarEmailCuotas(socio, cuota);
         return cuota;
@@ -115,7 +112,8 @@ public class CuotaServiceImp implements CuotaService{
         cDB.setFechaPago(fechaHoy);
         cDB.setDetallePago(cuota.getDetallePago());
         cDB.setFormaPago(cuota.getFormaPago());
+        repository.save(cDB);
         email.enviarRecibo(cuota.getSocio(), cuota);
-        return repository.save(cDB);
+        return cDB;
     }   
 }

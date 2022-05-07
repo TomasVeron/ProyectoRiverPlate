@@ -8,6 +8,16 @@
     flex-direction: column;
 }
 
+.details.config{
+    margin: 30px;
+    border-radius: 16px;
+    width: auto;
+    box-shadow: 0 0 10px #000;
+    background-color: #fff;
+    display: flex;
+    flex-direction: column;
+}
+
 .details_container-scroll{
     min-width: 50%;
     flex-grow: 1;

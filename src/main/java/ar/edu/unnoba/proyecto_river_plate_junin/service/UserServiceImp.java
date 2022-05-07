@@ -30,7 +30,7 @@ public class UserServiceImp implements UserService, UserDetailsService{
 
 
     @Override
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {//username es lo que llega del campo email del login
         User user = repository.findByEmail(username);
         if(user == null){
             throw new UsernameNotFoundException("El usuario " + username + " no existe");

@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+	<link rel="stylesheet" th:href="@{/css/main.css}">
+	<link rel="stylesheet" th:href="@{/css/normalize.css}">
+	<link rel="stylesheet" th:href="@{/css/nav.css}">
+	<link rel="stylesheet" th:href="@{/css/home.css}">
+    <link rel="stylesheet" th:href="@{/css/details.css}" />
+    <link rel="stylesheet" th:href="@{/css/modalDelete.css}" />
+
+
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@700&display=swap" rel="stylesheet">
+	<script src="https://kit.fontawesome.com/62ea397d3a.js" crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.0/chart.min.js" integrity="sha512-TW5s0IT/IppJtu76UbysrBH9Hy/5X41OTAbQuffZFU6lQ1rdcLHzpU5BzVvr/YFykoiMYZVWlr/PX1mDcfM9Qg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>	
+	<title>Home</title>
+</head>
+<body>
+	<header th:replace="nav.html">
+	</header>
+	<div class="main">
+        <div class="details config">
+            <h1 class="details__title">Configuracion</h1>
+            <div class="details__header">
+              <h2 class="details__header-tittle">Detalles de Socio</h2>
+              <a class="details__header-backbutton" th:href="@{/}"><i class="fas fa-long-arrow-alt-left"></i> volver</a>
+            </div>
+            <form method="POST" th:object="${config}" th:action="@{/configuracion/edit}"  class="details_container-scroll">
+              <div class="details-container">
+                <h3 class="details__detailName">Dia del mes que se generan las cuotas</h3>
+                <input type="hidden" th:value="${config.idConfig}" th:attr="name='idConfig'" />
+                <input type="hidden" th:value="${config.cantDeCoutasGeneradas}" th:attr="name='cantDeCoutasGeneradas'" />
+                <input type="hidden" th:value="${config.cantSociosPorGF}" th:attr="name='cantSociosPorGF'" />
+                <select th:field="*{diaGeneracionCuota}" class="categoriaSocioSelect">
+                    <option th:each="x: ${#numbers.sequence(1,28)}" th:value="${x}" th:text="${x}"></option>
+                </select>
+              </div>
+              <div class="details-container">
+                <h3 class="details__detailName">Cantidad de cuotas generadas en el mes</h3>
+                 <span class="details__detailInfo" th:text="${config.cantDeCoutasGeneradas}"></span>
+              </div>
+              <div class="details-container">
+                <h3 class="details__detailName">Cantidad de socios dentro del grupo familiar</h3>
+                <span class="details__detailInfo" th:text="${config.cantSociosPorGF}"></span>
+              </div>
+              <div class="details-container">
+                <h3 class="details__detailName">Cantidad de meses para el vencimiento de la cuota</h3>
+                <select th:field="*{cantMesesVencimientoCuota}" class="categoriaSocioSelect">
+                    <option th:each="x: ${#numbers.sequence(1,12)}" th:value="${x}" th:text="${x}"></option>
+                </select>
+              </div>
+              <input type="submit" class="details__btn-submit" value="Editar Socio" />
+            </form>
+          </div>
+		
+	</div>
+  <div th:include="modal-error.html" th:remove="tag"></div>
+  <div th:include="modal-succes.html" th:remove="tag"></div>
+  <script th:src="@{/js/errorModal.js}"></script>
+</body>
+</html>

@@ -37,8 +37,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .antMatchers("/**").hasRole("USER")
                 .and()
                     .formLogin().loginPage("/login").permitAll().defaultSuccessUrl("/").failureUrl("/login?error=true")
-                    .usernameParameter("email")
-                    .passwordParameter("password").and().csrf().disable()
+                    .usernameParameter("email") //indica a spring que lo que contenga el input con el atributo "email" en la pagina de login va a ser el username 
+                    .passwordParameter("password").and().csrf().disable()//indica a spring que lo que contenga el input con el atributo name="password" en la pagina de login va a ser la password 
                 .logout()
                     .permitAll()
                     .logoutSuccessUrl("/login?logout");

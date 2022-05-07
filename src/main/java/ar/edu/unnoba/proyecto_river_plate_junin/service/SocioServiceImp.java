@@ -66,10 +66,12 @@ private DateManager dateManager;
 
         //INDIVIDUAL O TITULAR
         if(uDB.getSocioTitular()==null){
-            if(uDB.isCategoriaGrupoFamiliar()){//TITULAR
+            if(uDB.isCategoriaGrupoFamiliar()){//TITULAR 
                 if(socio.isCategoriaIndividual()){//TITULAR -> INDIVIDUAL
+                    if(repository.contarSociosGrupoFamiliar(socio.getId())>0){
+                        throw new Exception("El socio titular no puede pasar a ser individual porque tiene socios familiares");
+                     }
                     uDB.setCategoria(socio.getCategoria());
-                    actualizarGrupoFamiliar(false,socio.getDomicilio(), uDB.getCodigo());//ACTUALIZA A LA FAMILIAR EN ESTADO INACTIVO
                 }
                 else if(!socio.getCodigoSocioTitular().equals("")){//TITULAR -> DEPENDIENTE
                     if(repository.contarSociosGrupoFamiliar(socio.getId())>0){
@@ -111,6 +113,13 @@ private DateManager dateManager;
                 
             }else if(socio.getCodigoSocioTitular().equals("")){//DEPENDIENTE -> TITULAR
                 uDB.setSocioTitular(null);
+            }
+            else if(!socio.getCodigoSocioTitular().equals(uDB.getSocioTitular().getCodigo())){//CAMBIO DE SOCIO
+                Socio titular = encontrarSocioTitular(socio.getCodigoSocioTitular());
+                if(repository.contarSociosGrupoFamiliar(titular.getId()) >= 4 ){
+                    throw new Exception("Se ha superado el limite del grupo familiar");
+                }
+                uDB.setSocioTitular(titular);
             }
         }
         uDB.setEstado(socio.getEstado());

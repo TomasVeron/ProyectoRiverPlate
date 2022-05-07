@@ -21,3 +21,11 @@ WHERE
     NOT EXISTS (
         SELECT id_usuario FROM usuarios WHERE id_usuario =99
     );
+
+INSERT INTO configuracion_sistema
+    (id_config, cant_cuotas_generadas, cant_socios_gf, dia_generacion_cuota, cant_meses_venc_couta)
+SELECT 1, 1,4,7,6
+WHERE
+    NOT EXISTS (
+        SELECT id_config FROM configuracion_sistema WHERE id_config =1
+    );
